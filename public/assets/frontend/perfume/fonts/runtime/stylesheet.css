@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Runtime';
+    src: url('Runtime-Regular.woff2') format('woff2'),
+        url('Runtime-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Source Serif 4 48pt';
+    src: url('SourceSerif448pt-ExtraLightItalic.woff2') format('woff2'),
+        url('SourceSerif448pt-ExtraLightItalic.woff') format('woff');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Serif 4 48pt';
+    src: url('SourceSerif448pt-ExtraBoldItalic.woff2') format('woff2'),
+        url('SourceSerif448pt-ExtraBoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Serif 4 48pt';
+    src: url('SourceSerif448pt-Medium.woff2') format('woff2'),
+        url('SourceSerif448pt-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Serif 4 48pt';
+    src: url('SourceSerif448pt-Bold.woff2') format('woff2'),
+        url('SourceSerif448pt-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Serif 4 48pt';
+    src: url('SourceSerif448pt-SemiBold.woff2') format('woff2'),
+        url('SourceSerif448pt-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Source Serif 4 48pt';
+    src: url('SourceSerif448pt-Regular.woff2') format('woff2'),
+        url('SourceSerif448pt-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

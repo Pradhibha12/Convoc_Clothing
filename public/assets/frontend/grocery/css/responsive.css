@@ -1,0 +1,479 @@
+
+@media all and (max-width: 1199px){
+    /* Title */
+    .mu-title-36px {
+        font-size: 34px;
+    }
+    .ml-title-48px {
+        font-size: 45px;
+    }
+    .pd-title-36px {
+        font-size: 34px;
+    }
+    .al-title-36px {
+        font-size: 34px;
+    }
+    .ml-title-60px {
+        font-size: 54px;
+    }
+    .al-title-42px {
+        font-size: 39px;
+    }
+    .al-title-40px {
+        font-size: 37px;
+    }
+    .al-title-30px{
+        font-size: 29px;
+    }
+    .al-title-34px{
+        font-size: 32px;
+    }
+    /* Home Page */
+    .ads-title-wrap {
+        max-width: 276px;
+    }
+    .ec-ads-one::after {
+        width: 265px;
+    }
+    .ec-ads-two::after {
+        width: 250px;
+    }
+    /* Filter Page */
+    .list-view-title-wrap {
+        padding-right: 0px;
+    }
+    .list-view-btn {
+        position: inherit;
+        margin-top: 16px;
+    }
+    /* Store Location Page */
+    .ec-google-map{
+        height: 370px;
+    }
+}
+@media all and (max-width: 991px){
+    /* Title */
+    .al-title-24px {
+        font-size: 23px;
+    }
+    .al-title2-24px {
+        font-size: 23px;
+    }
+    .mu-title-36px {
+        font-size: 32px;
+    }
+    .ml-title-48px {
+        font-size: 41px;
+    }
+    .pd-title-36px {
+        font-size: 32px;
+    }
+    .al-title-36px {
+        font-size: 32px;
+    }
+    .ml-title-60px {
+        font-size: 48px;
+    }
+    .al-title-42px {
+        font-size: 36px;
+    }
+    .al-title-40px {
+        font-size: 33px;
+    }
+    .al-title-30px{
+        font-size: 28px;
+    }
+    .al-title-34px{
+        font-size: 30px;
+    }
+    /* Home Page */
+    .offer-time-wrap .ec-offer-timer:not(:has(ul)){
+        font-size: 23px;
+    }
+    .best-deal-section::before {
+        width: 380px;
+    }
+    .best-deal-section::after{
+        width: 350px;
+    }
+    .customer-feedback-banner{
+        padding-right: 0px;
+    }
+    .main-banner-section::after {
+        width: 1200px;
+    }
+    /* Filter Page */
+    .filter-tab-header {
+        min-height: 30px;
+        position: relative;
+        padding-right: 56px;
+    }
+    .filter-sidebar-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .filter-offcanvas.offcanvas-lg.offcanvas-start {
+        width: 329px;
+        border: none;
+    }
+    /* About Page */
+    .ec-benefit-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .ec-benefit-single:last-child {
+        grid-column: 2 / 3;
+    }
+    .ec-benefit-single:nth-of-type(3)::after{
+        display: none
+    }
+    /* Store Location Page */
+    .ec-google-map{
+        height: 350px;
+    }
+    .footer-copyright-area {
+        margin-bottom: 70px;
+    }
+    .footer-copyright-area .al-subtitle2-16px {
+      line-height: 24px !important; 
+    }
+}
+@media all and (max-width: 767px){
+    /* Title */
+    .al-title-24px {
+        font-size: 22px;
+    }
+    .al-title2-24px {
+        font-size: 22px;
+    }
+    .al-title-20px{
+        font-size: 19px;
+    }
+    .mu-title-36px {
+        font-size: 29px;
+    }
+    .al-title-36px {
+        font-size: 29px;
+    }
+    .ml-title-48px {
+        font-size: 37px;
+    }
+    .pd-title-36px {
+        font-size: 29px;
+    }
+    .ml-title-60px {
+        font-size: 42px;
+    }
+    .al-title-42px {
+        font-size: 33px;
+    }
+    .al-title-40px {
+        font-size: 30px;
+    }
+    .al-title-30px{
+        font-size: 26px;
+    }
+    .al-title-34px{
+        font-size: 28px;
+    }
+    /* Home Page */
+    .product-md-card {
+        /* max-width: 350px; */
+        margin: 0 auto;
+    }
+    .offer-time-wrap .ec-offer-timer:not(:has(ul)){
+        font-size: 22px;
+    }
+    .best-deal-section::before {
+        width: 340px;
+    }
+    .best-deal-section::after{
+        width: 310px;
+    }
+    .news-card-banner {
+        flex: 0 0 230px;
+    }
+    .main-banner-bottom{
+        margin-top: 41px;
+    }
+    .happy-customer-badge {
+        margin-top: 0px;
+        padding: 14.02px;
+    }
+    .happy-customer-image {
+        height: 40.5px;
+        width: 40.5px;
+        flex: 0 0 40.5px;
+    }
+    .fastest-delivery-badge {
+        margin-top: 41px;
+        padding: 10.14px;
+    }
+    .fastest-delivery-badge .icon {
+        height: 40.5px;
+        width: 40.5px;
+        flex: 0 0 40.5px;
+    }
+    .fastest-delivery-badge .icon svg {
+        width: 21.73px;
+    }
+    .fastest-delivery-badge .text {
+        font-size: 16px;
+    }
+    .main-banner-section {
+        padding-top: 40px;
+        padding-bottom: 202px;
+    }
+    .happy-customer-title{
+        margin-bottom: 6px;
+    }
+    .main-banner-section::after {
+        width: 938px;
+    }
+    /* Filter Page */
+    .product-list-view {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .product-list-details {
+        padding: 0 24px 24px 24px;
+    }
+    .product-list-banner {
+        width: 100%;
+        flex: 0 0 auto;
+        height: 200px;
+        border-radius: 12px 12px 0 0px;
+    }
+    /* About Page */
+    .ec-benefit-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .ec-benefit-single:last-child {
+        grid-column: unset;
+    }
+    .ec-benefit-single:nth-of-type(2)::after{
+        display: none
+    }
+    .ec-benefit-single:nth-of-type(3)::after{
+        display: block
+    }
+    .signup-section-card {
+        padding: 70px 50px;
+    }
+    /* 404 Page */
+    .not-found-img {
+        width: 300px;
+    }
+    /* Store Location Page */
+    .ec-google-map{
+        height: 330px;
+    }
+    .quick-view-banner-wrap {
+    	margin: auto;
+    }
+}
+@media all and (max-width: 575px){
+    .gx-32px{
+        --bs-gutter-x: inherit;
+    }
+    /* Title */
+    .al-title-24px {
+        font-size: 21px;
+    }
+    .al-title2-24px {
+        font-size: 21px;
+    }
+    .al-title-20px{
+        font-size: 18px;
+    }
+    .mu-title-36px {
+        font-size: 26px;
+    }
+    .al-title-36px {
+        font-size: 26px;
+    }
+    .ml-title-48px {
+        font-size: 33px;
+    }
+    .pd-title-36px {
+        font-size: 26px;
+    }
+    .ml-title-60px {
+        font-size: 36px;
+    }
+    .al-title-42px {
+        font-size: 30px;
+    }
+    .al-title-40px {
+        font-size: 27px;
+    }
+    .al-title-30px{
+        font-size: 24px;
+    }
+    .al-title-34px{
+        font-size: 25px;
+    }
+    /* Home Page */
+    .category-item {
+        /* max-width: 350px; */
+        margin: 0 auto;
+    }
+    .offer-time-wrap .ec-offer-timer:not(:has(ul)){
+        font-size: 21px;
+    }
+    .offer-time-wrap .ec-offer-timer:not(:has(ul)){
+        font-size: 20px;
+        padding: 20px;
+    }
+    .offer-time-wrap .ec-offer-timer ul li{
+        width: 74px;
+        height: 74px;
+        flex: 0 0 74px;
+        gap: 4px;
+        font-size: 20px;
+    }
+    .offer-time-wrap .ec-offer-timer ul li span{
+        font-size: 20px;
+    }
+    .best-deal-section::before {
+        width: 310px;
+    }
+    .best-deal-section::after{
+        width: 290px;
+    }
+    .news-card-banner {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    .news-card{
+        flex-direction: column;
+        /* max-width: 400px; */
+        margin: 0 auto;
+    }
+    .testimonial-slider {
+        padding-right: 30px;
+    }
+    .ec-ads-one::after {
+        width: 240px;
+    }
+    .ec-ads-two::after {
+        width: 245px;
+    }
+    .main-banner-section{
+        padding-top: 30px;
+        padding-bottom: 220px;
+        background-image: url(../images/images/grocery-banner-sm.png);
+    }
+    .main-banner-section::after{
+        background-image: url(../images/images/banner-after-sm.png);
+        width: 430px;
+    }
+    .main-banner-bottom {
+        display: none !important;
+    }
+    /* Product Details */
+    .ec-payment-method {
+        width: fit-content;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    /* About Page */
+    .ec-benefit-grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .ec-benefit-single:nth-of-type(3)::after{
+        display: none
+    }
+    .ec-benefit-single::after{
+        display: none
+    }
+    .signup-section-card {
+        padding: 70px 30px;
+    }
+    .ec-benefit-single{
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    /* 404 Page */
+    .not-found-img {
+        max-width: 230px;
+        width: 100%;
+    }
+    /* Store Location Page */
+    .ec-google-map{
+        height: 310px;
+    }
+    /* Store */
+    .single-store {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    /* Gift Page */
+    .gift-card {
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .news-card-banner {
+        aspect-ratio: 352 / 237;
+    }
+    .customer-feedback-banner{
+        display:none;
+    }
+    .egads {
+       width: 245px !important;
+    }
+}
+
+@media all and (max-width: 450px){
+    /* Home Page */
+    .egads,
+    .ec-ads-two::after {
+        width: 182px !important;
+    }
+    .ec-ads-one::after {
+        width: 182px;
+    }
+    .main-banner-section::after {
+        width: 385px;
+    }
+    .main-banner-section {
+        padding-bottom: 200px;
+    }
+    /* Blog Details */
+    .comment-header {
+        column-gap: 12px;
+    }
+    .comment-body {
+        padding-left: 62px;
+    }
+    .single-comment:has( ~ .comment-replies) .comment-body:after {
+        left: 26px;
+    }
+    .single-comment-replies:first-child::after {
+        left: -36px;
+        width: 26px;
+    }
+    .single-comment-replies:not(:last-child) .single-comment .comment-body::after {
+        left: 26px;
+    }
+    .more-comment-item::after {
+        left: 26px;
+        width: 26px;
+    }
+    .commentator-profile {
+        flex: 0 0 48px;
+        width: 48px;
+        height: 48px;
+        margin-top: 3px;
+    }
+    .comment-replies {
+        padding-left: 62px;
+    }
+    .more-comment-item {
+        padding-left: 62px;
+    }
+    /* Store Location Page */
+    .ec-google-map{
+        height: 290px;
+    }
+}

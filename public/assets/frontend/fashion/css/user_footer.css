@@ -1,0 +1,206 @@
+/* Footer Css Start ***
+*********************/
+/* Start Other Common CSS */
+:root {
+    --skinColor: #EF4A4A;
+    --skinColor2: #06BFE2;
+    --skinColor3: #FFCB38;
+    --skinHoverColor: #f37070;
+    --whiteColor: #FFF;
+    --blackColor: #000;
+    --darkColor: #242D47;
+    --darkColor2: #100D0E;
+    --darkColor3: #0C0E0E;
+    --darkHoverColor: #0F0B0B;
+    --grayColor: #677497;
+    --grayColor2: #9E9EA9;
+    --iconColor: #99A1B7;
+    --lightColor: #F7F8FA;
+    --borderColor: #DBDFEB;
+}
+
+.al-title-16px{
+    color: var(--darkColor);
+    font-family: "Albert Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 16px */
+}
+.al-title-18px{
+    color: var(--darkColor);
+    font-family: "Albert Sans";
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 100%; /* 18px */
+}
+.al-subtitle2-16px{
+    color: var(--grayColor2);
+    font-family: "Albert Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 150% */
+}
+
+/* SVG Link */
+.svg-link svg{
+    display: block;
+}
+.svg-link path{
+    transition: .3s;
+}
+.svg-link:hover path{
+    fill: var(--skinColor);
+}
+/* End Other Common CSS */
+
+
+.footer-section-main{
+    background: var(--darkColor2);
+    padding-top: 50px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+.footer-section-main::after{
+    content: "";
+    position: absolute;
+    right: 25px;
+    top: -91px;
+    width: 206px;
+    /* height: 207px; */
+    aspect-ratio: 206 / 207;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #D9D9D9 0%, rgba(115, 115, 115, 0.00) 100%);
+    opacity: 0.06;
+    z-index: -1;
+    transform: rotate(90deg);
+}
+.footer-section-main::before{
+    content: "";
+    position: absolute;
+    left: -51px;
+    bottom: -98px;
+    width: 350px;
+    /* height: 350px; */
+    aspect-ratio: 350 / 350;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #D9D9D9 0%, rgba(115, 115, 115, 0.00) 100%);
+    opacity: 0.07;
+    z-index: -1;
+    transform: rotate(-90deg);
+}
+
+/* Top */
+.footer-top-area{
+    border-bottom: 1px solid rgba(129, 129, 149, 0.3);
+}
+.max-w-405px{
+    max-width: 405px;
+}
+.footer-logo{
+    display: block;
+    width: fit-content;
+}
+
+/* Middle */
+.footer-middle-area{
+    margin-bottom: 40px;
+    row-gap: 40px;
+    column-gap: 30px;
+}
+.footer-nav-link{
+    color: var(--grayColor2);
+    font-family: "Albert Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px; /* 112.5% */
+    transition: .3s;
+    display: block;
+    width: fit-content;
+}
+.footer-nav-link:hover{
+    color: var(--skinColor);
+}
+
+.footer-signup-area{
+    max-width: 318px;
+    width: 100%;
+}
+.footer-signup-wrap{
+    position: relative;
+}
+.footer-signup-btn svg{
+    display: block;
+}
+.footer-signup-btn{
+    display: block;
+    border: none;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background: var(--skinColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: .3s;
+}
+.footer-signup-btn:hover{
+    background: var(--skinColor);
+}
+.footer-signup-input{
+    border-radius: 100px;
+    border: 1px solid rgba(129, 129, 149, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--grayColor2);
+    font-family: "Albert Sans";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%; /* 16px */
+    padding: 17px 46px 17px 19px;
+    transition: .3s;
+    height: 52px;
+}
+.footer-signup-input:hover{
+    border-color: var(--skinColor);
+}
+.footer-signup-input:has(~ .footer-signup-btn:hover){
+    border-color: var(--skinColor);
+}
+.footer-signup-input:focus{
+    border-color: var(--skinColor);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--grayColor2);
+}
+.footer-signup-input::placeholder{
+    color: var(--grayColor2);
+}
+
+/* Copyright */
+.footer-copyright-area{
+    border-top: 1px solid rgba(129, 129, 149, 0.3);
+    padding: 30px 0;
+}
+
+
+/* Footer Responsice Css */
+@media all and (max-width: 575px){
+    /* Footer */
+    .footer-signup-area {
+        max-width: 100%;
+        width: 100%;
+    }
+    .footer-nav-area {
+        min-width: calc(50% - 20px);
+    }
+}
+/* Footer Css End ***
+*******************/

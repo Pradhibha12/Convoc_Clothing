@@ -1,0 +1,249 @@
+/* Fonts */
+/* Century Gothic */
+@import url("../fonts/century-gothic/stylesheet.css");
+/* font-family: 'Century Gothic'; */
+
+/* Luxury */
+@import url("../fonts/luxury/stylesheet.css");
+/* font-family: 'Luxury'; */
+
+/* Onest */
+@import url("../fonts/onest/stylesheet.css");
+/* font-family: 'Onest'; */
+
+/* Oregano */
+@import url("../fonts/oregano/stylesheet.css");
+/* font-family: 'Oregano'; */
+
+/* Runtime */
+@import url("../fonts/runtime/stylesheet.css");
+/* font-family: 'Runtime'; */
+
+
+
+/* Other common Css Start */
+:root {
+    --skinColor: #FB8430;
+    --whiteColor: #FFF;
+    --whiteColor2: rgba(255, 255, 255, 0.90);
+    --whiteColor3: rgba(255, 255, 255, 0.80);
+    --blackColor: #000;
+}
+
+/* Other common Css Start */
+
+
+
+/* Footer Css Start ***
+*********************/
+.footer-top-area{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-column-gap: 80px;
+       -moz-column-gap: 80px;
+            column-gap: 80px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    row-gap: 50px;
+    margin-bottom: 50px;
+}
+
+.footer-logo-area{
+    max-width: 379px;
+    width: 100%;
+}
+.footer-logo{
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-bottom: 25px;
+}
+.footer-info{
+    color: var(--whiteColor2);
+    /* font-family: "Century Gothic"; */
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px; /* 166.667% */
+    text-transform: capitalize;
+}
+
+.footer-social-link{
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.footer-social-link svg{
+    display: block;
+}
+.footer-social-link path{
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.footer-social-link:hover path{
+    fill: var(--skinColor);
+}
+
+.footer-nav-main{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-column-gap: 47px;
+       -moz-column-gap: 47px;
+            column-gap: 47px;
+    row-gap: 30px;
+}
+.footer-nav-title{
+    color: var(--whiteColor);
+    font-family: 'Runtime';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 27.18px;
+}
+.footer-nav-item:not(:last-child){
+    margin-bottom: 14px;
+}
+.footer-nav-link{
+    color: var(--whiteColor);
+    /* font-family: "Century Gothic"; */
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.footer-nav-link:hover{
+    color: var(--skinColor);
+}
+
+.footer-large-title{
+    background: -webkit-gradient(linear, left top, left bottom, from(#F55F2B), to(#020204));
+    background: -o-linear-gradient(top, #F55F2B 0%, #020204 100%);
+    background: linear-gradient(180deg, #F55F2B 0%, #020204 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: 'Runtime';
+    font-size: 220px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 15.4px;
+    text-align: center;
+    margin-bottom: -25.24px;
+}
+.ft-copyright-area{
+    padding-bottom: 26.24px;
+}
+.footer-copyright-text{
+    color: var(--whiteColor);
+    text-align: center;
+    /* font-family: "Century Gothic"; */
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    text-align: center;
+    opacity: 0.5;
+}
+
+
+
+/* Responsive */
+@media all and (max-width: 1199px){
+    .footer-top-area{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .footer-logo-area {
+        max-width: 100%;
+    }
+    .footer-large-title {
+        font-size: 160px;
+    }
+    .footer-logo{
+        max-width: 320px;
+    }
+    .footer-nav-main{
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+    }
+}
+@media all and (max-width: 991px){
+    .footer-large-title {
+        font-size: 120px;
+        letter-spacing: 14.4px;
+    }
+    .footer-logo{
+        max-width: 290px;
+    }
+    .footer-nav-link {
+        font-size: 21px;
+    }
+    .footer-nav-title {
+        font-size: 30px;
+    }
+    .footer-nav-main{
+        -webkit-column-gap: 30px;
+           -moz-column-gap: 30px;
+                column-gap: 30px;
+    }
+}
+@media all and (max-width: 767px){
+    .footer-large-title {
+        font-size: 80px;
+        letter-spacing: 12.4px;
+        margin-bottom: -10px;
+    }
+    .footer-logo{
+        max-width: 250px;
+    }
+    .footer-nav-link {
+        font-size: 19px;
+    }
+    .footer-nav-title {
+        font-size: 27px;
+    }
+    .footer-nav-main{
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+}
+@media all and (max-width: 575px){
+    .footer-large-title {
+        font-size: 50px;
+        letter-spacing: 8.4px;
+        margin-bottom: -4px;
+        word-break: break-all;
+    }
+    .footer-logo{
+        max-width: 200px;
+    }
+    .footer-nav-link {
+        font-size: 18px;
+    }
+    .footer-nav-title {
+        font-size: 24px;
+    }
+    .footer-navbar{
+        width: 100%;
+    }
+}
+/* Footer Css End ***
+*******************/

@@ -1,0 +1,143 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Page;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Image;
+use DB;
+
+
+class CommonController extends Controller
+{
+    function about_us(Request $request)
+    {
+        return view('frontend.about.about_us');
+    }
+
+    public function rendered_view($path = "", Request $request)
+    {
+        $page_data = array();
+        foreach ($request->all() as $key => $value) :
+            $page_data[$key] = $value;
+        endforeach;
+
+        return view($path, $page_data)->render();
+    }
+
+    public function page(Request $request)
+    {
+        $page_data['page'] = Page::where('slug', $request->slug)->firstOrNew();
+        return view('frontend.page.index', $page_data);
+    }
+
+    public function website_policies($slug)
+    {
+        return view('frontend.website_policies.index', ['slug' => $slug]);
+    }
+
+    function unique_slug($title, $table, $column_name = 'slug', $except_id = null)
+    {
+        $slug = slugify($title);
+        $updated_slug = $slug;
+        $counter = 1;
+
+        while (DB::table($table)
+            ->where($column_name, $updated_slug)
+            ->when($except_id, function ($query) use ($except_id) {
+                return $query->where('id', '!=', $except_id);
+            })
+            ->exists()
+        ) {
+            $updated_slug = $slug . '-' . $counter;
+            $counter++;
+        }
+
+        return $updated_slug;
+    }
+
+    function unique_code($table, $column_name = "code", $except_id = ""){
+        $code = random(10);
+        $row = DB::table($table)->where($column_name, $code);
+
+        if($except_id){
+            $row = $row->where('id', '!=', $except_id);
+        }
+
+        if ($row->exists()) {
+            $code = $code.$row->count();
+        }
+        
+        return strtoupper($code);
+    }
+
+    public static function upload($uploaded_file, $upload_to, $width = null, $height = null, $optimized_width = 250, $optimized_height = null)
+    {
+        // Explanation: $upload_file = this is the uploaded temp file => $request->video_feild_name
+        // Explanation: $upload_to = "public/storage/video" OR "public/storage/video/Sj8Ro5Gksde3T.mp4" OR "sdsdncts7sn.png" OR empty if amazon s3 is active
+        // Explanation: $width and $height => Image width and height
+        // Explanation: $optimized_width and $optimized_height ultra optimization, That is stored in optimized folder
+
+        if (!$uploaded_file)
+            return;
+
+        if($uploaded_file->extension() == 'svg')
+            $width = null;
+
+        //Add public path
+        $upload_path = $upload_to;
+        $upload_to = public_path($upload_to);
+
+        $s3_keys = get_settings('amazon_s3', 'object');
+        if (empty($s3_keys) || $s3_keys->active != 1) {
+            if (is_dir($upload_to)) {
+                $file_name = time() . '-' . random(25) . '.' . $uploaded_file->extension();
+            } else {
+                $uploaded_path_arr = explode('/', $upload_path);
+                $file_name = end($uploaded_path_arr);
+                $upload_to = str_replace('/' . $file_name, "", $upload_path);
+                $upload_path = $upload_to;
+                $upload_to = public_path($upload_to);
+            }
+
+            if ($width == null) {
+                $uploaded_file->move($upload_to, $file_name);
+            } else {
+                //Image optimization
+                
+                Image::make($uploaded_file->path())->orientate()->resize($width, $height, function ($constraint) {
+                    $constraint->upsize();
+                    $constraint->aspectRatio();
+                })->save($upload_to . '/' . $file_name);
+
+                // //Ultra Image optimization
+                $optimized_path = $upload_to . '/optimized';
+                if (is_dir($optimized_path)) {
+                    //Image optimization
+                    Image::make($uploaded_file->path())->orientate()->resize($optimized_width, $optimized_height, function ($constraint) {
+                        $constraint->upsize();
+                        $constraint->aspectRatio();
+                    })->save($optimized_path . '/' . $file_name);
+                }
+            }
+
+            return $upload_path . '/' . $file_name;
+
+        } else {
+            //upload to amazon s3
+            ini_set('max_execution_time', '600');
+            config(['filesystems.disks.s3.key' => $s3_keys->AWS_ACCESS_KEY_ID]);
+            config(['filesystems.disks.s3.secret' => $s3_keys->AWS_SECRET_ACCESS_KEY]);
+            config(['filesystems.disks.s3.region' => $s3_keys->AWS_DEFAULT_REGION]);
+            config(['filesystems.disks.s3.bucket' => $s3_keys->AWS_BUCKET]);
+
+            //social-files this directory automatically created on S3 server, the file upload in this folder
+            //The file name generated by laravel s3 package
+            $s3_file_path = Storage::disk('s3')->put('social-files', $uploaded_file, 'public');
+            $s3_file_path = Storage::disk('s3')->url($s3_file_path);
+            return $s3_file_path;
+        }
+    }
+}

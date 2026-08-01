@@ -1,0 +1,315 @@
+@media all and (max-width: 1399px){
+    /* Featured Brand */
+    .single-featured-brand .brand {
+        max-width: 90%;
+    }
+    .featured-brand-wrap {
+        -webkit-column-gap: 50px;
+           -moz-column-gap: 50px;
+                column-gap: 50px;
+    }
+}
+@media all and (max-width: 1199px){
+    /* Banner */
+    .hero-title {
+        font-size: 38px;
+    }
+    /* Section Title */
+    .section-title {
+        font-size: 38px;
+    }
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 90%;
+    }
+    /* Feature */
+    .feature-title {
+        font-size: 27px;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 23px;
+    }
+    .ca-btn-outline-secondary {
+        padding: 15px 29px;
+    }
+    .ca-btn-skin {
+        padding: 14px 22px;
+    }
+    /* Car Tips */
+    .tips-list-title {
+        font-size: 24px;
+    }
+    .tips-list-iconbox {
+        width: 80px;
+        height: 80px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 80px;
+                flex: 0 0 80px;
+    }
+    /* Featured Brand */
+    .single-featured-brand .brand {
+        max-width: 80%;
+    }
+    .featured-brand-wrap {
+        -webkit-column-gap: 40px;
+           -moz-column-gap: 40px;
+                column-gap: 40px;
+    }
+}
+@media all and (max-width: 991px){
+    /* Banner */
+    .hero-section {
+        padding-top: calc(73px + 132.58px);
+        margin-top: -132.58px;
+    }
+    .hero-title {
+        font-size: 34px;
+    }
+    .hero-section{
+        margin-bottom: 60px;
+    }
+    .video-player-wrap{
+        margin-bottom: -60px;
+    }
+    .video-player-wrap .plyr__control--overlaid{
+        width: 70px;
+        height: 70px;
+    }
+    .video-player-wrap .plyr__control--overlaid svg{
+        width: 20px;
+    }
+    /* Section Title */
+    .section-title {
+        font-size: 34px;
+    }
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 80%;
+    }
+    /* Feature */
+    .feature-title {
+        font-size: 24px;
+    }
+    /* Testimonial */
+    .testimonial-nav {
+        gap: 80px;
+    }
+    .testimonial-comment {
+        font-size: 21px;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 22px;
+    }
+    .ca-btn-outline-secondary {
+        padding: 14px 28px;
+    }
+    .ca-btn-skin {
+        padding: 13px 21px;
+    }
+    /* Car Tips */
+    .tips-list-title {
+        font-size: 23px;
+    }
+    /* Featured Brand */
+    .single-featured-brand .brand {
+        max-width: 70%;
+    }
+}
+@media all and (max-width: 767px){
+    /* Banner */
+    .hero-section {
+        padding-top: calc(73px + 162.58px);
+        margin-top: -162.58px;
+    }
+    .hero-title {
+        font-size: 30px;
+    }
+    .ca-btn-outline-white{
+        padding: 10px 20px;
+    }
+    .ca-btn-white{
+        padding: 10.5px 16px;
+    }
+    .video-player-wrap .plyr__control--overlaid{
+        width: 60px;
+        height: 60px;
+    }
+    .video-player-wrap .plyr__control--overlaid svg{
+        width: 18px;
+    }
+    /* Section Title */
+    .section-title {
+        font-size: 30px;
+    }
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 70%;
+    }
+    .hero-btn-wrap {
+        -webkit-column-gap: 26px;
+           -moz-column-gap: 26px;
+                column-gap: 26px;
+    }
+    /* Feature */
+    .feature-title {
+        font-size: 22px;
+    }
+    .feature-subtitle {
+        font-size: 17px;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 19px;
+    }
+    .ts-user-name {
+        font-size: 17px;
+    }
+    .testimonial-nav {
+        gap: 60px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 21px;
+    }
+    .category-iconbox {
+        width: 130px;
+        height: 130px;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 21px;
+    }
+    .product-card{
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .ca-btn-outline-secondary {
+        padding: 13px 27px;
+        font-size: 15px;
+    }
+    .ca-btn-skin {
+        font-size: 15px;
+    }
+    /* Car Tips */
+    .tips-list-title {
+        font-size: 22px;
+    }
+    /* Featured Brand */
+    .single-featured-brand {
+        width: 150px;
+        border: 1px solid #ffffff14;
+        padding: 10px;
+        height: 70px;
+    }
+}
+@media all and (max-width: 575px){
+    /* Banner */
+    .hero-title {
+        font-size: 26px;
+    }
+    .hero-btn-wrap {
+        -webkit-column-gap: 20px;
+           -moz-column-gap: 20px;
+                column-gap: 20px;
+    }
+    .ca-btn-outline-white{
+        padding: 9px 19px;
+    }
+    .ca-btn-white{
+        padding: 9.5px 15px;
+    }
+    .hero-section{
+        margin-bottom: 50px;
+    }
+    .video-player-wrap{
+        margin-bottom: -50px;
+    }
+    .video-player-wrap .plyr__control--overlaid{
+        width: 50px;
+        height: 50px;
+    }
+    .video-player-wrap .plyr__control--overlaid svg{
+        width: 16px;
+    }
+    /* Section Title */
+    .section-title {
+        font-size: 26px;
+    }
+    /* Feature */
+    .feature-title {
+        font-size: 20px;
+    }
+    .feature-subtitle {
+        font-size: 16px;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 17px;
+    }
+    .ts-user-name {
+        font-size: 16px;
+    }
+    .testimonial-nav {
+        gap: 40px;
+    }
+    /* Category */
+    .category-card{
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .category-card-title {
+        font-size: 20px;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 20px;
+    }
+    .ca-btn-outline-secondary {
+        padding: 12px 26px;
+    }
+    .ca-btn-skin {
+        padding: 12px 20px;
+    }
+    /* Car Tips */
+    .tips-list-title {
+        font-size: 20px;
+    }
+    /* Featured Brand */
+    .single-featured-brand .brand {
+        max-width: 60%;
+    }
+    .featured-brand-wrap {
+        -webkit-column-gap: 30px;
+           -moz-column-gap: 30px;
+                column-gap: 30px;
+    }
+    /* Scroll Top */
+    .scroll-progress-wrap {
+		bottom: 20px;
+		right: 20px;
+	}
+	 .car-tips-banner {
+        max-width: 100%;
+    }
+}
+
+@media all and (max-width: 450px){
+    .car-tips-banner-wrap{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+    }
+    .car-tips-banner {
+        width: 100%;
+        margin: 0 auto;
+    }
+}

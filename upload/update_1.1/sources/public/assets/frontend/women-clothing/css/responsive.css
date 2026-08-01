@@ -1,0 +1,536 @@
+@media all and (max-width: 1399px){
+    /* Hero */
+    .hero-position-image1 {
+        left: -210px;
+    }
+    .hero-title {
+        font-size: 80px;
+    }
+    /* Category */
+    .section-title {
+        font-size: 50px;
+    }
+    /* Promotional */
+    .promotional-offer-timer .time-wrap .value{
+        font-size: 40px;
+    }
+    .pdw-category{
+        font-size: 44px;
+    }
+    .pdw-title{
+        font-size: 50px;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 190px;
+        height: 190px;
+    }
+    .ts-profile-items {
+        max-width: 960px;
+    }
+    .ts-user-name {
+        font-size: 62px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 30px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 32px;
+    }
+}
+@media all and (max-width: 1199px){
+    /* Hero */
+    .hero-title {
+        font-size: 70px;
+    }
+    .hero-position-image1 {
+        left: -265px;
+        max-height: 760px;
+    }
+    .hero-position-image2 {
+        max-height: 760px;
+        right: -260px;
+    }
+    .hero-section {
+        padding-top: 84px;
+        margin-top: -84px;
+    }
+    /* Category */
+    .section-title {
+        font-size: 44px;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 26px;
+    }
+    /* Promotional */
+    .promotional-offer-timer .time-wrap .value{
+        font-size: 36px;
+    }
+    .promotional-offer-timer .time-wrap{
+        width: 90px;
+        height: 96px;
+    }
+    .promotional-deal-content {
+        padding-left: 0px;
+    }
+    .pdw-category{
+        font-size: 40px;
+    }
+    .pdw-title{
+        font-size: 44px;
+    }
+    /* Style */
+    .style-banner2 {
+        -webkit-transform: rotate(6deg);
+            -ms-transform: rotate(6deg);
+                transform: rotate(6deg);
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 150px;
+        height: 150px;
+    }
+    .ts-profile-items {
+        max-width: 755px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 110px;
+        height: 110px;
+    }
+    .ts-profile-items .slick-slide.slick-current.slick-active.slick-center {
+        margin: 0 10px;
+    }
+    .ts-user-name {
+        font-size: 54px;
+    }
+    .ts-content-items::before {
+        width: 100px;
+        right: -52px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 28px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 30px;
+    }
+}
+@media all and (max-width: 991px){
+    /* Hero */
+    .hero-title {
+        font-size: 60px;
+        letter-spacing: -1.7px;
+    }
+    .dark-corner-btn {
+        padding: 16px 42px;
+    }
+    .hero-slider {
+        max-width: 460px;
+    }
+    .hero-position-image1 {
+        left: -275px;
+        max-height: 645px;
+    }
+    .hero-position-image2 {
+        max-height: 645px;
+        right: -285px;
+    }
+    .hero-section {
+        padding-top: 78px;
+        margin-top: -78px;
+    }
+    /* Category */
+    .section-title {
+        font-size: 38px;
+        letter-spacing: -0.68px;
+    }
+    .section-subtitle2,
+    .section-subtitle {
+        font-size: 19px;
+    }
+    .category-title {
+        font-size: 24px;
+        margin-bottom: 26px;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 24px;
+    }
+    /* Seasonal Product */
+    .seasonal-section-title{
+        max-width: 100%;
+    }
+    /* Promotional */
+    .promotional-offer-timer .time-wrap .value{
+        font-size: 32px;
+    }
+    .promotional-offer-timer .time-wrap{
+        width: 85px;
+        height: 90px;
+    }
+    .promotional-deal-banner{
+        height: auto;
+        width: 100%;
+        max-width: 600px;
+        margin: 80px auto 0 auto;
+        position: unset;
+    }
+    .promotional-deal-content {
+        padding-top: 80px;
+        padding-bottom: 126px;
+    }
+    .min-w-177px {
+        min-width: 167px;
+    }
+    .pdw-category{
+        font-size: 36px;
+    }
+    .pdw-title{
+        font-size: 40px;
+    }
+    .promotion-discount-wrap {
+        min-width: 130px;
+    }
+    /* Style It Your Way */
+    .style-main-wrap{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+    }
+    .style-banner1{
+        margin-top: 0;
+    }
+    .style-content {
+        margin: 60px auto 0 auto;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 120px;
+        height: 120px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 90px;
+        height: 90px;
+    }
+    .ts-profile-items {
+        max-width: 600px;
+    }
+    .ts-user-name {
+        font-size: 48px;
+        letter-spacing: -1.1px;
+    }
+    .ts-rating-star svg {
+        width: 30px;
+        height: auto;
+    }
+    .ts-user-comment {
+        font-size: 22px;
+    }
+    .ts-content-items .slick-prev, .ts-content-items .slick-next {
+        width: 60px;
+        height: 60px;
+    }
+    .ts-content-items .slick-next {
+        right: calc(50% - 66px);
+    }
+    .ts-content-items .slick-prev {
+        left: calc(50% - 66px);
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 26px;
+        letter-spacing: -0.50px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 28px;
+    }
+}
+@media all and (max-width: 767px){
+    /* Hero */
+    .hero-title {
+        font-size: 50px;
+        letter-spacing: -0.7px;
+    }
+    .dark-corner-btn {
+        padding: 15px 38px;
+    }
+    .hero-position-image1 {
+        display: none;
+    }
+    .hero-position-image2 {
+        display: none;
+    }
+    .hero-content-area {
+        padding-top: 120px;
+    }
+    .hero-slider .swiper-wrapper {
+        margin-bottom: 120px;
+    }
+    /* Category */
+    .section-title {
+        font-size: 32px;
+    }
+    .section-sm-title {
+        font-size: 17px;
+    }
+    .section-subtitle2,
+    .section-subtitle {
+        font-size: 18px;
+    }
+    .wc-btn-outline-dark {
+        padding: 12.5px 18px;
+    }
+    .category-title {
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+    .category-arrow svg {
+        max-width: 20px;
+        height: auto;
+    }
+    /* Trending Product */
+    .product-card-title {
+        font-size: 22px;
+    }
+    .product-card-price {
+        font-size: 19px;
+    }
+    /* Promotional */
+    .promotional-section-subtitle {
+        font-size: 19px;
+    }
+    .promotional-offer-timer .time-wrap .value{
+        font-size: 28px;
+    }
+    .min-w-177px {
+        min-width: 157px;
+    }
+    .pdw-category{
+        font-size: 32px;
+    }
+    .pdw-title{
+        font-size: 34px;
+        margin-top: -11.05px;
+        margin-bottom: 0px;
+    }
+    .promotion-discount-wrap {
+        min-width: 120px;
+    }
+    /* Style It Your Way */
+    .style-section-subtitle{
+        font-size: 19px;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 100px;
+        height: 100px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 70px;
+        height: 70px;
+    }
+    .ts-profile-items {
+        max-width: 500px;
+    }
+    .ts-user-name {
+        font-size: 40px;
+        margin-bottom: 26px;
+    }
+    .ts-category {
+        font-size: 19px;
+        margin-bottom: 16px;
+    }
+    .ts-user-comment {
+        font-size: 21px;
+    }
+    .ts-content-items .slick-prev, .ts-content-items .slick-next {
+        width: 55px;
+        height: 55px;
+    }
+    .ts-content-items .slick-next {
+        right: calc(50% - 61px);
+    }
+    .ts-content-items .slick-prev {
+        left: calc(50% - 61px);
+    }
+    .ts-content-items::before {
+        width: 92px;
+        right: -48px;
+    }
+    .ts-content-items::after {
+        left: -48px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 24px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 25px;
+        letter-spacing: -0.82px;
+    }
+}
+@media all and (max-width: 575px){
+    /* Hero */
+    .hero-title {
+        font-size: 40px;
+    }
+    .dark-corner-btn {
+        font-size: 17px;
+        padding: 14px 35px;
+    }
+    /* Category */
+    .section-title {
+        font-size: 26px;
+    }
+    .section-sm-title {
+        font-size: 16px;
+    }
+    .section-subtitle2,
+    .section-subtitle {
+        font-size: 17px;
+    }
+    .wc-btn-outline-dark {
+        padding: 11.5px 17px;
+    }
+    .categories-row{
+        --bs-gutter-x: 24px;
+    }
+    .category-title {
+        font-size: 20px;
+        margin-bottom: 22px;
+    }
+    /* Trending Product */
+    .product-card {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .product-card-title {
+        font-size: 20px;
+    }
+    .product-card-price {
+        font-size: 18px;
+    }
+    .btn-underline {
+        font-size: 17px;
+    }
+    /* Promotional */
+    .promotional-section-subtitle {
+        font-size: 18px;
+    }
+    .promotional-offer-timer .time-wrap .value{
+        font-size: 24px;
+    }
+    .promotional-offer-timer .time-wrap{
+        width: 80px;
+        height: 80px;
+    }
+    .min-w-177px {
+        min-width: 147px;
+    }
+    .pdw-category{
+        font-size: 28px;
+    }
+    .pdw-title{
+        font-size: 30px;
+    }
+    .promotion-discount-wrap {
+        min-width: 100px;
+    }
+    /* Style It Your Way */
+    .style-section-subtitle{
+        font-size: 18px;
+    }
+    .style-content {
+        margin: 30px auto 0 auto;
+    }
+    .style-banner2 {
+        margin-top: 60px;
+        -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    .style-banner1::after {
+        left: -12px;
+        top: -12px;
+        -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    .style-banner2::after {
+        left: -12px;
+        top: -12px;
+        -webkit-transform: rotate(0deg);
+            -ms-transform: rotate(0deg);
+                transform: rotate(0deg);
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 90px;
+        height: 90px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 70px;
+        height: 70px;
+    }
+    .ts-profile-items {
+        max-width: 280px;
+    }
+    .ts-user-name {
+        font-size: 30px;
+    }
+    .ts-rating-star svg {
+        width: 26px;
+    }
+    .ts-category {
+        font-size: 18px;
+    }
+    .ts-user-comment {
+        font-size: 20px;
+    }
+    .ts-content-items .slick-prev, .ts-content-items .slick-next {
+        width: 50px;
+        height: 50px;
+    }
+    .ts-content-items .slick-next {
+        right: calc(50% - 56px);
+    }
+    .ts-content-items .slick-prev {
+        left: calc(50% - 56px);
+    }
+    .ts-content-items::before {
+        display: none;
+    }
+    .ts-content-items::after {
+        display: none;
+    }
+    .ts-content-items {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 22px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 22px;
+    }
+    /* Scroll Top */
+    .scroll-progress-wrap {
+		bottom: 20px;
+		right: 20px;
+	}
+}

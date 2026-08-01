@@ -1,0 +1,576 @@
+@media all and (max-width: 1399px){
+    /* Title & Button */
+    .section-title {
+        font-size: 46px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 28px;
+    }
+    /* Product */
+    .product-card-title {
+        font-size: 25px;
+    }
+    .product-card-price {
+        font-size: 25px;
+    }
+    .pc-old-price {
+        font-size: 24px;
+    }
+    .product-new-badge {
+        width: 130px;
+    }
+    /* Hero */
+    .hero-slide{
+        height: unset;
+    }
+    .hero-title {
+        font-size: 68px;
+    }
+    /* Tab */
+    .inspiration-title1,
+    .inspiration-title2,
+    .inspiration-title3,
+    .inspiration-title4 {
+        font-size: 34px;
+    }
+    /* Seasonal */
+    .seasonal-product-title {
+        font-size: 32px;
+    }
+    /* Why Choose */
+    .why-choose-main{
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+   
+    .why-choose-title {
+        font-size: 27px;
+    }
+    .why-choose-single {
+        -webkit-column-gap: 20px;
+           -moz-column-gap: 20px;
+                column-gap: 20px;
+    }
+    .why-choose-main {
+        -webkit-column-gap: 50px;
+           -moz-column-gap: 50px;
+                column-gap: 50px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 29px;
+    }
+    /* Limited Deal */
+    .limited-deal-slider .swiper-slide-active{
+        width: 350px !important;
+    }
+    .limited-deal-slider .swiper-pagination{
+        left: calc(350px + 24px + 6px);
+    }
+    .deal-slide-title{
+        font-size: 27px;
+    }
+    .offer-timer-wrap .mc-timer:not(:has(ul)){
+        font-size: 30px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.time{
+        font-size: 30px;
+    }
+}
+@media all and (max-width: 1199px){
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 90%;
+    }
+    /* Title & Button */
+    .section-title {
+        font-size: 40px;
+    }
+    .mc-btn-outline-black {
+        padding: 13.5px 28px;
+    }
+    .btn-min-218px {
+        min-width: 208px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 26px;
+    }
+    /* Product */
+    .product-card-title {
+        font-size: 24px;
+    }
+    .product-card-price {
+        font-size: 24px;
+    }
+    .pc-old-price {
+        font-size: 23px;
+    }
+    .product-new-badge {
+        width: 120px;
+    }
+    /* Hero */
+    .hero-title {
+        font-size: 60px;
+    }
+    /* Tab */
+    .inspiration-title1,
+    .inspiration-title2,
+    .inspiration-title3,
+    .inspiration-title4 {
+        font-size: 31px;
+    }
+    .inspiration-banner1 {
+        width: calc(40% - 12px);
+    }
+    .inspiration-banner2 {
+        width: calc(60% - 12px);
+    }
+    .inspiration-banner3 {
+        width: calc(60% - 12px);
+    }
+    .inspiration-banner4 {
+        width: calc(40% - 12px);
+    }
+    .inspiration-banner1,
+    .inspiration-banner2,
+    .inspiration-banner3,
+    .inspiration-banner4{
+        position: relative;
+        z-index: 1;
+    }
+    .inspiration-banner1::after,
+    .inspiration-banner2::after,
+    .inspiration-banner3::after,
+    .inspiration-banner4::after{
+        position: absolute;
+        content: "";
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        border-radius: inherit;
+        left: 0;
+        top: 0;
+        -webkit-backdrop-filter: blur(1px);
+                backdrop-filter: blur(1px);
+    }
+    /* Seasonal */
+    .seasonal-product-title {
+        font-size: 30px;
+    }
+    /* Why Choose */
+    .why-choose-title {
+        font-size: 26px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 27px;
+    }
+    /* Testimonial */
+    .testimonial-slider{
+        padding: 0 20px;
+    }
+    .ts-user-name {
+        font-size: 25px;
+    }
+    /* Limited Deal */
+    .limited-deal-slider .swiper-slide-active{
+        width: 300px !important;
+    }
+    .limited-deal-slider .swiper-pagination{
+        left: calc(300px + 24px + 6px);
+    }
+    .deal-slide-title{
+        font-size: 26px;
+    }
+    .offer-timer-wrap .mc-timer:not(:has(ul)){
+        font-size: 28px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.time{
+        font-size: 28px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.text{
+        font-size: 23px;
+    }
+    .offer-timer-wrap .mc-timer ul{
+        -webkit-column-gap: 24px;
+           -moz-column-gap: 24px;
+                column-gap: 24px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.time{
+        width: 70px;
+    }
+}
+@media all and (max-width: 991px){
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 80%;
+    }
+    /* Title & Button */
+    .section-title {
+        font-size: 34px;
+    }
+    .mc-btn-outline-black {
+        padding: 12.5px 26px;
+    }
+    .btn-min-218px {
+        min-width: 198px;
+    }
+    .section-mb {
+        margin-bottom: 170px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 24px;
+    }
+    /* Product */
+    .product-card-title {
+        font-size: 23px;
+    }
+    .product-card-price {
+        font-size: 23px;
+    }
+    .pc-old-price {
+        font-size: 22px;
+    }
+    .product-new-badge {
+        width: 110px;
+        top: calc(-55px + 24px);
+    }
+    /* Hero */
+    .hero-title {
+        font-size: 52px;
+    }
+    .mc-btn-white{
+        padding: 13.5px 26.5px;
+    }
+    .hero-slide{
+        height: 640px;
+    }
+    /* Tab */
+    .inspiration-title1,
+    .inspiration-title2,
+    .inspiration-title3,
+    .inspiration-title4 {
+        font-size: 28px;
+    }
+    .inspiration-banner1 {
+        width: calc(50% - 12px);
+    }
+    .inspiration-banner2 {
+        width: calc(50% - 12px);
+    }
+    .inspiration-banner3 {
+        width: calc(50% - 12px);
+    }
+    .inspiration-banner4 {
+        width: calc(50% - 12px);
+    }
+    /* Seasonal */
+    .seasonal-product-title {
+        font-size: 27px;
+    }
+    /* Why Choose */
+    .why-choose-title {
+        font-size: 24px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 25px;
+    }
+    /* Testimonial */
+    .testimonial-slider{
+        padding: 0 0;
+    }
+    .ts-user-name {
+        font-size: 24px;
+    }
+    /* Limited Deal */
+    .limited-deal-slider .swiper-slide-active{
+        width: 350px !important;
+    }
+    .limited-deal-slider .swiper-pagination{
+        left: calc(350px + 24px + 6px);
+    }
+    .deal-slide-title{
+        font-size: 24px;
+    }
+    .offer-timer-wrap .mc-timer:not(:has(ul)){
+        font-size: 26px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.time{
+        font-size: 26px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.text{
+        font-size: 22px;
+    }
+    .footer-copyright-area {
+        margin-bottom: 95px !important;
+    }
+}
+@media all and (max-width: 767px){
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 70%;
+    }
+    .brand-section {
+        margin-top: 100px;
+    }
+    /* Title & Button */
+    .section-title {
+        font-size: 30px;
+    }
+    .mc-btn-outline-black {
+        padding: 12px 24px;
+    }
+    .btn-min-218px {
+        min-width: 184px;
+    }
+    .section-mb {
+        margin-bottom: 140px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 22px;
+    }
+    /* Product */
+    .product-card-title {
+        font-size: 22px;
+    }
+    .product-card-price {
+        font-size: 22px;
+    }
+    .pc-old-price {
+        font-size: 21px;
+    }
+    .product-new-badge {
+        width: 100px;
+        left: -48px;
+        top: -28px;
+    }
+    /* Hero */
+    .hero-title {
+        font-size: 44px;
+    }
+    .hero-slide {
+        height: 640px;
+    }
+    .hero-banner2{
+        display: none;
+    }
+    .hero-banner1{
+        width: 100%;
+    }
+    .mc-btn-white{
+        padding: 13px 25px;
+    }
+    .hero-slide-content-inner {
+        padding: 47px 0 80px 0;
+    }
+    .hero-slider .swiper-pagination {
+        bottom: 45px;
+    }
+    /* Tab */
+    .inspiration-title1,
+    .inspiration-title2,
+    .inspiration-title3,
+    .inspiration-title4 {
+        font-size: 25px;
+    }
+    .inspiration-banner-wrap{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .inspiration-banner1,
+    .inspiration-banner2,
+    .inspiration-banner3,
+    .inspiration-banner4 {
+        width: 100%;
+    }
+    /* Seasonal */
+    .seasonal-product-title {
+        font-size: 24px;
+    }
+    /* Why Choose */
+    .why-choose-title {
+        font-size: 22px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 23px;
+    }
+    /* Testimonial */
+    .ts-user-name {
+        font-size: 22px;
+    }
+    /* Limited Deal */
+    .limited-deal-slider .swiper-slide-active{
+        width: 330px !important;
+    }
+    .limited-deal-slider .swiper-pagination{
+        left: calc(330px + 24px + 6px);
+        gap: 16px;
+    }
+    .deal-slide-title{
+        font-size: 22px;
+    }
+    .ltd-timer-subtitle {
+        font-size: 21px;
+    }
+    .offer-timer-wrap .mc-timer:not(:has(ul)){
+        font-size: 24px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.time{
+        font-size: 24px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.text{
+        font-size: 21px;
+    }
+    .section-title {
+        text-align: left !important;
+    }
+    .why-choose-main{
+        justify-content: start;
+        row-gap: 25px;
+    }
+    .why-choose-single {
+        min-width: 100%;
+    }
+    .deal-slider-next,
+    .deal-slider-prev{
+        display: none;
+    }
+   .ltd-section-btn {
+    	margin-bottom: 0px;
+    }
+    .ltd-section-subtitle {
+	  margin-bottom: 17px;
+    }
+    .ltd-section-title {
+    	margin-bottom: 10px;
+    }
+}
+@media all and (max-width: 575px){
+    /* Brand */
+    .brand-slide-img .brand {
+        max-width: 60%;
+    }
+    .brand-section {
+        margin-top: 50px;
+    }
+    /* Title & Button */
+    .section-title {
+        font-size: 26px;
+    }
+    .mc-btn-outline-black {
+        padding: 11.5px 22px;
+    }
+    .btn-min-218px {
+        min-width: 170px;
+    }
+    .section-mb {
+        margin-bottom: 120px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 20px;
+    }
+    .category-card {
+        margin: 0 auto;
+    }
+    /* Product */
+    .product-card-title {
+        font-size: 20px;
+    }
+    .product-card-price {
+        font-size: 20px;
+    }
+    .pc-old-price {
+        font-size: 19px;
+    }
+    .product-card{
+        margin: 0 auto;
+    }
+    .product-new-badge {
+        width: 90px;
+        left: -11px;
+    }
+    /* Hero */
+    .hero-title {
+        font-size: 34px;
+    }
+    .hero-slide {
+        height: 560px;
+    }
+    .mc-btn-white{
+        padding: 12px 24px;
+    }
+    /* Tab */
+    .inspiration-title1,
+    .inspiration-title2,
+    .inspiration-title3,
+    .inspiration-title4 {
+        font-size: 22px;
+    }
+    /* Seasonal */
+    .seasonal-product-title {
+        font-size: 21px;
+    }
+    /* Why Choose */
+    .why-choose-title {
+        font-size: 20px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 21px;
+    }
+    /* Testimonial */
+    .testimonial-slider{
+        padding: 0 20px;
+    }
+    .ts-user-name {
+        font-size: 20px;
+    }
+    /* Limited Deal */
+    .limited-deal-slider .swiper-slide-active{
+        width: 100% !important;
+    }
+    .limited-deal-slider .swiper-pagination{
+        /* left: calc(330px + 24px + 6px); */
+        position: unset;
+        padding: 6px;
+        margin-top: 16px;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+    }
+    .limited-deal-slider{
+        margin: 0 auto;
+    }
+    .deal-slide-title{
+        font-size: 20px;
+    }
+    .ltd-timer-subtitle {
+        font-size: 20px;
+    }
+    .offer-timer-wrap .mc-timer:not(:has(ul)){
+        font-size: 22px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.time{
+        font-size: 22px;
+    }
+    .offer-timer-wrap .mc-timer ul li span.text{
+        font-size: 20px;
+    }
+    /* Scroll Top */
+    .scroll-progress-wrap {
+		bottom: 88px;
+		right: 20px;
+	}
+    .blog-card-banner {
+        min-height: 278px;
+    }
+}

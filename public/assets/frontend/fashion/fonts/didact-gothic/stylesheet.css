@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Didact Gothic';
+    src: url('DidactGothic-Regular.eot');
+    src: url('DidactGothic-Regular.eot?#iefix') format('embedded-opentype'),
+        url('DidactGothic-Regular.woff2') format('woff2'),
+        url('DidactGothic-Regular.woff') format('woff'),
+        url('DidactGothic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

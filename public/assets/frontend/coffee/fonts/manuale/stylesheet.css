@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Manuale';
+    src: url('Manuale-Bold.woff2') format('woff2'),
+        url('Manuale-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Manuale';
+    src: url('Manuale-Light.woff2') format('woff2'),
+        url('Manuale-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Manuale';
+    src: url('Manuale-Medium.woff2') format('woff2'),
+        url('Manuale-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Manuale';
+    src: url('Manuale-ExtraBold.woff2') format('woff2'),
+        url('Manuale-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Manuale';
+    src: url('Manuale-Regular.woff2') format('woff2'),
+        url('Manuale-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Manuale';
+    src: url('Manuale-SemiBold.woff2') format('woff2'),
+        url('Manuale-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

@@ -1,0 +1,500 @@
+@media all and (max-width: 1399px){
+    /* Hero */
+    .hero-title {
+        font-size: 80px;
+        line-height: 120%;
+    }
+    .hero-section {
+        padding-top: 60px;
+    }
+    .hr-coffee-shape {
+        top: -65px;
+        width: 90px;
+    }
+    /* Title */
+    .section-title {
+        font-size: 48px;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 27px;
+    }
+    .testi-leaves-shape {
+        top: -20px;
+        width: 290px;
+    }
+    /* Note Slider */
+    .notice-slide-text {
+        font-size: 35px;
+    }
+}
+@media all and (max-width: 1199px){
+    /* Hero */
+    .hero-title {
+        font-size: 70px;
+    }
+    .hr-coffee-shape {
+        width: 80px;
+        top: -60px;
+    }
+    .hero-section {
+        padding-top: 80px;
+    }
+    /* Title */
+    .section-title {
+        font-size: 42px;
+    }
+    /* Category */
+    .featured-category-section{
+        background-size: cover;
+    }
+    .category-title {
+        font-size: 28px;
+    }
+    .featured-shape1 {
+        width: 110px;
+        top: 60px;
+    }
+    .featured-shape2 {
+        width: 120px;
+        bottom: -90px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 28px;
+    }
+    .product-card-price {
+        font-size: 30px;
+    }
+    /* Brewing Guides */
+    .blog-lg-title {
+        font-size: 32px;
+    }
+    .blog-md-title {
+        font-size: 28px;
+    }
+    .blog-lg-arrow {
+        width: 80px;
+        height: 80px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 80px;
+                flex: 0 0 80px;
+    }
+    .blog-lg-arrow svg {
+        width: 28px;
+        height: auto;
+    }
+    .blog-md-arrow svg {
+        width: 28px;
+        height: auto;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 26px;
+    }
+    .testi-leaves-shape {
+        top: 0px;
+        width: 260px;
+    }
+    /* Subscription Offer */
+    .so-banner-shape {
+        left: -40px;
+        width: 190px;
+    }
+    .ob-list-item {
+        font-size: 21px;
+    }
+    /* Sustainability Commitment */
+    .commitment-type-title {
+        font-size: 26px;
+    }
+    .commitment-item-wrap {
+        -webkit-column-gap: 30px;
+           -moz-column-gap: 30px;
+                column-gap: 30px;
+        row-gap: 60px;
+    }
+    .commitment-item {
+        width: calc(50% - 15px);
+    }
+    /* Note Slider */
+    .notice-slide-text {
+        font-size: 32px;
+    }
+}
+@media all and (max-width: 991px){
+    /* Hero */
+    .hero-title {
+        font-size: 60px;
+        line-height: 130%;
+    }
+    .cts-btn-outline-white {
+        padding: 15.5px 31px;
+    }
+    .cts-btn-white {
+        padding: 16.5px 36px;
+    }
+    .hr-coffee-shape {
+        width: 70px;
+        top: -50px;
+    }
+    /* Title */
+    .section-title {
+        font-size: 38px;
+    }
+    /* Category */
+    .category-title {
+        font-size: 26px;
+    }
+    .featured-shape1 {
+        width: 90px;
+        top: 10px;
+    }
+    .featured-shape2 {
+        width: 100px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 26px;
+    }
+    .product-card-price {
+        font-size: 28px;
+    }
+    /* Brewing Guides */
+    .blog-card-main{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .blog-lg-card{
+        width: 100%;
+    }
+    .blog-md-wrap{
+        width: 100%;
+    }
+    .blog-lg-title {
+        font-size: 30px;
+    }
+    .blog-md-title {
+        font-size: 26px;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 24px;
+    }
+    .testimonial-banner {
+        margin: 0 auto;
+    }
+    .testi-leaves-shape {
+        top: 20px;
+        width: 200px;
+    }
+    /* Subscription Offer */
+    .so-banner-shape {
+        top: -40px;
+        left: -30px;
+        width: 160px;
+    }
+    .ob-list-item {
+        font-size: 20px;
+    }
+    .subscription-offer-main{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+            -ms-flex-direction: column-reverse;
+                flex-direction: column-reverse;
+    }
+    .subscription-offer-content{
+        width: 100%;
+    }
+    .subscription-offer-banner{
+        max-width: 500px;
+        width: 100%;
+    }
+    /* Sustainability Commitment */
+    .commitment-type-title {
+        font-size: 24px;
+    }
+    .commitment-item-wrap {
+        margin: 0 auto;
+    }
+    /* Note Slider */
+    .notice-slide-text {
+        font-size: 29px;
+    }
+}
+@media all and (max-width: 767px){
+    /* Hero */
+    .hero-title {
+        font-size: 48px;
+    }
+    .hero-subtitle {
+        font-size: 19px;
+    }
+    .cts-btn-outline-white {
+        padding: 14.5px 29px;
+        font-size: 19px;
+    }
+    .cts-btn-white {
+        padding: 15.5px 32px;
+        font-size: 19px;
+    }
+    .hr-coffee-shape {
+        width: 65px;
+        top: -45px;
+        right: -12px;
+    }
+    /* Title */
+    .section-title {
+        font-size: 32px;
+    }
+    .section-subtitle {
+        font-size: 16px;
+    }
+    .ctsb2-btn-outline-white,
+    .cts-btn-outline-black {
+        padding: 11px 24px;
+        font-size: 19px;
+    }
+    .title-badge3,
+    .title-badge2,
+    .title-badge {
+        padding: 7px 15px;
+    }
+    /* Category */
+    .category-title {
+        font-size: 23px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 23px;
+    }
+    .product-card-price {
+        font-size: 25px;
+    }
+    /* Brewing Guides */
+    .blog-lg-title {
+        font-size: 28px;
+    }
+    .blog-md-title {
+        font-size: 24px;
+    }
+    .blog-lg-arrow {
+        width: 70px;
+        height: 70px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 70px;
+                flex: 0 0 70px;
+    }
+    .blog-lg-arrow svg {
+        width: 24px;
+    }
+    .blog-md-arrow svg {
+        width: 24px;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 22px;
+    }
+    .ts-user-name {
+        font-size: 21px;
+    }
+    .ts-user-profile {
+        width: 80px;
+        height: 80px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 80px;
+                flex: 0 0 80px;
+    }
+    .testimonial-nav{
+        bottom: 13px;
+    }
+    .testimonial-star svg {
+        width: 30px;
+        height: auto;
+    }
+    /* Subscription Offer */
+    .ob-list-item {
+        font-size: 19px;
+    }
+    .so-banner-shape {
+        top: -50px;
+        left: -24px;
+        width: 140px;
+    }
+    /* Sustainability Commitment */
+    .commitment-type-title {
+        font-size: 22px;
+    }
+    /* Note Slider */
+    .notice-slide-text {
+        font-size: 25px;
+    }
+    .notice-slider-nav .swiper-button-prev, 
+    .notice-slider-nav .swiper-button-next {
+        width: 50px;
+        height: 50px;
+    }
+    .notice-slider {
+        padding: 0 50px;
+    }
+    .notice-slider::after{
+        width: 50px;
+    }
+    .notice-slider::before{
+        width: 50px;
+    }
+}
+@media all and (max-width: 575px){
+    /* Hero */
+    .hero-title {
+        font-size: 36px;
+    }
+    .hero-subtitle {
+        font-size: 18px;
+    }
+    .cts-btn-outline-white {
+        padding: 13.5px 27px;
+        font-size: 18px;
+    }
+    .cts-btn-white {
+        padding: 14.5px 30px;
+        font-size: 18px;
+    }
+    .hr-coffee-shape {
+        width: 50px;
+        top: -35px;
+        right: 0;
+    }
+    /* Title */
+    .section-title {
+        font-size: 26px;
+    }
+    .section-subtitle {
+        font-size: 16px;
+    }
+    .ctsb2-btn-outline-white,
+    .cts-btn-outline-black {
+        padding: 10.5px 23.5px;
+        font-size: 18px;
+    }
+    .title-badge3,
+    .title-badge2,
+    .title-badge {
+        font-size: 15px;
+    }
+    /* Category */
+    .category-title {
+        font-size: 20px;
+    }
+    .category-arrow-icon{
+        width: 60px;
+    }
+    .category-arrow-icon svg{
+        width: 24px;
+        height: auto;
+    }
+    .category-view-icon{
+        width: 70px;
+    }
+    .category-view-icon svg{
+        width: 36px;
+        height: auto;
+    }
+    .featured-shape1 {
+        width: 80px;
+        top: -30px;
+    }
+    .featured-shape2 {
+        width: 90px;
+        bottom: -80px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 20px;
+    }
+    .product-card-price {
+        font-size: 22px;
+    }
+    /* Brewing Guides */
+    .blog-lg-title {
+        font-size: 25px;
+    }
+    .blog-md-title {
+        font-size: 22px;
+    }
+    .blog-md-arrow,
+    .blog-lg-arrow {
+        width: 60px;
+        height: 60px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 60px;
+                flex: 0 0 60px;
+    }
+    .blog-lg-arrow svg,
+    .blog-md-arrow svg {
+        width: 22px;
+    }
+    /* Testimonial */
+    .testimonial-comment {
+        font-size: 20px;
+    }
+    .testimonial-nav{
+        position: unset;
+        margin-top: 30px;
+        -webkit-box-pack: center;
+            -ms-flex-pack: center;
+                justify-content: center;
+    }
+    .ts-user-name {
+        font-size: 20px;
+    }
+    .testi-leaves-shape {
+        top: 30px;
+        width: 170px;
+    }
+    /* Subscription Offer */
+    .ob-list-item {
+        font-size: 18px;
+    }
+    .so-banner-shape {
+        top: -40px;
+        left: -20px;
+        width: 120px;
+    }
+    /* Sustainability Commitment */
+    .commitment-type-title {
+        font-size: 20px;
+    }
+    .commitment-item {
+        max-width: 254px;
+        width: 100%;
+    }
+    /* Note Slider */
+    .notice-slide-text {
+        font-size: 22px;
+    }
+    .notice-slider-nav .swiper-button-prev, 
+    .notice-slider-nav .swiper-button-next {
+        width: 45px;
+        height: 45px;
+    }
+    .notice-slider {
+        padding: 0 45px;
+    }
+    .notice-slider::after{
+        width: 45px;
+    }
+    .notice-slider::before{
+        width: 45px;
+    }
+    /* Scroll Top */
+    .scroll-progress-wrap {
+		bottom: 20px;
+		right: 20px;
+	}
+    .section-mb {
+        margin-bottom: 100px;
+    }
+}

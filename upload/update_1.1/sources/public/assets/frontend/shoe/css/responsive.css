@@ -1,0 +1,379 @@
+@media all and (max-width: 1399px){
+    /* Banner */
+    .sh1-banner-title {
+        font-size: 94px;
+        max-width: 800px;
+    }
+    .bn-slider-main {
+        max-width: 665px;
+        margin-top: -60px;
+    }
+    .bn-slider-main::after {
+        right: 195px;
+    }
+    /* Home */
+    .sml-category-card {
+        aspect-ratio: 428 / 352;
+    }
+    .featured-title-left {
+        max-width: 640px;
+    }
+    .featured-title-right {
+        max-width: 450px;
+    }
+    .product-card-title {
+        font-size: 29px;
+    }
+    .product-card-price {
+        font-size: 22px;
+    }
+    .product-card-star svg {
+        width: 24px;
+    }
+    .testimonial-comment {
+        font-size: 32px;
+    }
+    .testimonial-user-profile {
+        width: 360px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 360px;
+                flex: 0 0 360px;
+    }
+}
+@media all and (max-width: 1199px){
+    /* Banner */
+    .sh1-banner-title {
+        font-size: 75px;
+        max-width: 690px;
+    }
+    .bn-slider-main {
+        max-width: 490px;
+        margin-top: 0;
+    }
+    .bn-slider-content {
+        max-width: 400px;
+        margin-top: 50px;
+    }
+    .bn-slider-main::after {
+        right: 150px;
+    }
+    /* Belt */
+    .bn-belt-2-title,
+    .bn-belt-1-title {
+        font-size: 42px;
+    }
+    .bn-belt-2,
+    .bn-belt-1 {
+        gap: 40px;
+    }
+    .bn-belt-2 {
+        margin-top: -88.8px;
+    }
+    /* Home */
+    .sml-category-card {
+        aspect-ratio: 428 / 350;
+    }
+    .category-card-title {
+        font-size: 40px;
+    }
+    .section-title {
+        font-size: 54px;
+    }
+    .brand-story-area {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+            -ms-flex-direction: column-reverse;
+                flex-direction: column-reverse;
+    }
+    .product-card-price {
+        font-size: 22px;
+    }
+    .product-card-star svg {
+        width: 22px;
+    }
+    .testimonial-comment {
+        font-size: 30px;
+    }
+    .testimonial-user-profile {
+        width: 340px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 340px;
+                flex: 0 0 340px;
+    }
+    .testimonial-logo {
+        margin-bottom: 30px;
+    }
+    .testimonial-details {
+        gap: 30px;
+    }
+}
+/* Testimonial Slider  */
+@media all and (max-width: 1099px){
+    .testimonial-comment {
+        font-size: 28px;
+    }
+    .testimonial-user-profile {
+        width: 320px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 320px;
+                flex: 0 0 320px;
+    }
+    .footer-nav-content{
+        margin-left: 0 ;
+    }
+}
+@media all and (max-width: 991px){
+    /* Banner */
+    .bn-view-products-btn{
+        margin-top: 0;
+    }
+    .sh1-banner-title {
+        font-size: 62px;
+        max-width: 100%;
+    }
+    .bn-slider-main::after {
+        display: none;
+    }
+    .bn-slider-content-wrap {
+        margin-top: 40px;
+    }
+    .bn-slider-content {
+        margin-top: 0px;
+        max-width: 330px;
+    }
+    .bn-slider-subtitle {
+        font-size: 23px;
+    }
+    .sh1-banner-section {
+        padding: 100px 0 33px 0;
+    }
+    /* Belt */
+    .bn-belt-2-title,
+    .bn-belt-1-title {
+        font-size: 34px;
+    }
+    .bn-belt-2,
+    .bn-belt-1 {
+        gap: 36px;
+    }
+    .bn-belt-2 {
+        margin-top: -77.59px;
+    }
+    /* Home */
+    .sml-category-card {
+        aspect-ratio: 428 / 351;
+    }
+    .category-card-title {
+        font-size: 35px;
+    }
+    .section-title {
+        font-size: 48px;
+    }
+    .product-card-title {
+        font-size: 26px;
+    }
+    .product-card-price {
+        font-size: 21px;
+    }
+    .product-card-rating {
+        font-size: 19px;
+    }
+    .testimonial-comment {
+        font-size: 26px;
+    }
+    .testimonial-user-profile {
+        width: 280px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 280px;
+                flex: 0 0 280px;
+    }
+    .testimonial-logo {
+        max-width: 190px;
+        margin-bottom: 20px;
+    }
+    .testimonial-details {
+        gap: 20px;
+    }
+    .ts-user-name {
+        font-size: 26px;
+    }
+    
+}
+@media all and (max-width: 767px){
+    /* Banner */
+    .sh1-banner-title {
+        font-size: 50px;
+    }
+    .bn-slider-content-wrap {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .bn-slider-main {
+        margin: 0 auto;
+    }
+    .bn-slider-content {
+        max-width: 100%;
+    }
+    .sh1-banner-section {
+        padding: 80px 0 33px 0;
+    }
+    /* Belt */
+    .bn-belt-2-title,
+    .bn-belt-1-title {
+        font-size: 24px;
+    }
+    .bn-belt-2,
+    .bn-belt-1 {
+        gap: 24px;
+    }
+    .bn-belt-1-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+    .bn-belt-2 {
+        margin-top: -65.59px;
+    }
+    /* Home */
+    .sml-category-card {
+        aspect-ratio: 428 / 347;
+    }
+    .category-card-title {
+        font-size: 30px;
+    }
+    .section-title {
+        font-size: 40px;
+    }
+    .section-subtitle {
+        font-size: 23px;
+    }
+    .brand-story-subtitle {
+        font-size: 23px;
+    }
+    .brand-story-banners {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .brand-story-banner2,
+    .brand-story-banner1 {
+        max-width: 350px;
+        width: 100%;
+    }
+    .testimonial-user-profile {
+        width: 250px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 250px;
+                flex: 0 0 250px;
+    }
+    .testimonial-comment {
+        font-size: 24px;
+    }
+    .testimonial-logo {
+        max-width: 170px;
+    }
+    .ts-user-name {
+        font-size: 24px;
+    }
+    .testimonial-nav-wrap .swiper-button-next, .testimonial-nav-wrap .swiper-button-prev {
+        height: 56px;
+        width: 56px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 56px;
+                flex: 0 0 56px;
+    }
+}
+@media all and (max-width: 575px){
+    /* Banner */
+    .sh1-banner-title {
+        font-size: 38px;
+    }
+    .bn-view-products-btn {
+        font-size: 22px;
+    }
+    /* Belt */
+    .bn-belt-2-title,
+    .bn-belt-1-title {
+        font-size: 20px;
+    }
+    .bn-belt-2,
+    .bn-belt-1 {
+        gap: 20px;
+        padding: 10px 40px;
+    }
+    .bn-belt-2 {
+        margin-top: -54px;
+    }
+    .bn-belt-1-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+    /* Scroll Top Css */
+    .scroll-progress-wrap {
+        bottom: 24px;
+        right: 24px;
+    }
+    /* Home */
+    .lng-category-card{
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .sml-category-card{
+        max-width: 350px;
+        margin: 0 auto;
+    }
+    .category-card-title {
+        font-size: 25px;
+    }
+    .section-title {
+        font-size: 32px;
+    }
+    .section-subtitle {
+        font-size: 22px;
+    }
+    .brand-story-subtitle {
+        font-size: 22px;
+    }
+    .offer-deal-banners {
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+    .product-card-title {
+        font-size: 25px;
+    }
+    .product-card-price {
+        font-size: 20px;
+    }
+    .product-card-rating {
+        font-size: 18px;
+    }
+    .product-card-star svg {
+        width: 20px;
+    }
+    .testimonial-slide {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: reverse;
+            -ms-flex-direction: column-reverse;
+                flex-direction: column-reverse;
+    }
+    .testimonial-user-profile {
+        max-width: 250px;
+        width: 100%;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
+    }
+    .testimonial-nav-wrap .swiper-button-next, .testimonial-nav-wrap .swiper-button-prev {
+        height: 50px;
+        width: 50px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 50px;
+                flex: 0 0 50px;
+    }
+    .brand-story-banner2,
+    .brand-story-banner1 {
+        aspect-ratio: 607 / 648;
+    }
+}

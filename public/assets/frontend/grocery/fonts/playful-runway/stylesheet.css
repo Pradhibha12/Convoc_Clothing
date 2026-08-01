@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'PLAYFUL RUNWAY';
+    src: url('PLAYFULRUNWAY-Black.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PLAYFUL RUNWAY';
+    src: url('PLAYFULRUNWAY-Bold.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PLAYFUL RUNWAY ExtBd';
+    src: url('PLAYFULRUNWAY-ExtraBold.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PLAYFUL RUNWAY';
+    src: url('PLAYFULRUNWAY-Regular.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PLAYFUL RUNWAY Med';
+    src: url('PLAYFULRUNWAY-Medium.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PLAYFUL RUNWAY Outline';
+    src: url('PLAYFULRUNWAY-Outline.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'PLAYFUL RUNWAY SemBd';
+    src: url('PLAYFULRUNWAY-SemiBold.woff2') format('woff2'),
+        url('PLAYFULRUNWAY-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

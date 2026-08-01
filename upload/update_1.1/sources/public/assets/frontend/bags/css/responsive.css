@@ -1,0 +1,591 @@
+@media all and (max-width: 1399px){
+    /* Category */
+    .category-card-title {
+        font-size: 30px;
+    }
+    /* Lifestyle */
+    .lifestyle-banner-main{
+        margin-left: -248px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 29px;
+    }
+    .why-choose3-title{
+        font-size: 39px;
+    }
+    /* Blog */
+    .blog-card-title{
+        font-size: 34px;
+    }
+    /* Section Title */
+    .section-title {
+        font-size: 60px;
+    }
+    /* Testimonial */
+    .testimonial-user-profile {
+        width: 250px;
+        height: 250px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 250px;
+                flex: 0 0 250px;
+        margin-right: 0;
+    }
+    .sm-testimonial-profile {
+        width: 120px;
+        height: 120px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 120px;
+                flex: 0 0 120px;
+    }
+    .small-testimonial-wrap{
+        height: 400px;
+    }
+    /* Banner */
+    .banner-title {
+        font-size: 82px;
+    }
+    .banner-title-shape {
+        width: 80px;
+    }
+    .banner-card-title {
+        font-size: 39px;
+    }
+    .banner-card-outer::before {
+        bottom: 19px;
+    }
+    .bs-banner-section {
+        padding-top: 113px;
+        margin-top: -113px;
+    }
+    /* Other */
+}
+
+@media all and (max-width: 1199px){
+    /* Section Title */
+    .section-title {
+        font-size: 52px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 28px;
+    }
+    .category-btn-inner {
+        width: 90px;
+        height: 85px;
+    }
+    .category-card-btn {
+        border-bottom: 7px solid var(--whiteColor);
+    }
+    .category-card-btn::after {
+        bottom: -7px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 28px;
+    }
+    .product-card-price{
+        font-size: 31px;
+    }
+    .best-sellers-title-area {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+    .best-sellers-title-right {
+        max-width: 100%;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 28px;
+    }
+    .why-choose3-title{
+        font-size: 36px;
+    }
+    /* Blog */
+    .blog-card-title{
+        font-size: 31px;
+    }
+    /* Inspirational */
+    .inspirational-gallery-main{
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+    /* Testimonial */
+    .testimonial-wrap-main{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .large-testimonial-wrap {
+        width: 100%;
+    }
+    .small-testimonial-wrap {
+        width: 100%;
+    }
+    .sm-ts-user-name {
+        font-size: 26px;
+    }
+    .testimonial-comment {
+        font-size: 24px;
+    }
+    /* Banner */
+    .banner-title {
+        font-size: 72px;
+    }
+    .banner-title-area {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .banner-title::after {
+        left: -60px;
+        top: -55px;
+        width: 85px;
+    }
+    .banner-title-shape {
+        display: none;
+    }
+    .banner-title {
+        max-width: 100%;
+    }
+    .banner-subtitle {
+        max-width: 100%;
+        margin-left: 0;
+    }
+    .banner-card-outer::before {
+        bottom: 15px;
+    }
+    .banner-card-title {
+        font-size: 35px;
+    }
+    .bs-banner-card {
+        padding: 24px 14px;
+    }
+    .bs-banner-badge {
+        font-size: 21px;
+        right: 46px;
+    }
+    .bs-banner-badge svg {
+        width: 36px;
+        height: auto;
+    }
+    .banner-arrow-shape{
+        display: none;
+    }
+    .bs-banner-section {
+        padding-top: 101px;
+        margin-top: -101px;
+    }
+    /* Other */
+}
+
+@media all and (max-width: 991px){
+    /* Section Title */
+    .section-title {
+        font-size: 44px;
+    }
+    /* Brand */
+    .trusted-brand .brand{
+        max-width: 90%;
+    }
+    .trusted-brand-list {
+        -webkit-column-gap: 60px;
+           -moz-column-gap: 60px;
+                column-gap: 60px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 26px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 26px;
+    }
+    .product-card-price{
+        font-size: 29px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 26px;
+    }
+    .why-choose3-title{
+        font-size: 33px;
+    }
+   /* Lifestyle */
+   .iconbox-text-list-title{
+        font-size: 24px;
+   }
+    .lifestyle-banner-main{
+        margin-left: 0;
+    }
+    /* Blog */
+    .blog-card-title{
+       font-size: 28px;
+    }
+    .date-comment-list-item {
+        font-size: 18px;
+    }
+    .blogs-section-title-area {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        -webkit-box-align: start;
+            -ms-flex-align: start;
+                align-items: flex-start;
+    }
+    .blogs-section-title {
+        max-width: 100%;
+    }
+    .blogs-section-title-right {
+        max-width: 100%;
+    }
+   /* Testimonial */
+   .testimonial-user-profile {
+        width: 200px;
+        height: 200px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 200px;
+                flex: 0 0 200px;
+    }
+    .testimonial-logo{
+        max-width: 200px;
+    }
+    .sm-ts-user-name {
+        font-size: 24px;
+    }
+    .testimonial-comment {
+        font-size: 22px;
+    }
+    .sm-testimonial-profile {
+        width: 110px;
+        height: 110px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 110px;
+                flex: 0 0 110px;
+    }
+    .testimonial-quote-shape {
+        width: 70px;
+        height: 70px;
+    }
+    .testimonial-quote-shape svg {
+        max-width: 28px;
+        height: auto;
+    }
+    /* Banner */
+    .banner-title {
+        font-size: 62px;
+        letter-spacing: -5px;
+    }
+    .banner-subtitle {
+        font-size: 21px;
+    }
+    .banner-title::after {
+        left: -55px;
+        top: -38px;
+        width: 70px;
+    }
+    .banner-card-outer::before {
+        bottom: 0px;
+    }
+    .banner-card-outer {
+        bottom: 0px;
+    }
+    .bs-banner-badge {
+        right: 0;
+        font-size: 19px;
+    }
+    .bs-banner-badge svg {
+        width: 30px;
+    }
+    .banner-card-title {
+        font-size: 32px;
+        letter-spacing: -2px;
+    }
+    .bs-banner-wrap .banner {
+        border-radius: 28px;
+    }
+    .bs-banner-section::after {
+        height: calc(70% - 70px);
+    }
+    .bs-banner-section {
+        padding-top: 99px;
+        margin-top: -99px;
+    }
+   /* Other */
+}
+
+@media all and (max-width: 767px){
+    /* Section Title */
+    .section-title {
+        font-size: 36px;
+    }
+    .section-subtitle {
+        font-size: 18px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 24px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 24px;
+    }
+    .product-card-price{
+        font-size: 27px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 24px;
+    }
+    .why-choose3-title{
+        font-size: 30px;
+    }
+    /* Lifestyle */
+   .iconbox-text-list-title{
+        font-size: 22px;
+    }
+    /* Blog */
+    .blog-card-title{
+        font-size: 26px;
+    }
+    .blog-number {
+        width: 65px;
+        height: 55px;
+        font-size: 36px;
+    }
+    /* Brand */
+    .trusted-brand .brand{
+        max-width: 80%;
+    }
+    .trusted-brand-list {
+        -webkit-column-gap: 50px;
+           -moz-column-gap: 50px;
+                column-gap: 50px;
+        row-gap: 30px;
+    }
+    /* Testimonial */
+   .testimonial-user-profile {
+        width: 150px;
+        height: 150px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 150px;
+                flex: 0 0 150px;
+    }
+    .testimonial-logo{
+        max-width: 180px;
+    }
+    .sm-ts-user-name {
+        font-size: 22px;
+    }
+    .testimonial-comment {
+        font-size: 20px;
+    }
+    .sm-testimonial-profile {
+        width: 100px;
+        height: 100px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 100px;
+                flex: 0 0 100px;
+    }
+    .testimonial-quote-shape {
+        width: 60px;
+        height: 60px;
+    }
+    .testimonial-quote-shape svg {
+        max-width: 26px;
+    }
+    /* Banner */
+    .banner-title {
+        font-size: 52px;
+    }
+    .banner-title::after {
+        left: -40px;
+        top: -27px;
+        width: 50px;
+    }
+    .banner-card-outer::after{
+        display: none;
+    }
+    .banner-card-outer::before{
+        display: none;
+    }
+    .banner-card-outer {
+        max-width: 100%;
+        border-right: 0;
+        border-top: 0;
+        position: inherit;
+        margin-top: 16px;
+    }
+    .bs-banner-badge{
+        display: none;
+    }
+    .banner-card-title {
+        font-size: 30px;
+    }
+    .bs-banner-section::after{
+        display: none;
+    }
+    .banner-subtitle {
+        font-size: 20px;
+    }
+    .bs-banner-section {
+        padding-top: 80px;
+        margin-top: -80px;
+    }
+    /* Other */
+}
+
+@media all and (max-width: 575px){
+    /* Section Title */
+    .section-title {
+        font-size: 28px;
+    }
+    .section-subtitle {
+        font-size: 16px;
+    }
+    .bs-title-badge {
+        font-size: 16px;
+    }
+    .bs-title-badge::after {
+        height: 16.124px;
+    }
+    /* Category */
+    .category-card-title {
+        font-size: 22px;
+    }
+    .category-btn-inner {
+        width: 80px;
+        height: 75px;
+    }
+    /* Best Sellers */
+    .product-card-title{
+        font-size: 22px;
+    }
+    .product-card-price{
+        font-size: 25px;
+    }
+    /* Why Choose */
+    .why-choose-title{
+        font-size: 22px;
+    }
+    .why-choose3-title{
+        font-size: 26px;
+    }
+    /* Lifestyle */
+   .iconbox-text-list-title{
+        font-size: 20px;
+   }
+   .lifestyle-banner-main{
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    row-gap: 12px;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+   }
+   /* Blog */
+    .blog-card-title{
+        font-size: 24px;
+    }
+    .date-comment-list-item {
+        gap: 8px;
+    }
+    .blog-number {
+        width: 60px;
+        height: 50px;
+        font-size: 34px;
+    }
+    .date-comment-list-item svg{
+        width: 26px;
+        height: auto;
+    }
+    /* Brand */
+    .trusted-brand .brand{
+        max-width: 70%;
+    }
+    .trusted-brand-list {
+        -webkit-column-gap: 30px;
+           -moz-column-gap: 30px;
+                column-gap: 30px;
+    }
+    .trusted-brand-title{
+        font-size: 20px;
+    }
+   /* Testimonial */
+   .single-testimonial{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+        padding: 24px;
+   }
+   .testimonial-user-profile {
+        width: 120px;
+        height: 120px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 120px;
+                flex: 0 0 120px;
+        margin-top: 22px;
+    }
+    .testimonial-logo{
+        max-width: 160px;
+    }
+    .sm-ts-user-name {
+        font-size: 21px;
+    }
+    .testimonial-comment {
+        font-size: 20px;
+    }
+    .sm-testimonial-profile {
+        width: 90px;
+        height: 90px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 90px;
+                flex: 0 0 90px;
+    }
+    .testimonial-quote-shape {
+        width: 50px;
+        height: 50px;
+        top: -22px;
+    }
+    .testimonial-quote-shape svg {
+        max-width: 24px;
+    }
+    /* Banner */
+    .banner-title {
+        font-size: 42px;
+        letter-spacing: -3px;
+    }
+    .banner-card-title {
+        font-size: 28px;
+        letter-spacing: -1px;
+    }
+    .banner-subtitle {
+        font-size: 19px;
+    }
+    .bs-banner-section {
+        padding-top: 71px;
+        margin-top: -71px;
+    }
+    .banner-title-area {
+        padding-top: 45px;
+    }
+    /* Scroll Top Css */
+    .scroll-progress-wrap {
+        bottom: 24px;
+        right: 24px;
+    }
+   /* Other */
+   
+   .inspirational-img-wrap4,
+   .inspirational-img-wrap1,
+   .inspirational-img-wrap2,
+   .inspirational-img-wrap5,
+   .inspirational-img-wrap3
+   {
+    max-width: 100%;
+   }
+}

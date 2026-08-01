@@ -1,0 +1,422 @@
+@media all and (max-width: 1399px){
+    /* Banner */
+    .ptb2-btn-skin {
+        padding: 18px 32px;
+        font-size: 30px;
+    }
+    .iconText-btn{
+        font-size: 30px;
+    }
+    .banner-slider-area {
+        max-width: 520px;
+    }
+    .banner-title-area {
+        max-width: 556px;
+    }
+    .banner-title {
+        font-size: 86px;
+    }
+    .banner-setisfied-customer-wrap {
+        margin-top: -16px;
+        margin-left: 510px;
+    }
+    .banner-btn-wrap {
+        -webkit-column-gap: 30px;
+           -moz-column-gap: 30px;
+                column-gap: 30px;
+    }
+    /* title */
+    .section-title {
+        font-size: 68px;
+    }
+    /* Project Card */
+    .project-card-title2 {
+        font-size: 50px;
+    }
+    .project-card1 {
+        max-width: 424px;
+    }
+    /* Top Picks Product */
+    .product-card-title {
+        font-size: 33px;
+    }
+    .tp-area-title {
+        max-width: 560px;
+    }
+    .tp-title-right {
+        max-width: 516px;
+    }
+    .card-product-price {
+        font-size: 29px;
+    }
+    /* Latest Essentials */
+    .le-area-title {
+        max-width: 550px;
+    }
+    /* Bundle & Save! */
+    .pb-card-banner1 {
+        max-width: 320px;
+        margin-bottom: 0px;
+        margin-right: -18px;
+    }
+    .pb-card-banner2 {
+        max-width: 320px;
+    }
+    .product-bundle-title {
+        font-size: 50px;
+    }
+    /* Expert Pet Care */
+    .tb-card-title{
+        font-size: 34px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 34px;
+    }
+    /* Other */
+}
+@media all and (max-width: 1199px){
+    /* Banner */
+    .banner-slider-area {
+        max-width: 450px;
+    }
+    .banner-title-area {
+        max-width: 445px;
+    }
+    .banner-title {
+        font-size: 72px;
+    }
+    .banner-title-shape {
+        top: -34px;
+        right: -20px;
+        width: 60px;
+        height: 60px;
+    }
+    .banner-subtitle {
+        font-size: 21px;
+    }
+    .banner-btn-wrap {
+        -webkit-column-gap: 24px;
+           -moz-column-gap: 24px;
+                column-gap: 24px;
+    }
+    .ptb2-btn-skin {
+        padding: 18px 30px;
+        font-size: 28px;
+    }
+    .iconText-btn {
+        font-size: 28px;
+    }
+    /* title */
+    .section-title {
+        font-size: 60px;
+    }
+    /* Project Card */
+    .project-card-title2 {
+        font-size: 44px;
+    }
+    .project-card-title {
+        font-size: 38px;
+    }
+    .project-card-main {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .project-card1 {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .project-card1-body {
+        padding: 28px 30px 0px 30px;
+    }
+    .project-card1-banner {
+        margin-top: -20px;
+        position: inherit;
+    }
+    .project-card-other{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* Top Picks Product */
+    .product-card-title {
+        font-size: 27px;
+    }
+    .tp-area-title {
+        max-width: 100%;
+    }
+    .tp-title-right {
+        max-width: 100%;
+    }
+    .card-product-price {
+        font-size: 27px;
+    }
+    /* Latest Essentials */
+    .le-area-title {
+        max-width: 100%;
+    }
+    .le-area-subtitle {
+        max-width: 100%;
+    }
+    /* Bundle & Save! */
+    .product-bundle-title {
+        font-size: 45px;
+    }
+    .product-bundle-price {
+        font-size: 37px;
+    }
+    .pb-card-banner-wrap {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+    }
+    .pb-card-banner1 {
+        margin-top: 6px;
+    }
+    /* Follow us on Instagram */
+    .insta-gallery-title-area {
+        max-width: 100%;
+    }
+    /* Expert Pet Care */
+    .tb-card-title{
+        font-size: 32px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 32px;
+    }
+    .blog-number-badge {
+        width: 70px;
+        height: 60px;
+        font-size: 40px;
+    }
+    /* Other */
+}
+@media all and (max-width: 991px){
+    /* Banner */
+    .banner-area-top{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .banner-title-area {
+        max-width: 100%;
+    }
+    .banner-setisfied-customer-wrap {
+        margin-top: 24px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .banner-title {
+        font-size: 60px;
+        margin-bottom: 24px;
+    }
+    .banner-subtitle {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+    .ptb2-btn-skin {
+        font-size: 26px;
+    }
+    .iconText-btn {
+        font-size: 26px;
+    }
+    .iconText-btn svg {
+        width: 19px;
+        height: auto;
+    }
+    /* title */
+    .section-title {
+        font-size: 52px;
+    }
+    .section-subtitle {
+        font-size: 21px;
+    }
+    /* Project Card */
+    .project-card-title2 {
+        font-size: 40px;
+    }
+    .project-card-title {
+        font-size: 34px;
+    }
+    /* Top Picks Product */
+    .product-card-title {
+        font-size: 27px;
+    }
+    .card-product-price {
+        font-size: 26px;
+    }
+    /* Bundle & Save! */
+    .product-bundle-title {
+        font-size: 40px;
+    }
+    .product-bundle-price {
+        font-size: 34px;
+    }
+    /* Expert Pet Care */
+    .tb-card-title{
+        font-size: 30px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 30px;
+    }
+    /* Other */
+}
+@media all and (max-width: 767px){
+    /* Banner */
+    .banner-title {
+        font-size: 52px;
+    }
+    .banner-title-shape {
+        top: -44px;
+        right: 0px;
+        width: 50px;
+        height: 50px;
+    }
+    /* title */
+    .section-title {
+        font-size: 46px;
+    }
+    .section-subtitle {
+        font-size: 20px;
+    }
+    /* Project Card */
+    .project-card-title2 {
+        font-size: 36px;
+    }
+    .project-card-title {
+        font-size: 30px;
+    }
+    /* Top Picks Product */
+    .product-card-title {
+        font-size: 27px;
+    }
+    .card-product-price {
+        font-size: 24px;
+    }
+    /* Bundle & Save! */
+    .product-bundle-title {
+        font-size: 35px;
+    }
+    .product-bundle-price {
+        font-size: 31px;
+    }
+    .product-bundle-price-save {
+        font-size: 24px;
+    }
+    /* Expert Pet Care */
+    .tb-card-title{
+        font-size: 28px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 28px;
+    }
+    .project-card3,
+    .project-card3-banner,
+    .project-card2,
+    .project-card2-banner{
+        width: 100%;
+        max-width: 100%;
+    }
+    .project-card2-banner .banner,  
+    .project-card1-banner .banner,
+    .project-card3-banner .banner {
+	height: 340px;
+	object-fit: cover;
+} 
+     /* Other */
+}
+@media all and (max-width: 575px){
+    /* Banner */
+    .banner-title {
+        font-size: 44px;
+    }
+    .banner-area-main {
+        padding-top: 100px;
+    }
+    .banner-slider .swiper-pagination-bullet {
+        width: 60px;
+        height: 8px;
+    }
+    /* title */
+    .section-title {
+        font-size: 38px;
+    }
+    .section-subtitle {
+        font-size: 19px;
+    }
+    /* Project Card */
+    .project-card-title2 {
+        font-size: 32px;
+    }
+    .project-card-title {
+        font-size: 26px;
+    }
+    .project-card-other {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .project-card4,
+    .project-card3,
+    .project-card2 {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .project-card-inner {
+        max-width: 100%;
+    }
+    /* Top Picks Product */
+    .product-card-title {
+        font-size: 24px;
+    }
+    .top-picks-product-area::after {
+        width: 150px;
+        top: -56px;
+        left: -60px;
+    }
+    .card-product-price {
+        font-size: 22px;
+    }
+     /* Bundle & Save! */
+    .product-bundle-title {
+        font-size: 30px;
+    }
+    .product-bundle-price {
+        font-size: 28px;
+    }
+    .product-bundle-price-save {
+        font-size: 22px;
+    }
+    /* Expert Pet Care */
+    .tb-card-title{
+        font-size: 26px;
+    }
+    /* Blog */
+    .blog-card-title {
+        font-size: 26px;
+    }
+    .blog-number-badge {
+        width: 62px;
+        height: 48px;
+        font-size: 32px;
+    }
+    /* Scroll Top Css */
+    .scroll-progress-wrap {
+        bottom: 24px;
+        right: 24px;
+    }
+    /* Other */
+    .insta-gallery4,
+    .insta-gallery3,
+    .insta-gallery1 {
+        max-width: 100%;
+    }
+
+
+}

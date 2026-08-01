@@ -1,0 +1,12 @@
+.git
+.github
+node_modules
+vendor
+.env
+.env.backup
+.env.production
+docker-compose.yml
+Dockerfile
+.dockerignore
+tests
+README.md

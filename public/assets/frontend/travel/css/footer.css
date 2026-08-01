@@ -1,0 +1,132 @@
+/* Fonts */
+/* Manrope */
+@import url('../fonts/manrope/stylesheet.css');
+/* font-family: 'Manrope'; */
+
+/* Space Grotesk */
+@import url('../fonts/space-grotesk/stylesheet.css');
+/* font-family: "Space Grotesk", sans-serif; */
+/* font-family: 'Space Grotesk'; */
+
+
+/* Footer Common Css Start ***
+****************************/
+:root {
+    --skinColor: #FF8335;
+    --whiteColor: #FFF;
+    --bodyColor: #4C4C4C;
+    --blackColor: #000000;
+    --font-manrope :  "Manrope", sans-serif;
+    --font-space-grotesk :  'Space Grotesk'; 
+}
+
+/* Footer Common Css End ***
+**************************/
+
+/* Footer Area */
+.footer-area{
+    padding: 62px 0 34px 0;
+    background-color: #FFF9F6;
+}
+.footer-area .vector {
+	top: -95px;
+	right: 0;
+}
+.footer-area .vector img{
+    height: 196px;
+    float: right;
+}
+.footer-image {
+	height: 54px;
+	-o-object-fit: contain;
+	   object-fit: contain;
+	margin-bottom: 26px;
+}
+.single-footer-block p{
+    font-size: 16px;
+     line-height: 27px;
+     margin-bottom: 30px;
+     color: #4C4C4C;
+} 
+.footer-icon{
+    gap: 25px;
+    margin-bottom: 34px;
+}
+.footer-icon a img{
+    height: 34px;
+}
+.footer-item h4 {
+	font-size: 26px;
+	font-weight: 500;
+	color: var(--blackColor);
+	font-family: var(--font-space-grotesk);
+	margin-bottom: 15px;
+}
+.footer-item ul li a{
+    font-size: 16px;
+  line-height: 32px;
+    color: var(--blackColor);
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+}
+.footer-item ul li a:hover{
+    color: var(--skinColor);
+}
+.footer-bottom ul{
+    gap: 9px;
+    flex-wrap: wrap;
+}
+.footer-bottom ul li img{
+    width: 36px;
+    height: 27px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+.mt-110{
+    margin-top: 110px;
+}
+
+.footer-bottom-left ul{
+    gap: 32px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+.footer-bottom-left ul li a{
+    font-size: 18px;
+    font-weight: 400;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+}
+.footer-bottom-left ul li a:hover{
+    color: var(--blackColor);
+}
+
+/* Responsive */
+@media all and (max-width: 991px){
+    .mt-110{
+        margin-top: 80px;
+    }
+}
+@media all and (max-width: 767px){
+    .footer-item h4 {
+	    margin-bottom: 10px;
+    }
+    .single-footer-block  ul{
+        margin-bottom: 30px;
+    }
+    .mt-110{
+        margin-top: 50px;
+    }
+}
+@media all and (max-width: 575px){
+    .footer-item h4 {
+        font-size: 28px;
+    }
+    .mt-110{
+        margin-top: 30px;
+    }
+}
+/* Footer Css Start ***
+*********************/

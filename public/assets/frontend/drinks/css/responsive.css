@@ -1,0 +1,195 @@
+@media all and (max-width: 1199px){
+    /* Banner Area */
+    .banner-title {
+        font-size: 67px;
+    }
+    .banner-title-shape {
+        width: 200px;
+        top: -30px;
+        right: -130px;
+    }
+    .banner-area-banner {
+        max-width: 600px;
+    }
+    /* Other */
+    .section-title {
+        font-size: 50px;
+    }
+    .text-slider-text{
+        font-size: 50px;
+    }
+    /* Offer Section */
+    .offer-timer-section::after {
+        width: 670px;
+    }
+    .offer-section-title {
+        font-size: 50px;
+    }
+}
+
+@media all and (max-width: 991px){
+    /* Banner Area */
+    .banner-title {
+        font-size: 59px;
+    }
+    .banner-area-main{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .banner-left-area {
+        max-width: 100%;
+    }
+    .banner-title-shape{
+        display: none;
+    }
+    .banner-btn-wrap {
+        margin-bottom: 16px;
+    }
+    .banner-area-banner{
+        margin-top: 0px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    /* Explore What You Crave */
+    .category3-card-banner {
+        max-width: 205px;
+    }
+    .category2-card-banner {
+        max-width: 315px;
+    }
+    /* Other */
+    .section-title {
+        font-size: 44px;
+    }
+    .text-slider-text{
+        font-size: 44px;
+    }
+    .text-slider-dot {
+        margin-top: -10px;
+    }
+    /* Offer Section */
+    .offer-timer-section::after {
+        z-index: -2;
+    }
+    .offer-timer-section::before {
+        position: absolute;
+        content: "";
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: rgba(222, 255, 212, 0.9);
+        z-index: -1;
+    }
+    .offer-section-title {
+        font-size: 44px;
+    }
+    
+}
+
+@media all and (max-width: 767px){
+    /* Banner Area */
+    .banner-title {
+        font-size: 51px;
+    }
+    /* Explore What You Crave */
+    .category2-card-banner {
+        max-width: 270px;
+    }
+    .category3-card-banner {
+        max-width: 170px;
+    }
+    .category1-card-title {
+        font-size: 30px;
+    }
+    /* Other */
+    .section-title {
+        font-size: 37px;
+    }
+    .section-subtitle {
+        font-size: 17px;
+    }
+    .text-slider-text{
+        font-size: 37px;
+    }
+    .text-slider-dot{
+        height: 16px;
+        width: 16px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 16px;
+                flex: 0 0 16px;
+    }
+    /* Offer Section */
+    .offer-section-title {
+        font-size: 37px;
+    }
+}
+
+@media all and (max-width: 575px){
+    /* Banner Area */
+    .banner-title {
+        font-size: 43px;
+    }
+    /* Explore What You Crave */
+    .category2-card-banner {
+        max-width: 270px;
+    }
+    .category3-card-banner {
+        max-width: 170px;
+    }
+    .category1-card-title {
+        font-size: 28px;
+    }
+    /* Other */
+    .section-title {
+        font-size: 30px;
+    }
+    .section-subtitle {
+        font-size: 16px;
+    }
+    .text-slider-text{
+        font-size: 30px;
+    }
+    .text-slider-dot{
+        height: 12px;
+        width: 12px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 12px;
+                flex: 0 0 12px;
+    }
+    .text-slide-wrap{
+        -webkit-column-gap: 16px;
+           -moz-column-gap: 16px;
+                column-gap: 16px;
+    }
+    .text-slider-dot {
+        margin-top: -8px;
+    }
+    .product-card{
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* Offer Section */
+    .offer-section-title {
+        font-size: 30px;
+    }
+    /* Blog Section */
+    .dr-blog-card{
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    /* Scroll Top Css */
+    .scroll-progress-wrap {
+        bottom: 24px;
+        right: 24px;
+    }
+    .blog-card-banner {
+	
+	aspect-ratio: 0/ 0;
+}
+    
+}

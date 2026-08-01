@@ -1,0 +1,16 @@
+<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_28_1948" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="90" height="90">
+<path d="M0 0H90V90H0V0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_28_1948)">
+<path d="M45 87.3633H13.3594V57.4805H45V87.3633Z" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M45 87.3633H76.6406V57.4805H45V87.3633Z" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M34.2773 41.6602H2.63672L13.3594 57.4805H45L34.2773 41.6602Z" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M55.7227 41.6602H87.3633L76.6406 57.4805H45L55.7227 41.6602Z" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M63.0953 19.8821C55.5286 24.2508 45 20.1807 45 20.1807C45 20.1807 46.7395 9.02759 54.3062 4.6589C61.8729 0.290386 72.4015 4.36042 72.4015 4.36042C72.4015 4.36042 70.662 15.5134 63.0953 19.8821Z" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M35.6939 4.65895C43.2606 9.02764 45.0001 20.1806 45.0001 20.1806C45.0001 20.1806 34.4715 24.2508 26.9048 19.8821C19.3382 15.5134 17.5986 4.3603 17.5986 4.3603C17.5986 4.3603 28.1272 0.290256 35.6939 4.65895Z" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M58.7007 12.2705L45 20.1807" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31.2993 12.2705L45.0001 20.1807" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M45 39.0234V20.1806" stroke="black" stroke-width="2.3" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</svg>

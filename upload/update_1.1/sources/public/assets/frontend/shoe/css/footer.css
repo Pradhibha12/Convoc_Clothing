@@ -1,0 +1,287 @@
+/* Footer Css Start ***
+*********************/
+/* Footer Common Css Start */
+/* Outfit */
+@import url("../fonts/outfit/stylesheet.css");
+/* font-family: 'Outfit'; */ 
+
+/* Runtime */
+@import url("../fonts/runtime/stylesheet.css");
+/* font-family: 'Runtime'; */
+
+:root {
+    --skinColor: #e5f33c;
+    --whiteColor: #FFF;
+    --blackColor: #000;
+    --secondaryColor: #434343;
+    --lightColor: #f6f6f6;
+    --lightColor2: #f1f1f1;
+}
+/* Footer Common Css End */
+
+.footer-section{
+    background: #181818;
+}
+.footer-top-area{
+    padding: 45px 0 32px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-column-gap: 78px;
+       -moz-column-gap: 78px;
+            column-gap: 78px;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+}
+.footer-left-content{
+    max-width: 421px;
+    width: 100%;
+}
+.footer-logo{
+    margin-bottom: 48px;
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+}
+.footer-info-subtitle{
+    /* font-family: 'Outfit'; */
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 159%;
+    text-transform: capitalize;
+    color: var(--whiteColor);
+    margin-bottom: 35px;
+}
+.footer-social-link{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    border-radius: 46px;
+    width: 45px;
+    height: 45px;
+    border: 1.43px solid #f9fafb;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.footer-social-link:hover{
+    background: var(--whiteColor);
+}
+.footer-social-link svg{
+    display: block;
+}
+.footer-social-link path{
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.footer-social-link:hover path{
+    fill: #012F2C;
+}
+
+.footer-nav-content{
+    margin-left: auto;
+}
+.footer-nav-title{
+    font-family: 'Runtime';
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 140%;
+    color: var(--whiteColor);
+    margin-bottom: 22px;
+}
+.footer-navbar-nav > li{
+    margin-bottom: 13px;
+}
+.footer-nav-link{
+    /* font-family: 'Outfit'; */
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--whiteColor);
+    line-height: normal;
+    display: block;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.footer-nav-link:hover{
+    color: #ffffffb3;
+}
+
+.footer-newsletter-content{
+    max-width: 432px;
+    width: 100%;
+}
+.footer-newsletter-title{
+    font-family: 'Runtime';
+    font-weight: 400;
+    font-size: 36px;
+    line-height: 140%;
+    color: var(--whiteColor);
+    margin-bottom: 10px;
+}
+.footer-newsletter-subtitle{
+    /* font-family: 'Outfit'; */
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 156%;
+    color: var(--whiteColor);
+    margin-bottom: 27px;
+}
+
+/* Newsletter Form */
+.footer-newsletter-form{
+    position: relative;
+    width: 100%;
+}
+.newsletter-input{
+    padding: 16px 168px 15px 23px;
+    border: 0;
+    border-radius: 100px;
+    background: var(--whiteColor);
+    /* font-family: 'Outfit'; */
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--blackColor);
+    line-height: normal;
+}
+.newsletter-btn{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+    background: var(--skinColor);
+    padding: 17px 45px;
+    border-radius: 100px;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+    /* font-family: 'Outfit'; */
+    font-weight: 400;
+    font-size: 18px;
+    color: var(--blackColor);
+    line-height: 112%;
+    transition: .3s;
+}
+.newsletter-btn:hover{
+    background: #d9eb00;
+    color: var(--blackColor);
+}
+.newsletter-btn:active{
+    background: #d9eb00 !important;
+    color: var(--blackColor) !important;
+}
+
+.footer-copyright-area{
+    padding-bottom: 33px;
+}
+.footer-copyright-text{
+    /* font-family: 'Outfit'; */
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: capitalize;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Footer Responsive Css */
+@media all and (max-width: 1199px){
+    /* Footer */
+    .footer-logo {
+        max-width: 270px;
+    }
+   
+    .footer-nav-title {
+        font-size: 34px;
+    }
+    .footer-newsletter-title {
+        font-size: 34px;
+    }
+    .footer-nav-link {
+        font-size: 22px;
+    }
+    .footer-top-area {
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        row-gap: 30px;
+        -webkit-column-gap: 40px;
+           -moz-column-gap: 40px;
+                column-gap: 40px;
+    }
+}
+@media all and (max-width: 991px){
+    /* Footer */
+    .footer-logo {
+        max-width: 250px;
+    }
+    .footer-info-subtitle {
+        font-size: 16px;
+    }
+    .footer-nav-title {
+        font-size: 32px;
+    }
+    .footer-newsletter-title {
+        font-size: 32px;
+    }
+    .footer-nav-link {
+        font-size: 16px;
+    }
+    .footer-top-area {
+        -webkit-column-gap: 30px;
+           -moz-column-gap: 30px;
+                column-gap: 30px;
+    }
+    .footer-copyright-text {
+        font-size: 16px;
+    }
+}
+@media all and (max-width: 767px){
+    /* Footer */
+    .footer-nav-content {
+        margin-left: 0;
+    }
+    .footer-newsletter-content {
+        max-width: 100%;
+    }
+    .footer-left-content {
+        max-width: 300px;
+    }
+}
+@media all and (max-width: 575px){
+    /* Footer */
+    .footer-logo {
+        max-width: 230px;
+    }
+    .footer-nav-title {
+        font-size: 30px;
+    }
+    .footer-newsletter-title {
+        font-size: 30px;
+    }
+    .newsletter-btn {
+        padding: 17px 32px;
+    }
+    .footer-left-content {
+        max-width: 100%;
+    }
+    .footer-logo {
+        margin-bottom: 12px;
+    }
+}
+/* Footer Css End ***
+*******************/

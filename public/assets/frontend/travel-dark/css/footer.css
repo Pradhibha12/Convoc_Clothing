@@ -1,0 +1,143 @@
+/* Fonts */
+/* Manrope */
+@import url('../fonts/manrope/stylesheet.css');
+/* font-family: 'Manrope'; */
+
+/* Space Grotesk */
+@import url('../fonts/space-grotesk/stylesheet.css');
+/* font-family: "Space Grotesk", sans-serif; */
+/* font-family: 'Space Grotesk'; */
+
+/* Inter */
+@import url('../fonts/inter/stylesheet.css');
+/* font-family: 'Inter'; */
+
+/* Inter */
+@import url('../fonts/playfair-display/stylesheet.css');
+/* font-family: 'Playfair Display'; */
+
+
+/* Footer Common Css Start ***
+****************************/
+:root {
+    --skinColor: #E1FE35;
+    --whiteColor: #FFF;
+    --bodyColor: #fff;
+    --blackColor: #000000;
+    --bgColor: #060620;
+    --font-manrope :  "Manrope", sans-serif;
+    --font-playfair-display :  "Playfair Display", serif;
+     --secondaryColor: #62748E;
+    --secondaryColor2: #6D6D6D;
+    --secondaryColor3: #6C6C6C;
+    --lightColor: #F5F5F5;
+}
+
+/* Footer Common Css End ***
+**************************/
+
+/* Footer Area */
+.footer-area{
+    padding: 62px 0 34px 0;
+}
+.footer-image {
+	height: 45px;
+	-o-object-fit: contain;
+	   object-fit: contain;
+	margin-bottom: 26px;
+}
+.single-footer-block p{
+    font-size: 16px;
+     line-height: 27px;
+     margin-bottom: 30px;
+     color: var(--whiteColor);
+} 
+.footer-icon{
+    gap: 25px;
+    margin-bottom: 34px;
+}
+.footer-icon a img{
+    height: 34px;
+}
+.footer-item h4 {
+	font-size: 26px;
+	font-weight: 500;
+	color: var(--whiteColor);
+	font-family: "Playfair Display";
+	margin-bottom: 18px;
+}
+.footer-item ul li a{
+    font-size: 16px;
+    line-height: 38px;
+    color: var(--whiteColor);
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+}
+.footer-item ul li a:hover{
+    color: var(--skinColor);
+}
+.footer-bottom ul{
+    gap: 9px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+.footer-bottom ul li img{
+    width: 36px;
+    height: 27px;
+    -o-object-fit: contain;
+       object-fit: contain;
+}
+.mt-110{
+    margin-top: 110px;
+}
+
+.footer-bottom-left ul{
+    -webkit-column-gap: 32px;
+       -moz-column-gap: 32px;
+            column-gap: 32px;
+    row-gap: 16px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+.footer-bottom-left ul li a{
+    font-size: 18px;
+    font-weight: 400;
+    -webkit-transition: .5s;
+    -o-transition: .5s;
+    transition: .5s;
+}
+.footer-bottom-left ul li a:hover{
+    color: var(--skinColor);
+}
+.footer-bottom-left ul li a.active{
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+    .mt-110{
+        margin-top: 80px;
+    }
+}
+@media (max-width: 767px) {
+    .mt-110{
+        margin-top: 50px;
+    }
+    .footer-item h4 {
+        margin-bottom: 10px;
+    }
+    .single-footer-block  ul{
+        margin-bottom: 30px;
+    }
+}
+@media (max-width: 575px) {
+    .mt-110{
+        margin-top: 30px;
+    }
+    .footer-item h4 {
+        font-size: 28px;
+    }
+}
+/* Footer Css Start ***
+*********************/

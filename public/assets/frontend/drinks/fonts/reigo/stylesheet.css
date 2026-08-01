@@ -1,0 +1,63 @@
+@font-face {
+    font-family: 'Reigo';
+    src: url('Reigo-Black.woff2') format('woff2'),
+        url('Reigo-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Reigo';
+    src: url('Reigo-Regular.woff2') format('woff2'),
+        url('Reigo-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Reigo';
+    src: url('Reigo-Light.woff2') format('woff2'),
+        url('Reigo-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Reigo Med';
+    src: url('Reigo-Medium.woff2') format('woff2'),
+        url('Reigo-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Reigo ExtBd';
+    src: url('Reigo-ExtraBold.woff2') format('woff2'),
+        url('Reigo-ExtraBold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Reigo';
+    src: url('Reigo-Bold.woff2') format('woff2'),
+        url('Reigo-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Reigo SemBd';
+    src: url('Reigo-SemiBold.woff2') format('woff2'),
+        url('Reigo-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

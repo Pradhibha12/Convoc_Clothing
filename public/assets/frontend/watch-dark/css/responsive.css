@@ -1,0 +1,605 @@
+@media all and (max-width: 1399px){
+    .section-title {
+        font-size: 74px;
+    }
+    .category-card-title {
+        font-size: 32px;
+    }
+    .category-card-iconbox {
+        width: 105px;
+        height: 105px;
+        margin-top: -60px;
+    }
+    .category-card-iconbox img{
+        max-width: 50px;
+        max-height: 50px;
+    }
+    /* Highlight */
+    .hp-subtitle-wrap {
+        max-width: 565px;
+    }
+    .highlighted-banner2 {
+        left: -94px;
+    }
+    /* Featured 2 */
+    .collection-card-title {
+        font-size: 40px;
+    }
+    /* Why Choose */
+    .wch-benefit-line1::after {
+        right: -40px;
+        width: 50px;
+    }
+    .wch-benefit-line2::after {
+        right: -40px;
+        width: 50px;
+    }
+    /* Brand */
+    .brand-slide-img .brand{
+        max-width: 90%;
+    }
+    .brand-slide-img {
+        max-width: 190px;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 190px;
+        height: 190px;
+    }
+    .ts-profile-items {
+        max-width: 920px;
+    }
+    .ts-content-items {
+        max-width: calc(920px + 132px);
+        padding-right: 66px;
+        padding-left: 66px;
+    }
+    .ts-content-items .slick-next {
+        right: 0px;
+    }
+    .ts-content-items .slick-prev {
+        left: 0px;
+    }
+    .ts-user-name {
+        font-size: 32px;
+    }
+    .ts-user-comment {
+        font-size: 27px;
+    }
+    /* Banner */
+    .wch-banner-title {
+        font-size: 90px;
+    }
+}
+@media all and (max-width: 1199px){
+    .section-title {
+        font-size: 64px;
+    }
+    .category-card-title {
+        font-size: 30px;
+    }
+    .category-card-iconbox {
+        width: 100px;
+        height: 100px;
+        margin-top: -55px;
+    }
+    .category-card-iconbox img{
+        max-width: 48px;
+        max-height: 48px;
+    }
+    /* Featured */
+    .product-card-title {
+        font-size: 28px;
+    }
+    .pc-new-price {
+        font-size: 25px;
+    }
+    .pc-old-price {
+        font-size: 19px;
+    }
+    /* Highlight */
+    .hp-subtitle-wrap {
+        max-width: 495px;
+    }
+    .highlighted-banner2 {
+        left: -60px;
+        width: 280px;
+    }
+    .highlight-shape {
+        width: 110px;
+    }
+    /* Featured 2 */
+    .collection-card-title {
+        font-size: 35px;
+    }
+    /* Why Choose */
+    .wch-benefit-line2::after {
+        display: none;
+    }
+    .wch-benefit-line1::after {
+        display: none;
+    }
+    .wch-benefit-title {
+        font-size: 31px;
+    }
+    /* Brand */
+    .brand-slide-img .brand{
+        max-width: 80%;
+    }
+    .brand-slide-img {
+        max-width: 160px;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 150px;
+        height: 150px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 110px;
+        height: 110px;
+    }
+    .ts-profile-items .slick-slide.slick-current.slick-active.slick-center {
+        margin: 0 10px;
+    }
+    .ts-profile-items {
+        max-width: 750px;
+    }
+    .ts-content-items .slick-prev, 
+    .ts-content-items .slick-next {
+        width: 55px;
+        height: 55px;
+    }
+    .ts-content-items .slick-prev:before, 
+    .ts-content-items .slick-next::before {
+        font-size: 18px;
+    }
+    .ts-content-items {
+        max-width: calc(920px + 110px);
+        padding-right: 55px;
+        padding-left: 55px;
+    }
+    .ts-user-name {
+        font-size: 30px;
+    }
+    .ts-user-comment {
+        font-size: 26px;
+    }
+    /* Banner */
+    .wch-banner-title {
+        font-size: 80px;
+    }
+    .wch-banner-area::after{
+        width: 66px;
+        top: 45px;
+    }
+    .wch-banner-area::before{
+        width: 66px;
+        bottom: 90px;
+    }
+}
+@media all and (max-width: 991px){
+    .section-title {
+        font-size: 54px;
+    }
+    .section-subtitle{
+        font-size: 19px;
+    }
+    .wch-btn-skin {
+        padding: 14.5px 26px;
+        font-size: 19px;
+    }
+    .wch-btn-white {
+        padding: 14.5px 26px;
+        font-size: 19px;
+    }
+    .wch-btn-black {
+        padding: 14.5px 26px;
+        font-size: 19px;
+    }
+    .min-w-209px {
+        min-width: 200px;
+    }
+    .category-card-title {
+        font-size: 28px;
+    }
+    .category-card-iconbox {
+        width: 95px;
+        height: 95px;
+        margin-top: -50px;
+        border-width: 3px;
+    }
+    .category-card-iconbox img{
+        max-width: 45px;
+        max-height: 45px;
+    }
+    /* Featured */
+    .product-card-title {
+        font-size: 26px;
+    }
+    .pc-new-price {
+        font-size: 24px;
+    }
+    .pc-old-price {
+        font-size: 18px;
+    }
+    /* Highlight */
+    .highlight-shape {
+        width: 100px;
+    }
+    /* Featured 2 */
+    .collection-card-title {
+        font-size: 32px;
+    }
+    .collection-category {
+        font-size: 19px;
+    }
+    /* Why Choose */
+    .why-choose-title-area{
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+                flex-direction: column;
+    }
+    .why-choose-section-title {
+        max-width: 100%;
+    }
+    .wc-section-title-right {
+        max-width: 100%;
+    }
+    /* Why Choose */
+    .wch-benefit-title {
+        font-size: 28px;
+    }
+    .wch-benefit-icon{
+        width: 100px;
+        height: 100px;
+    }
+    .wch-benefit-icon .icon{
+        max-width: 100%;
+        max-height: 100%;
+        -o-object-fit: contain;
+           object-fit: contain;
+    }
+    /* Brand */
+    .brand-slide-img .brand{
+        max-width: 70%;
+    }
+    .brand-slide-img {
+        max-width: 140px;
+    }
+    /* Testimonial */
+    .ts-content-items .slick-prev, 
+    .ts-content-items .slick-next {
+        width: 50px;
+        height: 50px;
+    }
+    .ts-content-items .slick-prev:before, 
+    .ts-content-items .slick-next::before {
+        font-size: 16px;
+    }
+    .ts-content-items {
+        max-width: calc(920px + 100px);
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 120px;
+        height: 120px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 90px;
+        height: 90px;
+    }
+    .ts-profile-items {
+        max-width: 600px;
+    }
+    .ts-user-name {
+        font-size: 28px;
+    }
+    .ts-user-comment {
+        font-size: 24px;
+    }
+    /* Banner */
+    .wch-banner-section {
+        padding-top: 80px;
+        margin-top: -80px;
+    }
+    .wch-banner-title {
+        font-size: 70px;
+    }
+    .wch-banner-subtitle {
+        font-size: 24px;
+    }
+    .wch-banner-area::after{
+        width: 55px;
+        top: 56px;
+    }
+    .wch-banner-area::before{
+        width: 55px;
+        bottom: 80px;
+    }
+    .wch-banner-slider .swiper-wrapper {
+        margin-bottom: 120px;
+    }
+}
+@media all and (max-width: 767px){
+    .section-title {
+        font-size: 44px;
+    }
+    .section-subtitle{
+        font-size: 18px;
+    }
+    .wch-section-badge {
+        font-size: 18px;
+    }
+    .badge-shape-left,
+    .badge-shape-right{
+        max-width: 85px;
+    }
+    .wch-btn-skin {
+        padding: 13.5px 25px;
+        font-size: 18px;
+    }
+    .wch-btn-white {
+        padding: 13.5px 25px;
+        font-size: 18px;
+    }
+    .wch-btn-black {
+        padding: 13.5px 25px;
+        font-size: 18px;
+    }
+    .min-w-209px {
+        min-width: 190px;
+    }
+    .category-card-title {
+        font-size: 25px;
+    }
+    .category-card{
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    .category-card-iconbox {
+        width: 90px;
+        height: 90px;
+    }
+    /* Featured */
+    .product-card-title {
+        font-size: 24px;
+    }
+    .pc-new-price {
+        font-size: 22px;
+    }
+    .pc-old-price {
+        font-size: 19px;
+    }
+    .product-card{
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    /* Highlight */
+    .highlight-shape {
+        width: 90px;
+    }
+    /* Featured 2 */
+    .collection-card-title {
+        font-size: 27px;
+    }
+    .collection-category {
+        font-size: 18px;
+    }
+    /* Why Choose */
+    .wch-benefit-title {
+        font-size: 25px;
+    }
+    .wch-benefit-icon{
+        width: 90px;
+        height: 90px;
+    }
+    /* Brand */
+    .brand-slide-img .brand{
+        max-width: 60%;
+    }
+    .brand-slide-img {
+        max-width: 140px;
+        max-height: 20px;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 100px;
+        height: 100px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 70px;
+        height: 70px;
+    }
+    .ts-profile-items {
+        max-width: 500px;
+    }
+    .ts-user-name {
+        font-size: 26px;
+    }
+    .ts-user-comment {
+        font-size: 22px;
+    }
+    /* Banner */
+    .wch-banner-title {
+        font-size: 55px;
+    }
+    .wch-banner-subtitle {
+        font-size: 22px;
+    }
+    .bn-rating-info {
+        font-size: 19px;
+    }
+    .wch-banner-area {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+    .wch-banner-area::after{
+        width: 48px;
+        top: 40px;
+    }
+    .wch-banner-area::before{
+        width: 48px;
+        bottom: 88px;
+    }
+    .wch-banner-slider .swiper-wrapper {
+        margin-bottom: 90px;
+    }
+}
+@media all and (max-width: 575px){
+    .section-title {
+        font-size: 34px;
+    }
+    .section-subtitle{
+        font-size: 17px;
+    }
+    .wch-section-badge {
+        font-size: 16px;
+    }
+    .badge-shape-left,
+    .badge-shape-right{
+        max-width: 75px;
+    }
+    .wch-btn-skin {
+        padding: 12.5px 24px;
+        font-size: 17px;
+    }
+    .wch-btn-white {
+        padding: 12.5px 24px;
+        font-size: 17px;
+    }
+    .wch-btn-black {
+        padding: 12.5px 24px;
+        font-size: 17px;
+    }
+    .min-w-209px {
+        min-width: 180px;
+    }
+    .category-card-title {
+        font-size: 22px;
+    }
+    .category-card-subtitle {
+        font-size: 16px;
+    }
+    .category-card-btn {
+        font-size: 18px;
+    }
+    .category-card-iconbox {
+        width: 80px;
+        height: 80px;
+        margin-top: -40px;
+        border-width: 2px;
+    }
+    .category-card-iconbox img{
+        max-width: 40px;
+        max-height: 40px;
+    }
+    /* Featured */
+    .product-card-title {
+        font-size: 22px;
+    }
+    .pc-new-price {
+        font-size: 20px;
+    }
+    .pc-old-price {
+        font-size: 18px;
+    }
+    /* Highlight */
+    .highlighted-banner1 {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto 20px auto;
+    }
+    .highlighted-banner-wrap {
+        padding-left: 0px;
+        padding-bottom: 0px;
+    }
+    .highlighted-banner2{
+        position: unset;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    .highlight-shape {
+        width: 80px;
+    }
+    /* Featured 2 */
+    .collection-card-title {
+        font-size: 22px;
+    }
+    .collection-category {
+        font-size: 17px;
+    }
+    .collection-card-subtitle{
+        font-size: 17px;
+    }
+    .collection-card{
+        min-height: 420px;
+    }
+    /* Why Choose */
+    .wch-benefit-title {
+        font-size: 22px;
+    }
+    /* Brand */
+    .brand-slide-img {
+        max-width: 120px;
+        max-height: 20px;
+    }
+    /* Testimonial */
+    .ts-profile-items .slick-slide.ts-profile-image{
+        width: 90px;
+        height: 90px;
+    }
+    .ts-profile-items .slick-slide.ts-profile-image img {
+        width: 70px;
+        height: 70px;
+    }
+    .ts-profile-items {
+        max-width: 280px;
+    }
+    .ts-user-name {
+        font-size: 24px;
+    }
+    .ts-user-comment {
+        font-size: 20px;
+    }
+    /* Banner */
+    .wch-banner-pagination .swiper-button-next, 
+    .wch-banner-pagination .swiper-button-prev {
+        width: 30px;
+    }
+    /* Scroll Top Css */
+    .scroll-progress-wrap {
+        bottom: 24px;
+        right: 24px;
+    }
+    .wch-banner-title {
+        font-size: 40px;
+    }
+    .wch-banner-subtitle {
+        font-size: 20px;
+    }
+    .bn-rating-info {
+        font-size: 18px;
+    }
+    .wch-banner-area::after {
+        width: 35px;
+        top: 55px;
+    }
+    .wch-banner-area::before {
+        width: 35px;
+        bottom: 110px;
+    }
+    .wch-banner-pagination {
+        -webkit-column-gap: 14px;
+           -moz-column-gap: 14px;
+                column-gap: 14px;
+        row-gap: 12px;
+    }
+    .wch-banner-pagination .swiper-pagination{
+        -webkit-column-gap: 10px;
+           -moz-column-gap: 10px;
+                column-gap: 10px;
+    }
+}
