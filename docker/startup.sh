@@ -10,6 +10,16 @@ php artisan view:cache
 if [ -n "$DB_CONNECTION" ] && [ "$DB_CONNECTION" != "sqlite" ]; then
     echo "Running database migrations..."
     php artisan migrate --force
+
+    # Sync SQLite data to PostgreSQL if PostgreSQL has no users
+    echo "Checking if database needs synchronization..."
+    USER_COUNT=$(php artisan tinker --execute="echo App\Models\User::count();")
+    if [ "$USER_COUNT" = "0" ] || [ -z "$USER_COUNT" ]; then
+        echo "PostgreSQL database is empty. Syncing local SQLite data..."
+        php artisan db:seed --class="Database\Seeders\SqliteToPgsqlSeeder" --force
+    else
+        echo "Database already populated. Skipping sync."
+    fi
 fi
 
 # Start PHP-FPM in background
