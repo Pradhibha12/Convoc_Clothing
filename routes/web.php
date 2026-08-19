@@ -17,10 +17,59 @@ Route::get('/dashboard', function () {
 
 Route::get('/clear-cache', function () {
     Artisan::call('cache:clear');
-    Artisan::call('config:clear');
-    Artisan::call('route:clear');
-    Artisan::call('view:clear');
+    \Illuminate\Support\Facades\Artisan::call('config:clear');
+    \Illuminate\Support\Facades\Artisan::call('route:clear');
+    \Illuminate\Support\Facades\Artisan::call('view:clear');
     return 'Application cache cleared';
+});
+
+Route::get('/recover-db', function () {
+    try {
+        $sqlite = \Illuminate\Support\Facades\DB::connection('sqlite');
+        $pgsql = \Illuminate\Support\Facades\DB::connection('pgsql');
+        $pgsql->getPdo();
+    } catch (\Exception $e) {
+        return 'Connection check failed: ' . $e->getMessage() . '. Please verify Render environment variables (DB_HOST, DB_DATABASE, DB_USERNAME, DB_PASSWORD) are set correctly.';
+    }
+
+    try {
+        $sqlite->statement('PRAGMA foreign_keys = OFF');
+        $tables = $sqlite->select("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'");
+        foreach ($tables as $table) {
+            $sqlite->statement("DROP TABLE IF EXISTS \"{$table->name}\"");
+        }
+
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'sqlite', '--force' => true]);
+
+        $pgsqlTables = $pgsql->select("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
+        foreach ($pgsqlTables as $tableObj) {
+            $tableName = $tableObj->table_name;
+            if ($tableName === 'migrations') {
+                continue;
+            }
+
+            $rows = $pgsql->table($tableName)->get();
+            if ($rows->isEmpty()) {
+                continue;
+            }
+
+            $insertData = [];
+            foreach ($rows as $row) {
+                $insertData[] = (array)$row;
+            }
+
+            $chunks = array_chunk($insertData, 100);
+            foreach ($chunks as $chunk) {
+                $sqlite->table($tableName)->insert($chunk);
+            }
+        }
+
+        $sqlite->statement('PRAGMA foreign_keys = ON');
+
+        return response()->download(database_path('database.sqlite'), 'database.sqlite');
+    } catch (\Exception $e) {
+        return 'Error during recovery: ' . $e->getMessage();
+    }
 });
 
 Route::get('/logout', function (Request $request) {
