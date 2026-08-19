@@ -19,11 +19,11 @@
  <header class="logo-header">
      <div class="container">
          <div class="row justify-content-between align-items-center">
-             <div class="col-auto col-lg order-2 order-lg-1">
-                 <a href="{{ route('home') }}" class="header-logo">
-                     <img src="{{ get_image(get_frontend_settings('dark_logo')) }}" alt="logo">
-                 </a>
-             </div>
+              <div class="col-auto col-lg order-2 order-lg-1 d-flex align-items-center">
+                  <a href="{{ route('home') }}" class="header-logo d-flex align-items-center" style="padding: 0; height: 68px;">
+                      <img src="{{ get_image(get_frontend_settings('dark_logo')) }}" alt="logo" style="max-height: 42px; object-fit: contain;">
+                  </a>
+              </div>
              <div class="col-auto col-lg-6 order-1 order-lg-2">
                  <div class="d-lg-flex justify-content-center d-none">
                      <nav>
@@ -319,7 +319,7 @@
                  @csrf
                  <div class="position-relative">
                      <input type="search" class="form-control search-form-control" name="search"
-                         placeholder="Search Product...">
+                         placeholder="Search for 'Father & Kids', 'T-shirt', 'Customized'...">
                      <button type="submit" class="btn search-submit-btn">
                          <svg width="19" height="18" viewBox="0 0 19 18" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
@@ -496,7 +496,7 @@
                          <div class="modal-search-wrap">
                              <input type="search" name="search" class="form-control modal-search-input"
                                  id="searchFormControlInput1"
-                                 placeholder="{{ get_phrase('What are you looking for?') }}">
+                                 placeholder="{{ get_phrase('Search for \'Father & Kids\', \'T-shirt\', \'Customized\'...') }}">
                              <button type="submit" class="modal-search-btn">
                                  <svg xmlns="http://www.w3.org/2000/svg" width="19" height="18"
                                      viewBox="0 0 19 18" fill="none">

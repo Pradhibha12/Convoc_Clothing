@@ -106,6 +106,37 @@
     padding: 0;
     box-sizing: border-box;
 }
+html, body {
+    -webkit-overflow-scrolling: touch;
+}
+img, 
+picture, 
+video, 
+svg,
+.banner,
+.item,
+.item img,
+.tf-image-zoom, 
+.tf-product-media-wrap, 
+.tf-product-media-main, 
+.tf-product-media-thumbs, 
+.thumbs-slider,
+.swiper, 
+.swiper-wrapper,
+.swiper-slide, 
+.product-grid-banner-lg, 
+.product-grid-banner-md, 
+.product-grid-banner-sm,
+.product-grid-banner-xs,
+.product-cart-btn-md,
+.grid4-product-cart-btn,
+.product-title-link,
+.card,
+.product-card {
+    touch-action: pan-y !important;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: default;
+}
 :root {
     --skinColor: #EF4A4A;
     --skinHoverColor: #f37070;
@@ -1563,60 +1594,96 @@ figure.containerZoom{
 
 .size-checkbox-input{
     position: absolute;
-    clip: rect(0, 0, 0, 0);
+    opacity: 0;
+    width: 0;
+    height: 0;
     pointer-events: none;
 }
-.size-checkbox-btn{
-    height: 30px;
-    width: 30px;
-    flex: 0 0 30px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--darkColor);
-    /* font-family: "Albert Sans"; */
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%; /* 10px */
-    border: 0.76px solid var(--borderColor);
-    padding-top: 1px;
-    cursor: pointer;
-    transition: .3s;
+.size-checkbox-btn, .product-opt-size-pill{
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 8px 16px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    user-select: none !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 40px !important;
+    line-height: 1.3 !important;
+    white-space: nowrap !important;
+    margin: 4px 0 !important;
 }
-.size-checkbox-btn:has(~ .size-checkbox-input:checked){
-    background-color: var(--darkColor);
-    border-color: var(--darkColor);
-    color: var(--whiteColor);
+.size-checkbox-btn:hover, .product-opt-size-pill:hover{
+    border-color: #4b5563 !important;
+    background: #f9fafb !important;
+    transform: translateY(-1px) !important;
+}
+.size-checkbox-btn:has(~ .size-checkbox-input:checked),
+.size-checkbox-btn.active,
+.product-opt-size-pill.active,
+.size-checkbox-input:checked + label{
+    background-color: #111827 !important;
+    border-color: #111827 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2) !important;
 }
 .size-checkbox-btn-resize{
-    width: auto;
-    flex: 0 0 auto;
-    padding: 0 15px;
-    border-radius: 75px;
+    width: auto !important;
+    flex: 0 0 auto !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
 }
 
 .color-checkbox-input{
     position: absolute;
-    clip: rect(0, 0, 0, 0);
+    opacity: 0;
+    width: 0;
+    height: 0;
     pointer-events: none;
 }
-.color-checkbox-btn{
-    height: 19px;
-    width: 19px;
-    flex: 0 0 19px;
-    border-radius: 50%;
-    background-color: var(--checkbox-color);
-    border: 3px solid var(--whiteColor);
-    outline: 1px solid transparent;
-    outline-offset: -1px;
-    cursor: pointer;
-    transition: .3s;
-    display: block;
+.color-checkbox-btn, .product-opt-color-pill{
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 16px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #1f2937 !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease-in-out !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 40px !important;
+    line-height: 1.3 !important;
+    user-select: none !important;
+    white-space: nowrap !important;
+    margin: 4px 0 !important;
 }
-.color-checkbox-btn:has(~ .color-checkbox-input:checked){
-    outline-color: var(--checkbox-color);
+.color-checkbox-btn:hover, .product-opt-color-pill:hover{
+    border-color: #4b5563 !important;
+    background: #f9fafb !important;
+    transform: translateY(-1px) !important;
+}
+.color-checkbox-btn:has(~ .color-checkbox-input:checked),
+.color-checkbox-btn.active,
+.product-opt-color-pill.active,
+.color-checkbox-input:checked + label{
+    background-color: #111827 !important;
+    border-color: #111827 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2) !important;
 }
 
 .quantity-of-product{
@@ -2016,7 +2083,7 @@ figure.containerZoom{
 }
 .home-hero-banner{
     position: relative;
-    max-width: 942px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
 }

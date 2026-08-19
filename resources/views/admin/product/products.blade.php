@@ -82,10 +82,23 @@
                                             <select class="form-control ol-form-control ol-select2" data-toggle="select2" name="category" data-placeholder="Type to search...">
                                                 <option value="all">{{ get_phrase('All') }}</option>
 
-                                                @foreach (App\Models\Category::orderBy('title', 'asc')->get() as $category)
-                                                    <option value="{{ $category->slug }}" @if (request('category') == $category->slug) selected @endif>
-                                                        {{ $category->title }}
+                                                @php
+                                                    $mainCategories = App\Models\Category::where('parent_id', 0)->orderByRaw('LOWER(title) asc')->get();
+                                                @endphp
+                                                @foreach ($mainCategories as $mainCat)
+                                                    <option value="{{ $mainCat->slug }}" @if (request('category') == $mainCat->slug) selected @endif>
+                                                        {{ $mainCat->title }}
                                                     </option>
+                                                    @foreach ($mainCat->childs()->orderByRaw('LOWER(title) asc')->get() as $subCat)
+                                                        <option value="{{ $subCat->slug }}" @if (request('category') == $subCat->slug) selected @endif>
+                                                            &nbsp;&nbsp;-- {{ $subCat->title }}
+                                                        </option>
+                                                        @foreach ($subCat->childs()->orderByRaw('LOWER(title) asc')->get() as $subSubCat)
+                                                            <option value="{{ $subSubCat->slug }}" @if (request('category') == $subSubCat->slug) selected @endif>
+                                                                &nbsp;&nbsp;&nbsp;&nbsp;---- {{ $subSubCat->title }}
+                                                            </option>
+                                                        @endforeach
+                                                    @endforeach
                                                 @endforeach
                                             </select>
                                         </div>
@@ -193,7 +206,17 @@
                             <div class="col-lg-2"></div>
                             <div class="col-lg-7 col-9">
                                 <div class="search-input flex-grow-1">
-                                    <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ get_phrase('Search by product name') }}" class="ol-form-control form-control" />
+                                    <input type="text" name="search" value="{{ request('search') }}" placeholder="{{ get_phrase('Search (e.g. Corporate Polo, Birthday...)') }}" class="ol-form-control form-control" list="adminProductKeywords" autocomplete="off" />
+                                    <datalist id="adminProductKeywords">
+                                        <option value="Corporate Polo T-Shirt"></option>
+                                        <option value="Corporate Wear"></option>
+                                        <option value="Customized Polo"></option>
+                                        <option value="Three Kids"></option>
+                                        <option value="Father & Kids"></option>
+                                        <option value="Mother & Daughters"></option>
+                                        <option value="Birthday"></option>
+                                        <option value="Fearless Girl"></option>
+                                    </datalist>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-3">

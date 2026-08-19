@@ -81,6 +81,17 @@
                                             </div>
                                          </a>
                                      </li>
+                                     <li>
+                                         @php
+                                             $whatsapp_num = preg_replace('/[^0-9]/', '', get_settings('phone'));
+                                         @endphp
+                                         <a href="https://wa.me/{{ $whatsapp_num }}" target="_blank" class="footer-nav-link">
+                                             <div class="d-flex column-gap-2 align-items-center">
+                                                 <i class="fa-brands fa-whatsapp" style="font-size: 20px; color: #25D366 !important; width: 24px; text-align: center; margin-left: 2px;"></i>
+                                                 <p class="footer-nav-link">{{get_settings('phone')}}</p>
+                                             </div>
+                                          </a>
+                                      </li>
                                     <li>
                                         <a href="mailto:{{get_settings('system_email')}}" class="footer-nav-link">
                                             <div class="d-flex column-gap-2 align-items-start">

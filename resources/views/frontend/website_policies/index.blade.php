@@ -60,37 +60,41 @@
 }
 
 .section-heading {
-     font-size: 24px !important;
-    margin-bottom: 16px;
-    line-height: 32px;
+    font-size: 18px !important;
+    margin-bottom: 12px;
+    line-height: 26px;
     color: #000000;
     font-weight: 600;
+    text-align: left !important;
 }
 .section-heading strong,
 .section-heading h4 b,
 .section-heading h4 p,
-.editor-page-content  p b span,
 .section-heading h4 p span,
-.section-heading span{
-     font-size: 24px !important;
-     line-height: 32px;
+.section-heading span {
+    font-size: 18px !important;
+    line-height: 26px;
     color: #000000;
     font-weight: 600 !important;
 }
-.editor-page-content font ,
-.editor-page-content p {
-    font-size: 16px !important;
-    font-weight: 400;
-    color: #494F5B;
-    line-height: 28px;
+.editor-page-content {
+    text-align: left !important;
 }
-.editor-page-content h4 p ,
-.editor-page-content h4 p  span font,
-.editor-page-content h4 p font span{
-    font-size: 16px !important;
+.editor-page-content font,
+.editor-page-content p {
+    font-size: 14px !important;
     font-weight: 400;
     color: #494F5B;
-    line-height: 28px;
+    line-height: 24px;
+    text-align: left !important;
+}
+.editor-page-content h4 p,
+.editor-page-content h4 p span font,
+.editor-page-content h4 p font span {
+    font-size: 14px !important;
+    font-weight: 400;
+    color: #494F5B;
+    line-height: 24px;
 }
 .sidebar-menu   .list-unstyled li{
     margin: 20px 0 !important;

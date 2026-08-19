@@ -10,10 +10,16 @@
     <div>
         <div class=" product-grid-banner-{{ $layout }} mb-3">
             @php
-                $thumbnails = json_decode($product->thumbnail, true);
-                $firstImage = $thumbnails[0] ?? null;
+                $thumbnails = json_decode($product->thumbnail, true) ?: [];
+                $firstImage = null;
+                if (count($thumbnails) > 0) {
+                    $imgIndex = ($loop->index ?? $product->id) % count($thumbnails);
+                    $firstImage = $thumbnails[$imgIndex] ?? ($thumbnails[0] ?? null);
+                }
             @endphp
-            <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+            <a href="{{ route('product', $product->slug) }}" class="d-block w-100 h-100">
+                <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+            </a>
             @if ($product->is_discounted()->exists())
             @php
                 $discount = $product->is_discounted;

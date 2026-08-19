@@ -14,19 +14,140 @@
             </div>
         </div>
         <div class="row gy-4 mb-30px wow animate__fadeInUp" data-wow-delay=".3s">
-            @php 
-                $latest_products = App\Models\Product::where('status', 1)->latest()->take(4)->get();
+            @php
+            if (!function_exists('get_product_color_variants')) {
+                function get_product_color_variants($product) {
+                    $thumbnails = json_decode($product->thumbnail, true);
+                    if (!is_array($thumbnails) || empty($thumbnails)) {
+                        return [];
+                    }
+
+                    $image_attrs = json_decode($product->image_attributes, true);
+                    if (!is_array($image_attrs)) {
+                        $image_attrs = [];
+                    }
+
+                    $color_map = [
+                        11 => ['name' => 'Black', 'hex' => '#111827'],
+                        12 => ['name' => 'White', 'hex' => '#FFFFFF'],
+                        13 => ['name' => 'Navy', 'hex' => '#0F172A'],
+                        30 => ['name' => 'Charcoal Melange', 'hex' => '#4B5563'],
+                        31 => ['name' => 'Sky Blue', 'hex' => '#38BDF8'],
+                        43 => ['name' => 'Red', 'hex' => '#DC2626'],
+                        45 => ['name' => 'Maroon', 'hex' => '#7F1D1D'],
+                        83 => ['name' => 'Royal Blue', 'hex' => '#1D4ED8'],
+                        84 => ['name' => 'Yellow', 'hex' => '#EAB308'],
+                        85 => ['name' => 'Orange', 'hex' => '#EA580C'],
+                    ];
+
+                    $polo_color_meta = [
+                        'uploads/product/thumbnail/printmine_real_black.webp' => ['name' => 'Black', 'hex' => '#111827', 'attr_id' => 11],
+                        'uploads/product/thumbnail/printmine_real_navy.webp' => ['name' => 'Navy', 'hex' => '#0F172A', 'attr_id' => 13],
+                        'uploads/product/thumbnail/printmine_real_royal_blue.webp' => ['name' => 'Royal Blue', 'hex' => '#1D4ED8', 'attr_id' => 83],
+                        'uploads/product/thumbnail/printmine_real_sky_blue.webp' => ['name' => 'Sky Blue', 'hex' => '#38BDF8', 'attr_id' => 31],
+                        'uploads/product/thumbnail/printmine_real_red.webp' => ['name' => 'Red', 'hex' => '#DC2626', 'attr_id' => 43],
+                        'uploads/product/thumbnail/printmine_real_maroon.webp' => ['name' => 'Maroon', 'hex' => '#7F1D1D', 'attr_id' => 45],
+                        'uploads/product/thumbnail/printmine_real_yellow.webp' => ['name' => 'Yellow', 'hex' => '#EAB308', 'attr_id' => 84],
+                        'uploads/product/thumbnail/printmine_real_orange.webp' => ['name' => 'Orange', 'hex' => '#EA580C', 'attr_id' => 85],
+                        'uploads/product/thumbnail/printmine_real_white.webp' => ['name' => 'White', 'hex' => '#FFFFFF', 'attr_id' => 12],
+                        'uploads/product/thumbnail/printmine_real_gray.webp' => ['name' => 'Charcoal Melange', 'hex' => '#4B5563', 'attr_id' => 30],
+                    ];
+
+                    $variants = [];
+                    foreach ($thumbnails as $thumb) {
+                        $normalized_thumb = str_replace('\\', '/', $thumb);
+
+                        if (isset($polo_color_meta[$normalized_thumb])) {
+                            $meta = $polo_color_meta[$normalized_thumb];
+                            $variants[] = [
+                                'image' => $normalized_thumb,
+                                'name' => $meta['name'],
+                                'hex' => $meta['hex'],
+                                'attr_id' => $meta['attr_id']
+                            ];
+                            continue;
+                        }
+
+                        $attr_val = $image_attrs[$thumb] ?? $image_attrs[$normalized_thumb] ?? null;
+                        if ($attr_val) {
+                            $attr_id = null;
+                            if (is_array($attr_val)) {
+                                $attr_id = $attr_val['3'] ?? reset($attr_val);
+                            } else {
+                                $attr_id = $attr_val;
+                            }
+
+                            if ($attr_id && isset($color_map[$attr_id])) {
+                                $variants[] = [
+                                    'image' => $normalized_thumb,
+                                    'name' => $color_map[$attr_id]['name'],
+                                    'hex' => $color_map[$attr_id]['hex'],
+                                    'attr_id' => $attr_id
+                                ];
+                                continue;
+                            }
+                        }
+
+                        $filename = strtolower(basename($normalized_thumb));
+                        $matched = false;
+                        foreach ($color_map as $id => $color_info) {
+                            $color_name_lower = strtolower($color_info['name']);
+                            $color_name_clean = str_replace(' ', '_', $color_name_lower);
+                            if (str_contains($filename, $color_name_clean) || str_contains($filename, $color_name_lower)) {
+                                $variants[] = [
+                                    'image' => $normalized_thumb,
+                                    'name' => $color_info['name'],
+                                    'hex' => $color_info['hex'],
+                                    'attr_id' => $id
+                                ];
+                                $matched = true;
+                                break;
+                            }
+                        }
+
+                        if (!$matched) {
+                            $variants[] = [
+                                'image' => $normalized_thumb,
+                                'name' => 'Default',
+                                'hex' => '#9CA3AF',
+                                'attr_id' => null
+                            ];
+                        }
+                    }
+
+                    return $variants;
+                }
+            }
             @endphp
             @foreach ($latest_products as $product)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
                     <div class="d-block product-grid-md">
                         <div>
                             <div class="product-grid-banner-md mb-12px">
                                 @php
                                     $thumbnails = json_decode($product->thumbnail, true);
-                                    $firstImage = $thumbnails[0] ?? null;
+                                    $variants = get_product_color_variants($product);
+                                    $unique_variants = [];
+                                    $seen_colors = [];
+                                    foreach ($variants as $v) {
+                                        $color_key = strtolower($v['name']);
+                                        if (!in_array($color_key, $seen_colors)) {
+                                            $seen_colors[] = $color_key;
+                                            $unique_variants[] = $v;
+                                        }
+                                    }
+                                    
+                                    $defaultImage = $thumbnails[0] ?? null;
+                                    $active_swatch_idx = 0;
+                                    if (count($unique_variants) > 1) {
+                                        $variant_idx = $loop->index % count($unique_variants);
+                                        $defaultImage = $unique_variants[$variant_idx]['image'];
+                                        $active_swatch_idx = $variant_idx;
+                                    }
                                 @endphp
-                                <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                <a href="{{ route('product', $product->slug) }}" class="d-block w-100 h-100">
+                                    <img class="banner product-card-image-{{ $product->id }}" src="{{ get_image($defaultImage) }}" alt="banner">
+                                </a>
                                 @if ($product->is_discounted()->exists())
                                     @php
                                         $discount = $product->is_discounted;
@@ -57,6 +178,16 @@
                                 </a>
                             </div>
                             <div>
+                                @if(count($unique_variants) > 1)
+                                    <div class="product-card-swatches d-flex align-items-center gap-1 mt-1 mb-2 justify-content-start flex-wrap">
+                                        @foreach($unique_variants as $v_idx => $v)
+                                            <span class="color-swatch-dot {{ $v_idx == $active_swatch_idx ? 'active' : '' }}" 
+                                                  style="background-color: {{ $v['hex'] }}; cursor: pointer; display: inline-block; width: 15px; height: 15px; border-radius: 50%; border: {{ strtolower($v['name']) == 'white' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.1)' }}; transition: all 0.2s;" 
+                                                  title="{{ $v['name'] }}"
+                                                  onclick="event.preventDefault(); changeProductCardImage('{{ $product->id }}', '{{ get_image($v['image']) }}', this)"></span>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <a href="{{ route('product', $product->slug) }}" class="al-title-16px mb-12px product-title-link">{{ \Illuminate\Support\Str::limit($product->title, 70, '...') }}</a>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-start gap-1 mb-12px">

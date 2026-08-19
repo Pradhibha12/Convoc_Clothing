@@ -74,7 +74,7 @@
                     <div class="breadcrumb-area mt-30px mb-30px wow animate__fadeInUp" data-wow-delay=".1s">
                         <h1 class="al-title-42px text-center mb-20px">{{get_phrase('About')}}</h1>
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb fsh-breadcrumb">
+                            <ol class="breadcrumb fsh-breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="{{route('home')}}">{{get_phrase('Home')}}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{get_phrase('About')}}</li>
                             </ol>

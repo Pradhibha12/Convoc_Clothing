@@ -56,6 +56,9 @@ class ProductsController extends Controller
 
     function index(Request $request, $category = "", $sub_category = "", $sub_sub_category = "", $sub_sub_sub_category = "")
     {
+        if ($category === 'corporate-wear' || $category === 'corporate-polo-t-shirt' || $sub_category === 'corporate-polo-t-shirt') {
+            return redirect()->route('product', 'customized-corporate-your-company-logo-order-logo-print-582');
+        }
         $selected_categories = [];
         if ($category) $selected_categories['category'] = Category::where('slug', $category)->firstOrFail();
         if ($sub_category) $selected_categories['sub_category'] = Category::where('slug', $sub_category)->firstOrFail();
@@ -67,77 +70,139 @@ class ProductsController extends Controller
 
 
         $query = Product::where('status', 1);
-        // Category
-        if ($selected_category->id) {
-            // filtered by category
+        // Category Filter & Price Sort Parameters
+        $category_filter = $request->query('category_filter');
+        $price_sort = $request->query('price_sort');
+        $sort_by = $request->query('sort_by');
+
+        // Backward compatibility mapping for old sort_by parameter
+        if (empty($category_filter) && in_array($sort_by, ['men', 'women', 'kids', 'corporate'])) {
+            $category_filter = $sort_by;
+        }
+        if (empty($price_sort) && in_array($sort_by, ['low-to-high', 'low_to_high', 'high-to-low', 'high_to_low', 'latest'])) {
+            $price_sort = $sort_by;
+        }
+
+        // Department / Target Group Filter from Sidebar Checkboxes
+        if ($request->department != '') {
+            $departments = explode(',', $request->department);
+            $query->where(function ($q) use ($departments) {
+                foreach ($departments as $dept) {
+                    $dept = strtolower(trim($dept));
+                    if ($dept == 'men' || $dept == 'father') {
+                        $q->orWhereIn('category_id', [48, 49, 50, 51])
+                          ->orWhere('title', 'like', '%father%')
+                          ->orWhere('title', 'like', '%men%')
+                          ->orWhere('tags', 'like', '%men%');
+                    } elseif ($dept == 'women' || $dept == 'mother') {
+                        $q->orWhereIn('category_id', [52, 53, 54, 55])
+                          ->orWhere('title', 'like', '%mother%')
+                          ->orWhere('title', 'like', '%women%')
+                          ->orWhere('tags', 'like', '%women%');
+                    } elseif ($dept == 'kids') {
+                        $q->orWhereIn('category_id', [6, 45, 46, 56, 59, 60, 61])
+                          ->orWhere('title', 'like', '%kids%')
+                          ->orWhere('title', 'like', '%boy%')
+                          ->orWhere('title', 'like', '%girl%')
+                          ->orWhere('tags', 'like', '%kids%');
+                    } elseif ($dept == 'corporate' || $dept == 'corporate-uniforms') {
+                        $q->orWhereIn('category_id', [57, 58])
+                          ->orWhere('title', 'like', '%polo%')
+                          ->orWhere('title', 'like', '%corporate%')
+                          ->orWhere('tags', 'like', '%corporate%');
+                    }
+                }
+            });
+        }
+
+        // Category Filter Dropdown (Overrides URL subcategory to prevent zero results when switching context)
+        if (!empty($category_filter) && $category_filter !== 'all') {
+            if ($category_filter === 't-shirts') {
+                $cat = Category::where('slug', 't-shirts')->first();
+                if ($cat) {
+                    $child_ids = $this->get_all_child_category_ids($cat->id);
+                    $query->whereIn('category_id', $child_ids);
+                }
+            } elseif ($category_filter === 'hoodies') {
+                $cat = Category::where('slug', 'hoodies')->first();
+                if ($cat) {
+                    $child_ids = $this->get_all_child_category_ids($cat->id);
+                    $query->whereIn('category_id', $child_ids);
+                }
+            } elseif ($category_filter === 'family') {
+                $cat = Category::where('slug', 'family')->first();
+                if ($cat) {
+                    $child_ids = $this->get_all_child_category_ids($cat->id);
+                    $query->whereIn('category_id', $child_ids);
+                }
+            } elseif ($category_filter === 'polo-t-shirt') {
+                $cat = Category::where('slug', 'polo-t-shirt')->first();
+                if ($cat) {
+                    $child_ids = $this->get_all_child_category_ids($cat->id);
+                    $query->whereIn('category_id', $child_ids);
+                }
+            } elseif ($category_filter === 'combo') {
+                $cat = Category::where('slug', 'combo')->first();
+                if ($cat) {
+                    $child_ids = $this->get_all_child_category_ids($cat->id);
+                    $query->whereIn('category_id', $child_ids);
+                }
+            }
+        }
+        
+        // Size Filter
+        $size_filter = $request->query('size_filter');
+        if (!empty($size_filter) && $size_filter !== 'all') {
+            $size_attr = Attribute::where('attribute_type_id', 1)->where('slug', $size_filter)->first();
+            if ($size_attr) {
+                $query->whereIn('id', function($q) use ($size_attr) {
+                    $q->select('product_id')->from('product_attributes')->where('attribute_id', $size_attr->id);
+                });
+            }
+        }
+
+        // Color Filter
+        $color_filter = $request->query('color_filter');
+        if (!empty($color_filter) && $color_filter !== 'all') {
+            $color_attr = Attribute::where('attribute_type_id', 3)->where('slug', $color_filter)->first();
+            if ($color_attr) {
+                $query->whereIn('id', function($q) use ($color_attr) {
+                    $q->select('product_id')->from('product_attributes')->where('attribute_id', $color_attr->id);
+                });
+            }
+        } elseif ($selected_category->id) {
+            // Apply category filter from URL path if no explicit dropdown category_filter is set
             $child_category_ids = $this->get_all_child_category_ids($selected_category->id);
+            if ($selected_category->slug === 'all-t-shirts') {
+                $parent_cat = Category::where('slug', 't-shirts')->first();
+                if ($parent_cat) {
+                    $child_category_ids = $this->get_all_child_category_ids($parent_cat->id);
+                }
+            } elseif ($selected_category->slug === 'all-hoodies') {
+                $parent_cat = Category::where('slug', 'hoodies')->first();
+                if ($parent_cat) {
+                    $child_category_ids = $this->get_all_child_category_ids($parent_cat->id);
+                }
+            } elseif ($selected_category->slug === 'all-combo') {
+                $parent_cat = Category::where('slug', 'combo')->first();
+                if ($parent_cat) {
+                    $child_category_ids = $this->get_all_child_category_ids($parent_cat->id);
+                }
+            }
             if (count($child_category_ids) > 0) {
                 $query->where(function ($query) use ($child_category_ids) {
                     $query->whereIn('category_id', $child_category_ids);
                 });
             }
-
-            // filtered by category attributes
-            $all_child_category_attribute_ids = $this->get_category_attribute_ids($child_category_ids, $request);
-            if (count($all_child_category_attribute_ids) > 0) {
-                $query->whereHas('product_attributes', function ($query) use ($all_child_category_attribute_ids) {
-                    $query->where('quantity', '>', 0)->whereIn('attribute_id', $all_child_category_attribute_ids);
-                });
-            }
         }
 
-
-
-        // Search
-        if ($request->search != '') {
-            $query->where(function ($query) use ($request) {
-                $query->where('title', 'like', '%' . $request->search . '%');
-                $query->orWhere('tags', 'like', '%' . $request->search . '%');
-                $query->orWhere('summary', 'like', '%' . $request->search . '%');
-            });
-        }
-
-        // Price
-        if ($request->price != '') {
-            $price_min_max_arr = explode(',', $request->price);
-            if (!isset($price_min_max_arr[1])) $price_min_max_arr[1] = 0;
-
-            $query->where(function ($query) use ($price_min_max_arr) {
-                $query->whereBetween('price', $price_min_max_arr);
-            });
-        }
-
-        // Availability
-        if ($request->availability != '') {
-            $availability = explode(',', $request->availability);
-            $query->where(function ($query) use ($availability) {
-                if (in_array('in-stock', $availability) && !in_array('out-of-stock', $availability)) {
-                    $query->where('total_stock', '>', 0);
-                } elseif (in_array('out-of-stock', $availability) && !in_array('in-stock', $availability)) {
-                    $query->where('total_stock', 0);
-                }
-            });
-        }
-
-        // Rating
-        if ($request->rating != '') {
-            $rating = explode(',', $request->rating);
-            $query->where(function ($query) use ($rating) {
-                $query->whereIn('average_rating', $rating);
-            });
-        }
-
-        // Product sorting
-        if ($request->sort_by != '') {
-            if($request->sort_by == 'low-to-high'){
-                $query->orderBy('price', 'asc');
-            }elseif($request->sort_by == 'high-to-low'){
-                $query->orderBy('price', 'desc');
-            }elseif($request->sort_by == 'best-rated'){
-                $query->orderBy('average_rating', 'desc');
-            }elseif($request->sort_by == 'release-date'){
-                $query->orderBy('created_at', 'desc');
-            }
+        // Price Sort Dropdown (Separate Control)
+        if ($price_sort === 'low_to_high' || $price_sort === 'low-to-high') {
+            $query->orderBy('price', 'asc');
+        } elseif ($price_sort === 'high_to_low' || $price_sort === 'high-to-low') {
+            $query->orderBy('price', 'desc');
+        } else {
+            $query->latest();
         }
 
 

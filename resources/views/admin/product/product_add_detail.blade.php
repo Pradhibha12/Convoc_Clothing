@@ -71,7 +71,7 @@
                         <label for="description" class="form-label ol-form-label">{{ get_phrase('Product description') }}</label>
                         <textarea name="description" rows="4" class="form-control ol-form-control text_editor" id="description" placeholder="{{ get_phrase('Write description') }}"><p>Premium 180GSM -  100% pure cotton T-shirt.</p>
 <p>EASY EXCHANGE/REPLACEMENT FOR ANY SIZE RELATED ISSUES.</p>
-<p>PLEASE WRITE TO US AT SUPPORT@TAILORSKNOT.COM WITHIN 7 DAYS OF DELIVERY.</p>
+<p>PLEASE WRITE TO US AT convoc.fashion@gmail.com within 24 hours of delivery.</p>
 <p><strong>Size Chart:</strong></p>
 <ul>
     <li>Unisex t-shirt pattern with a regular fit</li>

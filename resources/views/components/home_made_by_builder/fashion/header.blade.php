@@ -10,22 +10,22 @@
      $current_route = Route::currentRouteName();
  @endphp
 
- <style>
-     .dropdown-item.active,
-     .dropdown-item:active {
-         color: var(--darkColor) !important;
-         text-decoration: none;
-         background-color: var(--lightColor);
-     }
- </style>
+  <style>
+      .dropdown-item.active,
+      .dropdown-item:active {
+          color: var(--darkColor) !important;
+          text-decoration: none;
+          background-color: var(--lightColor);
+      }
+  </style>
 
  <!-- Logo Header Area Start -->
  <header class="logo-header">
      <div class="container">
          <div class="row justify-content-between align-items-center">
-             <div class="col-auto col-lg order-2 order-lg-1">
-                 <a href="{{ route('home') }}" class="header-logo">
-                     <img src="{{ get_image(get_frontend_settings('dark_logo')) }}" alt="logo">
+             <div class="col-auto col-lg order-2 order-lg-1 d-flex align-items-center">
+                 <a href="{{ route('home') }}" class="header-logo d-flex align-items-center" style="padding: 0; height: 68px;">
+                     <img src="{{ get_image(get_frontend_settings('dark_logo')) }}" alt="logo" style="max-height: 42px; object-fit: contain;">
                  </a>
              </div>
               <div class="col-auto col-lg-6 order-1 order-lg-2">
@@ -47,8 +47,8 @@
                                               </a>
                                               @php
                                                   $categories = App\Models\Category::where('parent_id', '=', 0)
+                                                      ->whereIn('slug', ['t-shirts', 'hoodies', 'family', 'polo-t-shirt', 'combo'])
                                                       ->orderBy('sort', 'asc')
-                                                      ->orderBy('title', 'asc')
                                                       ->get();
                                               @endphp
                                               <!-- Mega Menu -->
@@ -58,6 +58,11 @@
                                                           <div class="mega-menu-inner-wrap">
                                                               <div class="mega-list-ads-wrap d-flex gap-3 align-items-start">
                                                                   <div class="mega-list-main-wrap">
+                                                                      <div class="mega-list-wrap">
+                                                                          <a href="{{ route('all_products') }}">
+                                                                              <h5 class="al-title-16px px-10px mb-12px">{{ get_phrase('All Products') }}</h5>
+                                                                          </a>
+                                                                      </div>
                                                                       @foreach ($categories as $category)
                                                                           @php
                                                                               $subCategories = App\Models\Category::where('parent_id', '=', $category->id)->orderBy('sort', 'asc')->orderBy('title', 'asc')->get();
@@ -141,7 +146,7 @@
              </div>
              <div class="col-auto col-lg order-3">
                  <div class="d-flex align-items-center gap-4 justify-content-end">
-                     <button type="button" class="search-modal-btn d-none d-lg-block svg-link header-svg-link d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#searchModal">
+                     <button type="button" class="search-modal-btn svg-link header-svg-link d-flex align-items-center me-2 me-lg-0" data-bs-toggle="modal" data-bs-target="#searchModal">
                          <span class="header-svg-link-inner" data-bs-toggle="tooltip" data-bs-title="Search" data-bs-placement="bottom">
                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18" fill="none">
                                  <path d="M8.625 16.3125C4.3875 16.3125 0.9375 12.8625 0.9375 8.625C0.9375 4.3875 4.3875 0.9375 8.625 0.9375C12.8625 0.9375 16.3125 4.3875 16.3125 8.625C16.3125 12.8625 12.8625 16.3125 8.625 16.3125ZM8.625 2.0625C5.0025 2.0625 2.0625 5.01 2.0625 8.625C2.0625 12.24 5.0025 15.1875 8.625 15.1875C12.2475 15.1875 15.1875 12.24 15.1875 8.625C15.1875 5.01 12.2475 2.0625 8.625 2.0625Z" fill="#0D0E10"></path>
@@ -273,7 +278,7 @@
                      <li>
                          <a href="{{ route('home') }}" class="d-flex gap-2 mobile-menuitem-a">
                              <svg width="22" height="22" viewbox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path d="M18.3701 6.25171L13.09 2.55754C11.6509 1.54921 9.44172 1.60421 8.05755 2.67671L3.46505 6.26088C2.54839 6.97588 1.82422 8.44255 1.82422 9.59755V15.9225C1.82422 18.26 3.72172 20.1667 6.05922 20.1667H15.9409C18.2784 20.1667 20.1759 18.2692 20.1759 15.9317V9.71671C20.1759 8.47921 19.3784 6.95755 18.3701 6.25171ZM11.6876 16.5C11.6876 16.8759 11.3759 17.1875 11.0001 17.1875C10.6242 17.1875 10.3126 16.8759 10.3126 16.5V13.75C10.3126 13.3742 10.6242 13.0625 11.0001 13.0625C11.3759 13.0625 11.6876 13.3742 11.6876 13.75V16.5Z" fill="#000000"></path>
+                                 <path d="M18.3701 6.25171L13.09 2.55754C11.6509 1.54921 9.44172 1.60421 8.05755 2.67671L3.46505 6.26088C2.54839 6.97588 1.82422 8.44255 1.82422 9.59755V15.9225C1.82422 18.26 3.72172 20.1667 6.05922 20.1667H15.9409C18.2784 20.1667 20.1759 18.2692 20.1759 15.9317V9.71671C20.1759 8.47921 19.3784 6.95755 18.3701 6.25171ZM11.6876 16.5C11.6876 16.8759 11.3759 17.1875 11.0001 17.1875C10.6242 17.1875 10.3126 16.8759 10.3126 16.5V13.75C10.3126 13.3742 10.6242 13.0625 11.0001 13.0625C11.3759 13.0625 11.6876 13.3742 11.0001 13.75V16.5Z" fill="#000000"></path>
                              </svg>
                              <span class="text">{{ get_phrase('Home') }}</span>
                          </a>
@@ -290,6 +295,11 @@
                          </a>
 
                          <ul class="mobile-dropdown-menu ">
+                             <li>
+                                 <a href="{{ route('all_products') }}" class="mobile-menuitem-a">
+                                     {{ get_phrase('All Products') }}
+                                 </a>
+                             </li>
                              @foreach ($categories as $category)
                                  @php
                                      $subCategories = App\Models\Category::where('parent_id', $category->id)

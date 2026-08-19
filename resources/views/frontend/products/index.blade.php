@@ -3,6 +3,12 @@
 @push('meta')
 @endpush
 @push('css')
+<style>
+    .nice-select.nice-select-right .list {
+        right: 0 !important;
+        left: auto !important;
+    }
+</style>
 @endpush
 
 @section('content')
@@ -177,16 +183,51 @@
                             </li>
                           
                         </ul>
-                        <div class="d-flex align-items-center gap-12px">
-                            <p class="al-subtitle-14px lh-1 d-none d-md-block">{{ get_phrase('Sort By') }}</p>
-                            <form action="">
-                                <select name="sort_by" class="fsh-md-select min-w-155px right fsh-nice-select" onchange="document.getElementById('sort_by').value = this.value; submitFilterForm();">
-                                    <option value="low-to-high" @if (request()->sort_by == 'low-to-high') selected @endif>{{ get_phrase('Price') }} : {{ get_phrase('Low to High') }}</option>
-                                    <option value="high-to-low" @if (request()->sort_by == 'high-to-low') selected @endif>{{ get_phrase('Price') }} : {{ get_phrase('High to Low') }}</option>
-                                    <option value="best-rated" @if (request()->sort_by == 'best-rated') selected @endif>{{ get_phrase('Rating') }} : {{ get_phrase('Best rated') }}</option>
-                                    <option value="release-date" @if (request()->sort_by == 'release-date') selected @endif>{{ get_phrase('Release Date') }}</option>
+                        <div class="d-flex align-items-center flex-wrap gap-2 ms-auto">
+                            <!-- Category Filter Dropdown -->
+                            <div class="d-flex align-items-center gap-1">
+                                <span class="text-secondary small fw-medium text-uppercase me-1" style="font-family: 'Albert Sans', sans-serif; font-size: 13px;">{{ get_phrase('Category') }}:</span>
+                                <select name="category_filter" class="fsh-md-select fsh-nice-select" onchange="document.getElementById('category_filter_input').value = this.value; submitFilterForm();">
+                                    <option value="all" @if(request()->category_filter == 'all' || (!request()->category_filter && (!request()->sort_by || in_array(request()->sort_by, ['low_to_high', 'high_to_low', 'latest'])))) selected @endif>{{ get_phrase('All') }}</option>
+                                    <option value="t-shirts" @if(request()->category_filter == 't-shirts') selected @endif>{{ get_phrase('Tshirts') }}</option>
+                                    <option value="hoodies" @if(request()->category_filter == 'hoodies') selected @endif>{{ get_phrase('Hoodies') }}</option>
+                                    <option value="polo-t-shirt" @if(request()->category_filter == 'polo-t-shirt') selected @endif>{{ get_phrase('Polo family') }}</option>
                                 </select>
-                            </form>
+                            </div>
+
+                            <!-- Size Filter Dropdown -->
+                            <div class="d-flex align-items-center gap-1">
+                                <select name="size_filter" class="fsh-md-select fsh-nice-select" onchange="document.getElementById('size_filter_input').value = this.value; submitFilterForm();">
+                                    <option value="all" @if(request()->size_filter == 'all' || !request()->size_filter) selected @endif>{{ get_phrase('Size') }}: {{ get_phrase('All') }}</option>
+                                    @foreach (App\Models\Attribute::where('attribute_type_id', 1)->get() as $size_option)
+                                        <option value="{{ $size_option->slug }}" @if(request()->size_filter == $size_option->slug) selected @endif>{{ get_phrase('Size') }}: {{ $size_option->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Color Filter Dropdown -->
+                            <div class="d-flex align-items-center gap-1">
+                                <select name="color_filter" class="fsh-md-select fsh-nice-select" onchange="document.getElementById('color_filter_input').value = this.value; submitFilterForm();">
+                                    <option value="all" @if(request()->color_filter == 'all' || !request()->color_filter) selected @endif>{{ get_phrase('Color') }}: {{ get_phrase('All') }}</option>
+                                    @php
+                                        // Standard colors that exist in database for filters
+                                        $allowed_colors = ['black', 'white', 'navy', 'grey-melange', 'pink', 'charcoal-melange', 'sky-blue', 'red', 'blue', 'maroon', 'royal-blue', 'yellow', 'orange'];
+                                        $color_options = App\Models\Attribute::where('attribute_type_id', 3)->whereIn('slug', $allowed_colors)->get();
+                                    @endphp
+                                    @foreach ($color_options as $color_option)
+                                        <option value="{{ $color_option->slug }}" @if(request()->color_filter == $color_option->slug) selected @endif>{{ get_phrase('Color') }}: {{ $color_option->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <!-- Price Sort Dropdown -->
+                            <div class="d-flex align-items-center gap-1">
+                                <select name="price_sort" class="fsh-md-select fsh-nice-select nice-select-right" onchange="document.getElementById('price_sort_input').value = this.value; submitFilterForm();">
+                                    <option value="latest" @if(request()->price_sort == 'latest' || (!request()->price_sort && request()->sort_by == 'latest')) selected @endif>{{ get_phrase('Sort') }}: {{ get_phrase('Default') }}</option>
+                                    <option value="low_to_high" @if(request()->price_sort == 'low_to_high' || request()->sort_by == 'low-to-high' || request()->sort_by == 'low_to_high') selected @endif>{{ get_phrase('Price') }}: {{ get_phrase('Low to High') }}</option>
+                                    <option value="high_to_low" @if(request()->price_sort == 'high_to_low' || request()->sort_by == 'high-to-low' || request()->sort_by == 'high_to_low') selected @endif>{{ get_phrase('Price') }}: {{ get_phrase('High to Low') }}</option>
+                                </select>
+                            </div>
                         </div>
                        
                     </div>
@@ -201,14 +242,14 @@
                                 <div class="row gy-4  mb-30px">
                                     
                                     @foreach ($products as $product)
-                                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+                                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6">
                                             @include("components.{$active_theme->identifier}.products.product_grid", ['layout' => 'sm'])
                                         </div>
                                     @endforeach
                                          
                                 </div>
                                 <!-- Pagination -->
-                                {{ $products->links('pagination::bootstrap-4') }}
+                                {{ $products->onEachSide(1)->links('pagination::bootstrap-4') }}
                             </div>
                             
                             <!-- Grid Column 3 -->
@@ -216,27 +257,27 @@
                                 <div class="row gy-4 mb-30px">
                                     
                                     @foreach ($products as $product)
-                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6">
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-6">
                                             @include("components.{$active_theme->identifier}.products.product_grid", ['layout' => 'md'])
                                         </div>
                                     @endforeach
                                     
                                 </div>
                                 <!-- Pagination -->
-                                {{ $products->links('pagination::bootstrap-4') }}
+                                {{ $products->onEachSide(1)->links('pagination::bootstrap-4') }}
                             </div>
                             <!-- Grid Column 2 -->
                             <div class="tab-pane fade " id="pills-filter1" role="tabpanel" aria-labelledby="pills-filter1-tab" tabindex="0">
                                 <div class="row gy-4 mb-30px">
                                     @foreach ($products as $product)
-                                        <div class="col-md-6">
+                                        <div class="col-md-6 col-6">
                                             @include("components.{$active_theme->identifier}.products.product_grid", ['layout' => 'lg'])
                                         </div>
                                     @endforeach
                                         
                                 </div>
                                 <!-- Pagination -->
-                                {{ $products->links('pagination::bootstrap-4') }}
+                                {{ $products->onEachSide(1)->links('pagination::bootstrap-4') }}
                             </div>
                             <!-- List View -->
                             <div class="tab-pane fade" id="pills-filter4" role="tabpanel" aria-labelledby="pills-filter4-tab" tabindex="0">
@@ -247,7 +288,7 @@
                                      
                                 </div>
                                 <!-- Pagination -->
-                                {{ $products->links('pagination::bootstrap-4') }}
+                                {{ $products->onEachSide(1)->links('pagination::bootstrap-4') }}
                             </div>
                             @else 
                                 <div class="col-12 mt-5">

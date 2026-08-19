@@ -98,6 +98,18 @@ if (!function_exists('get_image')) {
             return asset('uploads/system/placeholder.png');
         }
 
+        // If the URL is stored as a JSON array (e.g. multi-image arrays in DB), decode it and use the first image
+        if (is_string($url) && str_starts_with(trim($url), '[')) {
+            $decoded = json_decode($url, true);
+            if (is_array($decoded) && !empty($decoded)) {
+                $url = $decoded[0];
+            }
+        }
+
+        if ($url == null) {
+            return asset('uploads/system/placeholder.png');
+        }
+
         // If the value of URL is from an online URL
         if (str_contains($url, 'http://') || str_contains($url, 'https://')) {
             return $url;

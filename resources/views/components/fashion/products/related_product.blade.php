@@ -7,14 +7,23 @@
 <!-- Swiper -->
 <div class="swiper products-slider">
     <div class="swiper-wrapper">
-             
-            @foreach ($product->related_products()->where('status', 1)->take(30)->get() as $related_product)
+            @php
+                $related = $product->related_products()->where('status', 1)->take(30)->get();
+                if ($related->isEmpty()) {
+                    $related = \App\Models\Product::where('status', 1)->where('id', '!=', $product->id)->latest()->take(10)->get();
+                }
+            @endphp
+            @foreach ($related as $related_product)
               <div class="d-block product-grid-md swiper-slide">
                         <div>
                             <div class="product-grid-banner-md mb-12px">
                                 @php
-                                    $thumbnails = json_decode($related_product->thumbnail, true);
-                                    $firstImage = $thumbnails[0] ?? null;
+                                    $thumbnails = json_decode($related_product->thumbnail, true) ?: [];
+                                    $firstImage = null;
+                                    if (count($thumbnails) > 0) {
+                                        $imgIndex = ($loop->index ?? $related_product->id) % count($thumbnails);
+                                        $firstImage = $thumbnails[$imgIndex] ?? ($thumbnails[0] ?? null);
+                                    }
                                 @endphp
                                 <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
                                 @if ($related_product->is_discounted()->exists())

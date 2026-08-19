@@ -104,14 +104,25 @@
                             <div class="footer-nav-area">
                                 <h4 class="al-title-18px text-white mb-4 builder-editable" builder-identity="5">{{ get_phrase($footer_contact_title) }}</h4>
                                 <ul class="d-flex flex-column gap-18px">
-                                    <li>
-                                        <a href="tel:{{get_settings('phone')}}" class="footer-nav-link">
-                                            <div class="d-flex column-gap-2 align-items-start">
-                                                <img src="{{ asset('assets/frontend/fashion/images/image-icons/call-red-24.svg') }}" alt="icon">
-                                                <p class="footer-nav-link">{{get_settings('phone')}}</p>
-                                            </div>
-                                         </a>
-                                     </li>
+                                     <li>
+                                         <a href="tel:{{get_settings('phone')}}" class="footer-nav-link">
+                                             <div class="d-flex column-gap-2 align-items-start">
+                                                 <img src="{{ asset('assets/frontend/fashion/images/image-icons/call-red-24.svg') }}" alt="icon">
+                                                 <p class="footer-nav-link">{{get_settings('phone')}}</p>
+                                             </div>
+                                          </a>
+                                      </li>
+                                     <li>
+                                         @php
+                                             $whatsapp_num = preg_replace('/[^0-9]/', '', get_settings('phone'));
+                                         @endphp
+                                         <a href="https://wa.me/{{ $whatsapp_num }}" target="_blank" class="footer-nav-link">
+                                             <div class="d-flex column-gap-2 align-items-center">
+                                                 <i class="fa-brands fa-whatsapp" style="font-size: 20px; color: #25D366 !important; width: 24px; text-align: center; margin-left: 2px;"></i>
+                                                 <p class="footer-nav-link">{{get_settings('phone')}}</p>
+                                             </div>
+                                          </a>
+                                      </li>
                                     <li>
                                         <a href="mailto:{{get_settings('system_email')}}" class="footer-nav-link">
                                             <div class="d-flex column-gap-2 align-items-start">

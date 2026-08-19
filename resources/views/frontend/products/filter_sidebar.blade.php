@@ -4,16 +4,26 @@
 @php
     $header_category = [];
     $list_categories = []; 
+    
+    $category_filter = request()->query('category_filter');
+    $current_category = $selected_category;
+    
+    if ($category_filter && $category_filter !== 'all') {
+        $cat = App\Models\Category::where('slug', $category_filter)->first();
+        if ($cat) {
+            $current_category = $cat;
+        }
+    }
 
-    if ($selected_category->id == '') {
+    if ($current_category->id == '') {
         $list_categories = App\Models\Category::where('parent_id', 0)->get();
-    } elseif ($selected_category->childs->count() > 0) {
-        $header_category = $selected_category;
-        $list_categories = $selected_category->childs;
+    } elseif ($current_category->childs->count() > 0) {
+        $header_category = $current_category;
+        $list_categories = $current_category->childs;
         
     } else {
-        $header_category = $selected_category->parent;
-        $list_categories = $selected_category->parent->childs;
+        $header_category = $current_category->parent;
+        $list_categories = $current_category->parent->childs;
        
     }
    
@@ -69,6 +79,10 @@
     </div>
     <form action="#" id="filter-form" method="get">
         @csrf
+        <input type="hidden" name="category_filter" id="category_filter_input" value="{{ request()->category_filter ?? (in_array(request()->sort_by, ['men', 'women', 'kids', 'corporate']) ? request()->sort_by : '') }}">
+        <input type="hidden" name="price_sort" id="price_sort_input" value="{{ request()->price_sort ?? (in_array(request()->sort_by, ['low-to-high', 'low_to_high', 'high-to-low', 'high_to_low', 'latest']) ? request()->sort_by : '') }}">
+        <input type="hidden" name="size_filter" id="size_filter_input" value="{{ request()->size_filter ?? '' }}">
+        <input type="hidden" name="color_filter" id="color_filter_input" value="{{ request()->color_filter ?? '' }}">
         <div class="offcanvas-body">
             <div class="filter-sidebar w-100">
                 <!-- Categories -->
@@ -89,6 +103,12 @@
                          
                     </h4>
                     <ul>
+                        <li>
+                            <a href="{{ route('all_products') }}" class="category-nav-link @if (empty($selected_category->id)) active @endif">
+                                <span>{{ get_phrase('All') }}</span>
+                                <span>{{ App\Models\Product::where('status', 1)->count() }}</span>
+                            </a>
+                        </li>
                         @foreach ($list_categories as $list_category)
                             <li>
                                 <a href="{{ route('products', get_category_params($list_category)) }}" class="category-nav-link @if ($selected_category->id == $list_category->id) active @endif">
@@ -344,11 +364,15 @@
         // Replace %2C with a comma
         queryString = queryString.replace(/%2C/g, ',');
 
-        // Update the form action with the new query string
-        var updatedActionUrl = '{{ request()->url() }}?' + queryString;
+        // If category_filter is set and not empty/all, route to main /products page to avoid subcategory URL conflicts
+        var baseUrl = (queryParams['category_filter'] && queryParams['category_filter'] !== 'all') 
+            ? '{{ route("all_products") }}' 
+            : '{{ request()->url() }}';
 
-        // Now submit the form manually with the updated action URL
-        window.location.href = updatedActionUrl; // Redirect to the new URL
+        var updatedActionUrl = baseUrl + (queryString ? '?' + queryString : '');
+
+        // Redirect to updated action URL
+        window.location.href = updatedActionUrl;
     }
 
 

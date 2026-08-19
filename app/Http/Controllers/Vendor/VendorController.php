@@ -308,7 +308,8 @@ class VendorController extends Controller
             $category = Category::where('slug', $slug)->first();
 
             if ($category) {
-                $query->where('category_id', $category->id);
+                $child_category_ids = (new \App\Http\Controllers\Frontend\ProductsController)->get_all_child_category_ids($category->id);
+                $query->whereIn('category_id', $child_category_ids);
             } else {
                 // No matching category → force empty result
                 $query->whereRaw('1 = 0');

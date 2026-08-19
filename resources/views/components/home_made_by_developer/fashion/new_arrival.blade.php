@@ -18,7 +18,7 @@
                 $latest_products = App\Models\Product::where('status', 1)->latest()->take(4)->get();
             @endphp
             @foreach ($latest_products as $product)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6">
                     <div class="d-block product-grid-md">
                         <div>
                             <div class="product-grid-banner-md mb-12px">
@@ -26,7 +26,9 @@
                                     $thumbnails = json_decode($product->thumbnail, true);
                                     $firstImage = $thumbnails[0] ?? null;
                                 @endphp
-                                <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                <a href="{{ route('product', $product->slug) }}" class="d-block w-100 h-100">
+                                    <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                </a>
                                 @if ($product->is_discounted()->exists())
                                     @php
                                         $discount = $product->is_discounted;

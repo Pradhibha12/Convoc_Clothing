@@ -252,8 +252,22 @@ function toggleWishlist(productId, el) {
         }
     });
 }
+
+$(document).ready(function() {
+    $(document).on('click', '.product-grid-sm, .product-grid-md, .product-grid-lg, .product-grid-xs', function(e) {
+        // If clicking on wishlist or quickview buttons, do not intercept
+        if ($(e.target).closest('.product-wishlist-btn, .product-quickview-btn, .grid4-wishlist, .grid4-quickview, a.product-wishlist-btn, a.product-quickview-btn').length) {
+            return;
+        }
+        var link = $(this).find('.product-title-link').attr('href') || $(this).find('a').first().attr('href');
+        if (link && link !== 'javascript:void(0)' && link !== 'javascript:;') {
+            window.location.href = link;
+        }
+    });
+});
 </script>
 @include('frontend.product.share_modal')
+@include('frontend.partials.floating_video_widget')
 
 </body>
 

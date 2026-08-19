@@ -22,11 +22,14 @@
                     <div class="d-flex align-items-center flex-wrap column-gap-2 row-gap-2 justify-content-center justify-content-md-start flex-column flex-sm-row">
                         <a href="tel:{{ get_settings('phone') }}" class="d-flex column-gap-2px align-items-start header-phone">
                             <img src="{{ asset('assets/frontend/fashion/images/image-icons/call-calling-white-18.svg') }}" alt="">
-                            <span class="text-white mt-3px al-title-14px text-break">{{ get_phrase('Hotline') }} : {{ get_settings('phone') }}</span>
+                            <span class="text-white mt-3px al-title-14px text-break">{{ get_phrase('Contact') }} : {{ get_settings('phone') }}</span>
                         </a>
-                        <a href="mailto:{{ get_settings('contact_email') }}" class="d-flex column-gap-2px align-items-start contact-info-line">
-                            <img src="{{ asset('assets/frontend/fashion/images/image-icons/sms-white-18.svg') }}" alt="">
-                            <span class="text-white mt-3px al-title-14px text-break">{{ get_phrase('Email') }} : {{get_settings('system_email')}}</span>
+                        @php
+                            $whatsapp_num = preg_replace('/[^0-9]/', '', get_settings('phone'));
+                        @endphp
+                        <a href="https://wa.me/{{ $whatsapp_num }}" target="_blank" class="d-flex align-items-center column-gap-4px header-phone ms-3 text-decoration-none" style="opacity: 0.9; transition: opacity 0.2s ease;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.9">
+                            <i class="fa-brands fa-whatsapp" style="font-size: 16px; color: #25D366 !important; margin-top: 1px;"></i>
+                            <span class="text-white al-title-14px ms-1">WhatsApp</span>
                         </a>
                     </div>
                     <div class="d-flex align-items-center flex-wrap column-gap-2 row-gap-2 justify-content-center justify-content-md-end flex-column flex-sm-row">

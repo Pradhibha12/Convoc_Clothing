@@ -80,7 +80,7 @@
                     <div class="breadcrumb-area mt-30px mb-30px wow animate__fadeInUp" data-wow-delay=".1s">
                         <h1 class="al-title-42px text-center mb-20px">{{ get_phrase($c_title) }}</h1>
                         <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb fsh-breadcrumb">
+                            <ol class="breadcrumb fsh-breadcrumb justify-content-center">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">{{ get_phrase('Home') }}</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">{{ get_phrase($c_title) }}</li>
                             </ol>
@@ -181,7 +181,7 @@
 
                                 <h4 class="contact-title">{{ get_phrase($c_visit_title) }}</h4>
                                 <p class="contact-text">{{ get_phrase($c_visit_subtitle) }}</p>
-                                <span class="contact-link">{{ $c_address }}</span>
+                                 <span class="contact-link">{!! nl2br(e($c_address)) !!}</span>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6">

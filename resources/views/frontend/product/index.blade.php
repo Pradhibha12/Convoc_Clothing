@@ -3,6 +3,465 @@
 @push('meta')
 @endpush
 @push('css')
+<style>
+    /* Prevent image clipping and enforce smooth mobile touch scrolling */
+    html, body {
+        -webkit-overflow-scrolling: touch;
+    }
+    .gallery-swatch-dot {
+        width: 28px !important;
+        height: 28px !important;
+        border-radius: 50% !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        padding: 0 !important;
+    }
+    .gallery-swatch-dot.active {
+        transform: scale(1.2) !important;
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #FF9900 !important;
+        border-color: #000 !important;
+    }
+    .gallery-swatch-dot:hover {
+        transform: scale(1.15) !important;
+    }
+    img, 
+    picture,
+    .tf-product-media-wrap, 
+    .thumbs-slider, 
+    .tf-product-media-main, 
+    .tf-product-media-thumbs, 
+    .swiper,
+    .swiper-wrapper,
+    .swiper-slide, 
+    .item, 
+    .item img,
+    .tf-image-zoom {
+        touch-action: pan-y !important;
+        -webkit-user-drag: none;
+        -webkit-touch-callout: default;
+    }
+    .tf-product-media-main .item img,
+    .tf-product-media-main img,
+    .tf-image-zoom,
+    .swiper-slide img {
+        object-fit: contain !important;
+        max-width: 100% !important;
+        height: auto !important;
+        padding: 4px !important;
+        box-sizing: border-box !important;
+        touch-action: pan-y !important;
+    }
+    /* Force the 10-color side panel to always stay as a row (never column) */
+    .all-colors-side-wrap,
+    .all-colors-side-wrap.thumbs-slider-wrap,
+    div.all-colors-side-wrap {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+    }
+    .side-thumbnails-all-colors-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 72px) !important;
+        gap: 6px !important;
+        width: 150px !important;
+        min-width: 150px !important;
+        flex: 0 0 150px !important;
+        order: -1 !important;
+    }
+    .side-thumb-card {
+        width: 72px !important;
+        max-width: 72px !important;
+        box-sizing: border-box !important;
+        border: 1.5px solid #e2e8f0 !important;
+        border-radius: 8px !important;
+        padding: 3px !important;
+        background: #fff !important;
+        cursor: pointer !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        transition: all 0.2s ease !important;
+        pointer-events: auto !important;
+        z-index: 10 !important;
+        position: relative !important;
+        user-select: none !important;
+    }
+    .side-thumb-card.active {
+        border-color: #FF9900 !important;
+        box-shadow: 0 0 0 2px rgba(255,153,0,0.35) !important;
+        background: #fffdf5 !important;
+    }
+    .side-thumb-card:hover {
+        border-color: #94a3b8 !important;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.08) !important;
+    }
+    .side-thumb-img-wrap {
+        width: 62px !important;
+        height: 62px !important;
+        border-radius: 5px !important;
+        overflow: hidden !important;
+        background: #f8fafc !important;
+    }
+    .side-thumb-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+    }
+    .side-thumb-label {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 2px !important;
+        margin-top: 3px !important;
+        font-size: 9px !important;
+        font-weight: 700 !important;
+        color: #1e293b !important;
+        max-width: 66px !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
+        white-space: nowrap !important;
+        line-height: 1.2 !important;
+    }
+    .side-thumb-dot {
+        width: 6px !important;
+        height: 6px !important;
+        border-radius: 50% !important;
+        flex-shrink: 0 !important;
+    }
+    .tf-product-media-main.swiper {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: calc(100% - 162px) !important;
+    }
+    .side-thumbnails-all-colors-grid {
+        pointer-events: auto !important;
+        z-index: 20 !important;
+        position: relative !important;
+    }
+    @media (max-width: 991px) {
+        .tf-image-zoom,
+        .item img,
+        .swiper-slide {
+            pointer-events: auto !important;
+            touch-action: pan-y !important;
+        }
+        .zoomContainer,
+        .drift-zoom-pane,
+        .drift-bounding-box {
+            display: none !important;
+            pointer-events: none !important;
+        }
+        .all-colors-side-wrap,
+        .all-colors-side-wrap.thumbs-slider-wrap {
+            flex-direction: column-reverse !important;
+        }
+        .side-thumbnails-all-colors-grid {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            width: 100% !important;
+            min-width: 0 !important;
+            flex: 0 0 auto !important;
+            padding-bottom: 6px !important;
+            gap: 6px !important;
+        }
+        .side-thumb-card {
+            flex: 0 0 70px !important;
+            width: 70px !important;
+        }
+        .tf-product-media-main.swiper {
+            width: 100% !important;
+        }
+    }
+
+    .color-swatch-opt {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 2px solid #e5e7eb;
+        cursor: pointer;
+        display: inline-block;
+        transition: all 0.2s ease;
+    }
+    .color-swatch-opt.active, .color-swatch-opt:hover {
+        border-color: #000;
+        transform: scale(1.15);
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #FF9900;
+    }
+    .qty-pack-btn {
+        border: 1.5px solid #e5e7eb;
+        background: #fff;
+        color: #374151;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 13px;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .qty-pack-btn.active, .qty-pack-btn:hover {
+        background: #111827;
+        color: #fff;
+        border-color: #111827;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    /* Product Meta Badges */
+    .product-meta-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 10px;
+        margin-bottom: 16px;
+    }
+    .product-meta-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #f3f4f6;
+        color: #4b5563;
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        border: 1px solid #e5e7eb;
+    }
+    .product-meta-badge strong {
+        color: #111827;
+    }
+    .badge-in-stock {
+        background: #ecfdf5;
+        color: #059669;
+        border: 1px solid #a7f3d0;
+    }
+    .badge-out-stock {
+        background: #fffbeb;
+        color: #d97706;
+        border: 1px solid #fde68a;
+    }
+
+    /* Modern Attribute & Option Pill Selectors */
+    .attribute-group-wrap {
+        margin-bottom: 22px;
+    }
+    .attribute-group-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .attribute-group-title .selected-val {
+        font-weight: 600;
+        color: #2563eb;
+    }
+
+    /* Size Chips / Pills Grid */
+    .size-chips-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        margin-top: 6px !important;
+        margin-bottom: 20px !important;
+    }
+    .size-chip-item {
+        position: relative !important;
+        display: inline-flex !important;
+        margin: 0 !important;
+        flex: 0 0 auto !important;
+    }
+    .size-chip-item input[type="radio"] {
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        pointer-events: none !important;
+    }
+    .size-chip-item label, .product-opt-size-pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 9px 18px !important;
+        background: #ffffff !important;
+        border: 1.5px solid #d1d5db !important;
+        border-radius: 8px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #1f2937 !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease-in-out !important;
+        user-select: none !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 42px !important;
+        line-height: 1.3 !important;
+        white-space: nowrap !important;
+    }
+    .size-chip-item label:hover, .product-opt-size-pill:hover {
+        border-color: #4b5563 !important;
+        background: #f9fafb !important;
+        transform: translateY(-1px) !important;
+    }
+    .size-chip-item input[type="radio"]:checked + label,
+    .size-chip-item label.active,
+    .product-opt-size-pill.active {
+        background: #111827 !important;
+        color: #ffffff !important;
+        border-color: #111827 !important;
+        box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2) !important;
+    }
+
+    /* Color Chips / Swatches */
+    .color-chips-grid {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+        margin-top: 6px !important;
+        margin-bottom: 20px !important;
+        align-items: center !important;
+    }
+    .color-chip-item {
+        position: relative !important;
+        display: inline-flex !important;
+        margin: 0 !important;
+        flex: 0 0 auto !important;
+    }
+    .color-chip-item input[type="radio"] {
+        position: absolute !important;
+        opacity: 0 !important;
+        width: 0 !important;
+        height: 0 !important;
+        pointer-events: none !important;
+    }
+    .color-chip-item label, .product-opt-color-pill {
+        display: inline-flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        padding: 8px 16px !important;
+        background: #ffffff !important;
+        border: 1.5px solid #d1d5db !important;
+        border-radius: 8px !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        color: #1f2937 !important;
+        cursor: pointer !important;
+        transition: all 0.2s ease-in-out !important;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+        width: auto !important;
+        height: auto !important;
+        min-height: 40px !important;
+        line-height: 1.3 !important;
+        user-select: none !important;
+        white-space: nowrap !important;
+    }
+    .color-chip-item .color-dot {
+        width: 15px !important;
+        height: 15px !important;
+        border-radius: 50% !important;
+        display: inline-block !important;
+        border: 1px solid rgba(0,0,0,0.2) !important;
+        flex-shrink: 0 !important;
+    }
+    .color-chip-item label:hover, .product-opt-color-pill:hover {
+        border-color: #4b5563 !important;
+        background: #f9fafb !important;
+        transform: translateY(-1px) !important;
+    }
+    .color-chip-item input[type="radio"]:checked + label,
+    .color-chip-item label.active,
+    .product-opt-color-pill.active {
+        background: #111827 !important;
+        color: #ffffff !important;
+        border-color: #111827 !important;
+        box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2) !important;
+    }
+    .color-chip-item input[type="radio"]:checked + label .color-dot,
+    .product-opt-color-pill.active .color-dot {
+        border-color: #ffffff !important;
+    }
+
+    /* Action Buttons Bar */
+    .product-action-bar {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+    .product-cart-row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    .product-cart-row .btn-add-cart {
+        flex: 1;
+        height: 50px;
+        background: #111827;
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 15px;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(17, 24, 39, 0.15);
+    }
+    .product-cart-row .btn-add-cart:hover {
+        background: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(17, 24, 39, 0.25);
+    }
+    .btn-buy-now {
+        width: 100%;
+        height: 50px;
+        background: linear-gradient(135deg, #FFB800 0%, #FFA000 100%);
+        color: #111827;
+        font-weight: 800;
+        font-size: 15px;
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 14px rgba(255, 160, 0, 0.25);
+    }
+    .btn-buy-now:hover {
+        background: linear-gradient(135deg, #FFA000 0%, #FF8F00 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(255, 160, 0, 0.35);
+    }
+    .product-icon-btn {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        border: 1.5px solid #e5e7eb;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #374151;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+    .product-icon-btn:hover {
+        background: #f9fafb;
+        border-color: #d1d5db;
+        color: #111827;
+        transform: translateY(-2px);
+    }
+</style>
 @endpush
 
 @section('content')
@@ -83,140 +542,225 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
     <section>
         <div class="container">
             <div class="row gy-4 mb-30px justify-content-center">
-                <div class="col-lg-6 col-md-9 wow animate__fadeInUp" data-wow-delay=".2s">
+                <div class="col-lg-7 col-md-12 wow animate__fadeInUp" data-wow-delay=".2s">
                     <div class="tf-product-media-wrap">
-                        <div class="thumbs-slider thumbs-slider-wrap">
-                            <div dir="ltr" class="swiper tf-product-media-thumbs" data-direction="vertical">
-                                <div class="swiper-wrapper">
-                                    @php
-                                        $decoded = json_decode($product->thumbnail, true);
-                                        $thumbnails = (!empty($decoded) && is_array($decoded)) 
-                                            ? $decoded 
-                                            : ['uploads/system/placeholder.png'];
-                                        $image_attrs = json_decode($product->image_attributes, true) ?? [];
-                                    @endphp
-                                    @foreach($thumbnails as $thumb)
-                                        @php
-                                            $mapped_val = $image_attrs[$thumb] ?? '';
-                                            $mapped_ids = '';
-                                            if (is_array($mapped_val)) {
-                                                $mapped_ids = implode(',', array_filter($mapped_val));
-                                            } else {
-                                                $mapped_ids = $mapped_val;
-                                            }
-                                        @endphp
-                                        <div class="swiper-slide" data-mapped-attribute-id="{{ $mapped_ids }}">
-                                            <div class="item">
-                                                <img src="{{ get_image($thumb) }}" alt="product-thumb">
-                                            </div> 
-                                        </div>
-                                    @endforeach
-                                </div>
+                        @php
+                            $decoded = json_decode($product->thumbnail, true);
+                            $thumbnails = (!empty($decoded) && is_array($decoded)) 
+                                ? $decoded 
+                                : ['uploads/system/placeholder.png'];
+                            $image_attrs = json_decode($product->image_attributes, true) ?? [];
+
+                            $polo_color_meta = [
+                                'uploads/product/thumbnail/printmine_real_black.webp' => ['name' => 'Black', 'hex' => '#111827', 'attr_id' => 11],
+                                'uploads/product/thumbnail/printmine_real_navy.webp' => ['name' => 'Navy', 'hex' => '#0F172A', 'attr_id' => 13],
+                                'uploads/product/thumbnail/printmine_real_royal_blue.webp' => ['name' => 'Royal Blue', 'hex' => '#1D4ED8', 'attr_id' => 83],
+                                'uploads/product/thumbnail/printmine_real_sky_blue.webp' => ['name' => 'Sky Blue', 'hex' => '#38BDF8', 'attr_id' => 31],
+                                'uploads/product/thumbnail/printmine_real_red.webp' => ['name' => 'Red', 'hex' => '#DC2626', 'attr_id' => 43],
+                                'uploads/product/thumbnail/printmine_real_maroon.webp' => ['name' => 'Maroon', 'hex' => '#7F1D1D', 'attr_id' => 45],
+                                'uploads/product/thumbnail/printmine_real_yellow.webp' => ['name' => 'Yellow', 'hex' => '#EAB308', 'attr_id' => 84],
+                                'uploads/product/thumbnail/printmine_real_orange.webp' => ['name' => 'Orange', 'hex' => '#EA580C', 'attr_id' => 85],
+                                'uploads/product/thumbnail/printmine_real_white.webp' => ['name' => 'White', 'hex' => '#FFFFFF', 'attr_id' => 12],
+                                'uploads/product/thumbnail/printmine_real_gray.webp' => ['name' => 'Charcoal Melange', 'hex' => '#4B5563', 'attr_id' => 30],
+                                
+                                // Plain Catalog Products Mappings
+                                'uploads/product/thumbnail/plain_tshirt_unisex.webp' => ['name' => 'Off-White', 'hex' => '#F5F5F0', 'attr_id' => 12],
+                                'uploads/product/thumbnail/plain_tshirt_kids.webp' => ['name' => 'Sky Blue', 'hex' => '#38BDF8', 'attr_id' => 31],
+                                'uploads/product/thumbnail/plain_polo_unisex.webp' => ['name' => 'Navy', 'hex' => '#0F172A', 'attr_id' => 13],
+                                'uploads/product/thumbnail/plain_polo_kids.webp' => ['name' => 'Yellow', 'hex' => '#F59E0B', 'attr_id' => 84],
+                                'uploads/product/thumbnail/plain_hoodie_unisex.webp' => ['name' => 'Charcoal', 'hex' => '#4B5563', 'attr_id' => 30],
+                                'uploads/product/thumbnail/plain_hoodie_kids.webp' => ['name' => 'Lavender', 'hex' => '#D8B4FE', 'attr_id' => 999],
+                                'uploads/product/thumbnail/family_tshirt_set.webp' => ['name' => 'Beige & White', 'hex' => '#E5D9C4', 'attr_id' => 888],
+                            ];
+                        @endphp
+                        <div class="d-flex flex-column align-items-center w-100">
+                            <!-- Main Large Product Image -->
+                            <div class="main-product-image-container text-center border p-3 rounded bg-white shadow-sm mb-3 w-100" style="position: relative; overflow: hidden; height: 500px; display: flex; align-items: center; justify-content: center;">
+                                <img id="mainProductImage" src="{{ get_image($thumbnails[0]) }}?v=5" data-zoom="{{ get_image($thumbnails[0]) }}?v=5" alt="{{ $product->title }}" class="img-fluid tf-image-zoom" style="max-height: 480px; object-fit: contain; transition: opacity 0.2s ease;">
                             </div>
-                            <div dir="ltr" class="swiper tf-product-media-main fsh-magnific-popup">
-                                <div class="swiper-wrapper" >
+                            
+                            @php
+                                $first_thumb = $thumbnails[0] ?? '';
+                                $first_meta = $polo_color_meta[$first_thumb] ?? null;
+                                $first_color_name = $first_meta['name'] ?? 'Black';
+                            @endphp
+                            <!-- Color Name Label -->
+                            <div class="mb-2 fs-14px fw-bold text-dark text-center">
+                                Color: <span id="selectedGalleryColorName" class="text-secondary fw-semibold">{{ $first_color_name }}</span>
+                            </div>
+
+                            <!-- Small Color Swatch Dots -->
+                            <div class="d-flex align-items-center justify-content-center gap-2 mb-4 flex-wrap" id="gallerySwatches">
+                                @foreach($thumbnails as $idx => $thumb)
                                     @php
-                                        $decoded = json_decode($product->thumbnail, true);
-                                        $thumbnails = (!empty($decoded) && is_array($decoded)) 
-                                            ? $decoded 
-                                            : ['uploads/system/placeholder.png'];
-                                        $image_attrs = json_decode($product->image_attributes, true) ?? [];
-                                    @endphp
-                                    @foreach($thumbnails as $thumb)
-                                        @php
-                                            $mapped_val = $image_attrs[$thumb] ?? '';
-                                            $mapped_ids = '';
+                                        $meta = $polo_color_meta[$thumb] ?? null;
+                                        $cName = $meta['name'] ?? null;
+                                        $cHex = $meta['hex'] ?? null;
+                                        $cAttrId = $meta['attr_id'] ?? '';
+                                        
+                                        // Auto-mapping colors for non-polo catalog products
+                                        if (!$cName) {
+                                            $mapped_val = $image_attrs[$thumb] ?? null;
+                                            $mapped_color_id = null;
                                             if (is_array($mapped_val)) {
-                                                $mapped_ids = implode(',', array_filter($mapped_val));
-                                            } else {
-                                                $mapped_ids = $mapped_val;
+                                                $mapped_color_id = $mapped_val[3] ?? ($mapped_val['3'] ?? null);
                                             }
-                                        @endphp
-                                        <div class="swiper-slide ec-product-banner-slide" data-mapped-attribute-id="{{ $mapped_ids }}">
-                                            <a href="javascript:;"  class="item">
-                                                <img class="tf-image-zoom" data-zoom="{{ get_image($thumb) }}" data-src="{{ get_image($thumb) }}" src="{{ get_image($thumb) }}" alt="">
-                                            </a>
-                                        </div>
-                                    @endforeach
-                                </div>
+                                            
+                                            // Fallback 1: Use first color mapped in the product's image attributes
+                                            if (!$mapped_color_id) {
+                                                foreach ($image_attrs as $t => $attrs) {
+                                                    if (is_array($attrs)) {
+                                                        $cid = $attrs[3] ?? ($attrs['3'] ?? null);
+                                                        if ($cid) {
+                                                            $mapped_color_id = $cid;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            
+                                            // Fallback 2: Default to Black (ID 11)
+                                            if (!$mapped_color_id) {
+                                                $mapped_color_id = 11;
+                                            }
+                                            
+                                            $color_attr = \App\Models\Attribute::find($mapped_color_id);
+                                            if ($color_attr) {
+                                                $cName = $color_attr->name;
+                                                $cHex = $color_attr->input_value ?: '#374151';
+                                                $cAttrId = $color_attr->id;
+                                            } else {
+                                                $cName = 'Black';
+                                                $cHex = '#111827';
+                                                $cAttrId = 11;
+                                            }
+                                        }
+
+                                        $mapped_val = $image_attrs[$thumb] ?? '';
+                                        $mapped_ids = '';
+                                        if (is_array($mapped_val)) {
+                                            $mapped_ids = implode(',', array_filter($mapped_val));
+                                        } else {
+                                            $mapped_ids = $mapped_val ?: $cAttrId;
+                                        }
+                                    @endphp
+                                    <button type="button" 
+                                            class="gallery-swatch-dot {{ $loop->first ? 'active' : '' }}" 
+                                            style="width: 28px; height: 28px; border-radius: 50%; background-color: {{ $cHex }}; border: 2px solid {{ $cHex == '#FFFFFF' ? '#cbd5e1' : '#e2e8f0' }}; cursor: pointer; transition: all 0.2s ease; position: relative;"
+                                            data-image-src="{{ get_image($thumb) }}"
+                                            data-color-name="{{ $cName }}"
+                                            data-mapped-ids="{{ $mapped_ids }}"
+                                            data-index="{{ $idx }}"
+                                            data-attr-id="{{ $cAttrId }}"
+                                            title="{{ $cName }}"
+                                            onclick="changeMainProductImage('{{ get_image($thumb) }}', '{{ $cName }}', this, {{ $idx }}, '{{ $cAttrId }}')">
+                                    </button>
+                                @endforeach
                             </div>
                         </div>
+                        @if($product->id == 582 || $product->category_id == 58 || $product->category_id == 57 || str_contains(strtolower($product->title), 'corporate'))
+                            <div class="mt-3 text-center p-2 rounded-3 bg-light border fw-semibold fs-14px text-dark shadow-sm d-flex align-items-center justify-content-center gap-2">
+                                <span>Available Sizes —</span>
+                                <span class="badge bg-secondary">S</span>
+                                <span class="badge bg-secondary">M</span>
+                                <span class="badge bg-secondary">L</span>
+                                <span class="badge bg-secondary">XL</span>
+                                <span class="badge bg-secondary">XXL</span>
+                            </div>
+                        @endif
                     </div>
                 </div>
-                <div class="col-lg-6 wow animate__fadeInUp" data-wow-delay=".3s">
+                <div class="col-lg-5 wow animate__fadeInUp" data-wow-delay=".3s">
                     <div class="w-100 position-relative">
                         <div class="tf-zoom-main"></div>
                         <div class="d-flex align-items-end justify-content-between gap-10px flex-wrap mb-20px">
-                            <div>
-                                <h3 class="al-title-30px mb-3">{{ $product->title }}</h3>
-                                   <div class="d-flex align-items-center gap-1 mb-2">
-                                        <img src="{{ asset('assets/frontend/fashion/images/image-icons/star-yellow-20.svg') }}" alt="">
-                                        <p class="al-title-16px fw-medium">{{ number_format($product->average_rating ?? 0, 1) }}  <span class="fsh-text-gray">({{ $product->reviews->count() }})</span></p>
+                            <div class="w-100">
+                                @if($product->id == 582 || $product->category_id == 58 || $product->category_id == 57 || str_contains(strtolower($product->title), 'corporate'))
+                                    <!-- PrintMine Header and Rating Line -->
+                                    <h3 class="al-title-26px fw-bold text-dark mb-2">{{ $product->title }}</h3>
+                                    <div class="d-flex align-items-center gap-3 flex-wrap mb-3">
+                                        <div class="d-flex align-items-center fs-14px fw-bold" style="color: #FF9900;">
+                                            <span class="me-1">★ ★ ★ ★ ★</span>
+                                            <span class="text-dark me-1">4.3</span>
+                                            <span class="text-muted fw-normal">(872 Reviews)</span>
+                                        </div>
+                                        <div class="fs-14px fw-bold" style="color: #D97706;">
+                                            12,240+ Orders Delivered
+                                        </div>
+                                    </div>
+
+                                    <!-- PrintMine Price Box -->
+                                    <div class="p-3 rounded-3 mb-3" style="background-color: #F4F4F6;">
+                                        <div class="d-flex align-items-center gap-3 mb-1">
+                                            <del class="text-muted fs-18px">₹ 1,622.00</del>
+                                            <span class="fs-26px fw-bold text-dark">₹ 999.00</span>
+                                            <span class="badge px-2 py-1 fs-12px text-uppercase text-white fw-bold" style="background-color: #FF5722; border-radius: 4px;">SAVE 38%</span>
+                                        </div>
+                                        <div class="fs-13px text-muted fw-medium">
+                                            Inclusive of All Taxes
+                                        </div>
+                                    </div>
+                                @else
+                                    <h3 class="al-title-30px mb-2 fw-bold text-dark">{{ $product->title }}</h3>
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <div class="d-flex align-items-center text-warning fs-14px">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        <span class="fw-bold fs-14px text-dark">{{ number_format($product->average_rating ?? 5.0, 1) }}</span>
+                                        <span class="text-muted fs-13px">({{ $product->reviews->count() > 0 ? $product->reviews->count() : '0' }})</span>
                                     </div>
                                
-                                @php 
-                                    $vendor = App\Models\Brand::where('id', $product->brand_id)->first();
-                                @endphp
+                                    @php 
+                                        $vendor = App\Models\Brand::where('id', $product->brand_id)->first();
+                                    @endphp
 
-                                <p class="al-subtitle-16px fsh-text-dark mb-1">{{get_phrase('Vendor :')}} {{ $vendor->name ?? ''}}</p>
-                                <p class="al-subtitle-16px fsh-text-dark mb-1">{{get_phrase('SKU :')}} {{ $product->code }}</p>
-                                <p class="al-subtitle-16px fsh-text-dark mb-1"> {{ get_phrase('Availability :') }} {{ availiblty($product->id) }}</p>
+                                    <div class="product-meta-badges">
+                                        @if(!empty($vendor->name))
+                                            <span class="product-meta-badge">
+                                                <i class="fa-solid fa-store text-muted me-1"></i> Vendor: <strong>{{ $vendor->name }}</strong>
+                                            </span>
+                                        @else
+                                            <span class="product-meta-badge">
+                                                <i class="fa-solid fa-store text-muted me-1"></i> Vendor: <strong>Convoc</strong>
+                                            </span>
+                                        @endif
+                                        @if(!empty($product->code))
+                                            <span class="product-meta-badge">
+                                                <i class="fa-solid fa-barcode text-muted me-1"></i> SKU: <strong>{{ $product->code }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
 
-                                <div class="d-flex align-items-center gap-20px mt-3 flex-wrap">
+                                    <div class="d-flex align-items-center gap-3 mt-3 mb-2 flex-wrap">
+                                        @if ($product->is_discounted()->exists())
+                                            @php
+                                                $discount = $product->is_discounted;
 
-                                    {{-- @if ($product->is_discounted)
-                                        @php
-                                            $discount = $product->discount;
-                                        @endphp
-                                        <div class="d-flex align-items-center gap-2">
+                                                if ($discount->discount_type == 'percentage') {
+                                                    $final_price = $product->price - ($product->price * $discount->discount_value / 100);
+                                                    $discount_text = $discount->discount_value . '% OFF';
+                                                } else { // flat
+                                                    $final_price = $product->price - $discount->discount_value;
+                                                    $discount_text = currency($discount->discount_value) . ' FLAT';
+                                                }
+                                            @endphp
+
                                             <div class="d-flex align-items-center gap-2">
-                                                @if ($discount->discount_type == 'percentage')
-                                                    <h5 class="al-title-24px">{{ currency(($product->price / 100) * $discount->discount_value) }}</h5>
-                                                @else
-                                                    <h5 class="al-title-24px">{{ currency($discount->discount_value) }}</h5>
-                                                @endif
-                                                <h6 class="al-title-18px fsh-text-gray fw-medium"><del>{{ currency($product->price) }}</del></h6>
+                                                <h4 class="fs-28px fw-extrabold text-dark mb-0">{{ currency($final_price) }}</h4>
+                                                <h5 class="fs-18px text-muted fw-medium text-decoration-line-through mb-0">
+                                                    {{ currency($product->price) }}
+                                                </h5>
+                                                <span class="badge bg-danger px-2 py-1 fs-12px fw-bold">{{ $discount_text }}</span>
                                             </div>
-                                            <p class="sky-blue-badge-md">{{ $discount->discount_value }}%</p>
-                                        </div>
-                                    @else
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <h5 class="al-title-24px">{{ currency($product->price) }}</h5>
-                                            </div>
-                                        </div>
-                                    @endif --}}
-
-                                    @if ($product->is_discounted()->exists())
-                                        @php
-                                            $discount = $product->is_discounted;
-
-                                            if ($discount->discount_type == 'percentage') {
-                                                $final_price = $product->price - ($product->price * $discount->discount_value / 100);
-                                                $discount_text = $discount->discount_value . '% OFF';
-                                            } else { // flat
-                                                $final_price = $product->price - $discount->discount_value;
-                                                $discount_text = currency($discount->discount_value) . ' FLAT';
-                                            }
-                                        @endphp
-
-                                        <div class="d-flex align-items-center gap-2">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <h5 class="al-title-24px">{{ currency($final_price) }}</h5>
-                                                <h6 class="al-title-18px fsh-text-gray fw-medium">
-                                                    <del>{{ currency($product->price) }}</del>
-                                                </h6>
-                                            </div>
-                                            <p class="sky-blue-badge-md">{{ $discount_text }}</p>
-                                        </div>
-                                    @else
-                                        <h5 class="al-title-24px">{{ currency($product->price) }}</h5>
-                                    @endif
-
-
-
-                                    
-                                </div>
+                                        @else
+                                            <h4 class="fs-28px fw-extrabold text-dark mb-0">{{ currency($product->price) }}</h4>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         {{-- <div class="mb-30px">
@@ -228,8 +772,180 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
                                 <div class="progress-bar" data-progress="{{ getSoldProgress($product->id) }}"></div>
                             </div>
                         </div> --}}
-                        <form class="ajaxForm eProductForm" id="productFormMain" action="{{ route('customer.cart_item.store', ['product_id' => $product->id]) }}" method="post">
+                        <form class="ajaxForm eProductForm" id="productFormMain" action="{{ route('customer.cart_item.store', ['product_id' => $product->id ?? 582]) }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            @if($product->id == 582 || $product->category_id == 58 || $product->category_id == 57 || str_contains(strtolower($product->title), 'corporate'))
+                                <!-- PrintMine Exact Match Custom Corporate Polo Options -->
+                                <div class="corporate-polo-options-wrap mb-30px">
+
+                                    <!-- Upload Your Logo Button -->
+                                    <div class="mb-3">
+                                        <button type="button" class="btn w-100 py-3 fw-bold text-white fs-16px shadow-sm radius-8 d-flex align-items-center justify-content-center gap-2" onclick="document.getElementById('poloLogoInput').click()" style="background: linear-gradient(135deg, #FF9900 0%, #FFA000 100%); border: none;">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M7 16a4 4 0 01-.88-7.9 5 5 0 019.76-1.74A4.5 4.5 0 0118 15h-2M12 12v9m0-9l-3 3m3-3l3 3" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span>Upload Your Logo</span>
+                                        </button>
+                                        <input type="file" name="logo_file" id="poloLogoInput" accept="image/*" class="d-none" onchange="previewPoloLogo(this)">
+                                    </div>
+
+                                    <div id="poloLogoPreviewBox" class="mb-3 p-3 bg-light rounded-3 d-none align-items-center justify-content-between border border-warning shadow-sm">
+                                        <div class="d-flex align-items-center gap-2">
+                                            <div class="d-flex align-items-center justify-content-center bg-white p-2 rounded border" style="min-width: 42px; height: 42px;">
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="#FF9900" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M10 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H12L10 4Z"/>
+                                                </svg>
+                                            </div>
+                                            <img id="poloLogoImg" src="" style="max-height: 40px; max-width: 55px; object-fit: contain;" class="rounded border bg-white p-1">
+                                            <div>
+                                                <div id="poloLogoName" class="fw-bold fs-13px text-dark text-truncate max-w-200px">logo.png</div>
+                                                <div class="fs-11px text-success fw-semibold"><i class="fa-solid fa-folder-closed text-warning me-1"></i> Logo File Uploaded</div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-outline-danger border-0 rounded-circle" onclick="removePoloLogo()">&times;</button>
+                                    </div>
+
+                                    <!-- Reassurance Notice Box -->
+                                    <div class="mb-4 p-3 rounded-3 border-0 fs-13px" style="background-color: #FFF9E6; color: #3A2E00;">
+                                        <div class="mb-2 d-flex align-items-start gap-2">
+                                            <span class="fs-16px">📜</span>
+                                            <span><strong>We'll Send Design for Approval</strong> After Order is Placed/Confirmed</span>
+                                        </div>
+                                        <div class="d-flex align-items-start gap-2">
+                                            <span class="fs-16px">💬</span>
+                                            <span><strong>Don't have a logo? No problem!</strong> Place your order with text only — our team will create and share a custom design for you.</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Any Text or Customization Needed (Optional) -->
+                                    <div class="mb-4">
+                                        <label for="polo_custom_text" class="fw-bold fs-14px text-dark mb-2 d-block">
+                                            Any Text or Customization Needed (Optional)
+                                        </label>
+                                        <div class="position-relative">
+                                            <input type="text" name="customization_text" id="polo_custom_text" class="form-control p-3 pe-5 border radius-8" placeholder="Write here">
+                                            <span class="position-absolute end-0 top-50 translate-middle-y me-3 text-muted" title="Optional customization instructions">
+                                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4m0-4h.01"/></svg>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <!-- QUANTITY WISE BULK PRICING CARD -->
+                                    <div class="mb-4 p-3 rounded-3 border bg-white shadow-sm" style="border-color: #E5E7EB !important;">
+                                        <div class="fw-bold fs-14px text-dark mb-2 d-flex align-items-center justify-content-between">
+                                            <span>QUANTITY WISE BULK PRICING:</span>
+                                            <span id="tierSavingsBadge" class="badge bg-success fs-12px">Save up to 50%</span>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-sm text-center mb-2 fs-12px align-middle">
+                                                <thead class="table-light">
+                                                    <tr>
+                                                        <th>2-4 Pcs</th>
+                                                        <th>5-9 Pcs</th>
+                                                        <th>10-19 Pcs</th>
+                                                        <th>20-49 Pcs</th>
+                                                        <th>50-99 Pcs</th>
+                                                        <th>100+ Pcs</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="fw-bold text-dark">
+                                                        <td id="tier-col-2" class="table-warning border-warning">₹999/pc</td>
+                                                        <td id="tier-col-5">₹899/pc</td>
+                                                        <td id="tier-col-10">₹799/pc</td>
+                                                        <td id="tier-col-20">₹699/pc</td>
+                                                        <td id="tier-col-50">₹599/pc</td>
+                                                        <td id="tier-col-100">₹499/pc</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between border-top pt-2 mt-1">
+                                            <span class="fs-13px text-muted">Estimated Total:</span>
+                                            <div>
+                                                <span id="poloTotalPriceDisplay" class="fs-18px fw-bold text-dark">₹ 1,998.00</span>
+                                                <span id="poloUnitPriceDisplay" class="fs-13px text-primary fw-semibold ms-1">(₹999/pc)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- QUANTITY PACKS Selection -->
+                                    <div class="mb-4">
+                                        <label class="fw-bold fs-14px text-dark mb-2 d-block">
+                                            QUANTITY: <span id="pmSelectedQtyLabel" class="text-uppercase text-primary fw-bold ms-1">2 PCS SAMPLE</span>
+                                        </label>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            @foreach(['2 Pcs Sample' => 2, '5 Pcs' => 5, '10 Pcs' => 10, '15 Pcs' => 15, '20 Pcs' => 20, '30 Pcs' => 30, '50 Pcs' => 50, '75 Pcs' => 75, '100 Pcs' => 100] as $label => $qty)
+                                                <button type="button" class="btn qty-pack-btn {{ $loop->first ? 'active' : '' }}" onclick="selectQtyPack({{ $qty }}, '{{ strtoupper($label) }}', this)">
+                                                    {{ $label }}
+                                                </button>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <!-- Selection Progress Bar Card -->
+                                    <div class="mb-4 p-3 rounded-3 border" style="background-color: #FFF3E0; border-color: #FFE0B2 !important;">
+                                        <div class="d-flex align-items-center justify-content-between mb-2 fs-14px fw-bold text-dark">
+                                            <div>Select <span id="pmTargetQty">2</span> pieces.</div>
+                                            <div>Selected: <span id="pmCurrentQty">0</span>/<span id="pmTargetQtyMax">2</span></div>
+                                        </div>
+                                        <div class="progress" style="height: 8px; background-color: #FFE0B2;">
+                                            <div id="pmProgressBar" class="progress-bar" role="progressbar" style="width: 0%; background-color: #F57C00;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Available Sizes Counter Breakdown -->
+                                    <div class="mb-4">
+                                        <label class="fw-bold fs-14px text-dark mb-2 d-block">
+                                            AVAILABLE SIZES:
+                                        </label>
+                                        <div class="d-flex flex-column gap-2">
+                                            @foreach(['S (36)', 'M (38)', 'L (40)', 'XL (42)', 'XXL (44)'] as $size)
+                                                <div class="d-flex align-items-center justify-content-between border rounded-3 p-2 px-3 bg-white shadow-sm">
+                                                    <span class="fw-bold fs-14px text-dark">{{ $size }}</span>
+                                                    <div class="d-flex align-items-center">
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary border-1 px-3 py-1 fw-bold fs-16px radius-6" onclick="updateSizeCount(this, -1)">-</button>
+                                                        <span class="mx-3 fw-bold size-qty-val fs-15px text-dark">0</span>
+                                                        <button type="button" class="btn btn-sm btn-outline-secondary border-1 px-3 py-1 fw-bold fs-16px radius-6" onclick="updateSizeCount(this, 1)">+</button>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    <!-- Colour Changing Options (All 10 Colors) -->
+                                    <div class="mb-4">
+                                        <label class="fw-bold fs-14px text-dark mb-2 d-block">
+                                            SELECT COLOR: <span id="poloSelectedColorLabel" class="fw-bold text-primary ms-1">Black</span>
+                                        </label>
+                                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                                            @php
+                                                $allPoloColors = [
+                                                    ['name' => 'Black', 'hex' => '#111827', 'index' => 0, 'attr_id' => 11],
+                                                    ['name' => 'Navy', 'hex' => '#0F172A', 'index' => 1, 'attr_id' => 13],
+                                                    ['name' => 'Royal Blue', 'hex' => '#1D4ED8', 'index' => 2, 'attr_id' => 83],
+                                                    ['name' => 'Sky Blue', 'hex' => '#38BDF8', 'index' => 3, 'attr_id' => 31],
+                                                    ['name' => 'Red', 'hex' => '#DC2626', 'index' => 4, 'attr_id' => 43],
+                                                    ['name' => 'Maroon', 'hex' => '#7F1D1D', 'index' => 5, 'attr_id' => 45],
+                                                    ['name' => 'Yellow', 'hex' => '#EAB308', 'index' => 6, 'attr_id' => 84],
+                                                    ['name' => 'Orange', 'hex' => '#EA580C', 'index' => 7, 'attr_id' => 85],
+                                                    ['name' => 'White', 'hex' => '#FFFFFF', 'index' => 8, 'attr_id' => 12],
+                                                    ['name' => 'Charcoal Melange', 'hex' => '#4B5563', 'index' => 9, 'attr_id' => 30],
+                                                ];
+                                            @endphp
+                                            @foreach($allPoloColors as $pc)
+                                                <span class="color-swatch-opt {{ $loop->first ? 'active' : '' }}" 
+                                                      style="background-color: {{ $pc['hex'] }}; border: {{ $pc['hex'] == '#FFFFFF' ? '1.5px solid #94a3b8' : 'none' }};" 
+                                                      title="{{ $pc['name'] }}" 
+                                                      data-color-name="{{ $pc['name'] }}"
+                                                      data-index="{{ $pc['index'] }}"
+                                                      data-attr-id="{{ $pc['attr_id'] }}"
+                                                      onclick="selectPoloColor({{ $pc['index'] }}, '{{ $pc['name'] }}', this, {{ $pc['attr_id'] }})"></span>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                             @php
                                 $merged_attr_types = $product->product_merged_attributes();
                             @endphp
@@ -263,92 +979,107 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
                                         @endforeach
                                     </div>
                                 @elseif ($input_type == 'color')
-                                    <div class="mb-20px">
-                                        <div class="d-flex gap-30px flex-wrap align-items-start">
-                                            <div>
-                                                <h6 class="al-title-16px fw-medium mb-3">
-                                                    <span>{{ $type_name }} :</span> 
-                                                    <span id="selected-color-name">{{ $attr_type['attributes'][0]['name'] ?? '' }}</span>
-                                                </h6>
-                                                <div class="d-flex align-items-center gap-1 flex-wrap">
-                                                    @foreach ($attr_type['attributes'] as $key => $attribute)
-                                                        <div class="position-relative">
-                                                            <label class="color-checkbox3-btn" 
-                                                                   for="{{ $type_slug . $attribute['slug'] }}" 
-                                                                   style="--checkbox-color: {{ $attribute['input_value'] ?? '#000' }}"></label>
-                                                            <input type="radio" class="color-checkbox3-input attribute-selector-radio" 
-                                                                   name="{{ $type_slug }}[]" 
-                                                                   id="{{ $type_slug . $attribute['slug'] }}" 
-                                                                   value="{{ $attribute['slug'] }}" 
-                                                                   autocomplete="off" 
-                                                                   {{ $key == 0 ? 'checked' : '' }} 
-                                                                   data-color-name="{{ $attribute['name'] }}"
-                                                                   data-attribute-id="{{ $attribute['id'] }}">
-                                                        </div>
-                                                    @endforeach
+                                    <div class="attribute-group-wrap">
+                                        <label class="attribute-group-title">
+                                            <span>{{ $type_name }}:</span> 
+                                            <span class="selected-val" id="selected-color-name-{{ $attr_type_id }}">{{ $attr_type['attributes'][0]['name'] ?? '' }}</span>
+                                        </label>
+                                        <div class="color-chips-grid">
+                                            @foreach ($attr_type['attributes'] as $key => $attribute)
+                                                @php
+                                                    $color_name = trim($attribute['name']);
+                                                    $color_map = [
+                                                        'black' => '#000000',
+                                                        'white' => '#FFFFFF',
+                                                        'sky blue' => '#38BDF8',
+                                                        'blue' => '#2563EB',
+                                                        'navy' => '#0F172A',
+                                                        'navy blue' => '#0A192F',
+                                                        'red' => '#DC2626',
+                                                        'gray' => '#6B7280',
+                                                        'grey' => '#6B7280',
+                                                        'green' => '#10B981',
+                                                        'yellow' => '#F59E0B',
+                                                        'pink' => '#EC4899',
+                                                        'maroon' => '#831843',
+                                                        'orange' => '#EA580C',
+                                                        'purple' => '#9333EA',
+                                                    ];
+                                                    $color_hex = $attribute['input_value'] ?? ($color_map[strtolower($color_name)] ?? '#374151');
+                                                    $attr_input_id = 'color_attr_' . $attr_type_id . '_' . $attribute['id'];
+                                                @endphp
+                                                <div class="color-chip-item">
+                                                    <input type="radio" class="attribute-selector-radio" 
+                                                           name="{{ $type_slug }}[]" 
+                                                           id="{{ $attr_input_id }}" 
+                                                           value="{{ $attribute['slug'] }}" 
+                                                           autocomplete="off" 
+                                                           {{ $key == 0 ? 'checked' : '' }} 
+                                                           data-color-name="{{ $attribute['name'] }}"
+                                                           data-target-label="selected-color-name-{{ $attr_type_id }}"
+                                                           data-attribute-id="{{ $attribute['id'] }}">
+                                                    <label for="{{ $attr_input_id }}" class="product-opt-color-pill {{ $key == 0 ? 'active' : '' }}">
+                                                        <span class="color-dot" style="background-color: {{ $color_hex }};"></span>
+                                                        <span>{{ $attribute['name'] }}</span>
+                                                    </label>
                                                 </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 @else
-                                    <div class="mb-30px">
-                                        <h5 class="al-title-16px fw-medium mb-3">{{ $type_name }}</h5>
-                                        <div class="d-flex align-items-center gap-3 flex-wrap justify-content-between">
-                                            <div class="d-flex align-items-center gap-12px flex-wrap">
-                                                @foreach ($attr_type['attributes'] as $key => $attribute)
-                                                    <div class="position-relative">
-                                                        <label class="size-checkbox2-btn" for="{{ $type_slug . $attribute['slug'] }}">{{ $attribute['name'] }}</label>
-                                                        <input type="radio" class="size-checkbox2-input attribute-selector-radio" name="{{ $type_slug }}[]" id="{{ $type_slug . $attribute['slug'] }}" autocomplete="off" value="{{ $attribute['slug'] }}" {{ $key == 0 ? 'checked' : '' }} data-attribute-id="{{ $attribute['id'] }}">
-                                                    </div>
-                                                @endforeach
-                                            </div>
+                                    <div class="attribute-group-wrap">
+                                        <label class="attribute-group-title">
+                                            <span>{{ $type_name }}:</span>
+                                        </label>
+                                        <div class="size-chips-grid">
+                                            @foreach ($attr_type['attributes'] as $key => $attribute)
+                                                @php
+                                                    $attr_input_id = 'size_attr_' . $attr_type_id . '_' . $attribute['id'];
+                                                @endphp
+                                                <div class="size-chip-item">
+                                                    <input type="radio" class="attribute-selector-radio" 
+                                                           name="{{ $type_slug }}[]" 
+                                                           id="{{ $attr_input_id }}" 
+                                                           autocomplete="off" 
+                                                           value="{{ $attribute['slug'] }}" 
+                                                           {{ $key == 0 ? 'checked' : '' }} 
+                                                           data-attribute-id="{{ $attribute['id'] }}">
+                                                    <label class="product-opt-size-pill {{ $key == 0 ? 'active' : '' }}" for="{{ $attr_input_id }}">
+                                                        {{ $attribute['name'] }}
+                                                    </label>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 @endif
                             @endforeach
 
-                             <div class="dtBtn d-flex mb-12px">
-                                <button type="submit" class="btn fsh-btn-dark order-3 order-md-1"> {{ strtoupper(get_phrase('ADD TO CART')) }}</button>
-                                 <div class="d-flex dtToolBtn align-items-center gap-6px order-1 order-md-2 mb-1 mb-md-0">
+                            <div class="product-action-bar">
+                                <div class="product-cart-row">
+                                    <button type="submit" class="btn btn-add-cart">
+                                        <i class="fa-solid fa-cart-shopping me-1"></i> {{ strtoupper(get_phrase('ADD TO CART')) }}
+                                    </button>
                                     <a href="javascript:;" 
-                                            class="circle-iconbox-42px {{ wishlist_class($product->id) }}" 
-                                            onclick="toggleWishlist({{ $product->id }}, this)" data-bs-toggle="tooltip" data-bs-title="Wishlist" data-bs-placement="top">
-                                            <span class="d-flex align-items-center justify-content-center h-100 w-100 rounded-circle" >
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                                    <path d="M10.0008 17.5059C9.75965 17.5059 9.52632 17.4748 9.33187 17.4048C6.36076 16.3859 1.63965 12.7692 1.63965 7.42586C1.63965 4.70364 3.84076 2.49475 6.54743 2.49475C7.86187 2.49475 9.09076 3.00808 10.0008 3.92586C10.9108 3.00808 12.1396 2.49475 13.4541 2.49475C16.1608 2.49475 18.3619 4.71142 18.3619 7.42586C18.3619 12.777 13.6408 16.3859 10.6696 17.4048C10.4752 17.4748 10.2419 17.5059 10.0008 17.5059ZM6.54743 3.66142C4.48632 3.66142 2.80632 5.3492 2.80632 7.42586C2.80632 12.7381 7.91632 15.6936 9.71298 16.3081C9.85298 16.3548 10.1563 16.3548 10.2963 16.3081C12.0852 15.6936 17.203 12.7459 17.203 7.42586C17.203 5.3492 15.523 3.66142 13.4619 3.66142C12.2796 3.66142 11.183 4.21364 10.4752 5.17031C10.2574 5.46586 9.75965 5.46586 9.54187 5.17031C8.81854 4.20586 7.72965 3.66142 6.54743 3.66142Z" fill="#0D0E10"/>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                        <a href="javascript:;" class="circle-iconbox-42px" id="shareButton" onclick="openSocialShareModal(window.location.href, '{{ addslashes($product->title) }}')">
-                                            <span class="d-flex align-items-center justify-content-center h-100 w-100 rounded-circle" data-bs-toggle="tooltip" data-bs-title="Share" data-bs-placement="top">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                                    <g clip-path="url(#clip0_664_18329)">
-                                                    <path d="M13.9346 11.2077C12.885 11.2077 11.9454 11.6865 11.3219 12.437L7.26631 10.1344C7.39243 9.77952 7.46175 9.39792 7.46175 9.00024C7.46175 8.60263 7.39243 8.22103 7.26631 7.86613L11.3216 5.56297C11.945 6.31374 12.8847 6.7927 13.9344 6.7927C15.8067 6.7927 17.3299 5.26891 17.3299 3.39583C17.3301 1.52332 15.8068 0 13.9346 0C12.062 0 10.5386 1.52332 10.5386 3.39576C10.5386 3.79344 10.6079 4.17512 10.7341 4.5301L6.67858 6.83334C6.0552 6.08297 5.11566 5.60432 4.06631 5.60432C2.19356 5.60432 0.669922 7.12764 0.669922 9.00016C0.669922 10.8726 2.19356 12.3959 4.06631 12.3959C5.11566 12.3959 6.05512 11.9173 6.6785 11.167L10.7341 13.4697C10.6079 13.8246 10.5386 14.2064 10.5386 14.6042C10.5386 16.4766 12.062 17.9999 13.9345 17.9999C15.8068 17.9999 17.33 16.4765 17.33 14.6042C17.3301 12.7314 15.8068 11.2077 13.9346 11.2077ZM13.9346 1.1883C15.1516 1.1883 16.1418 2.17854 16.1418 3.39576C16.1418 4.6136 15.1516 5.60432 13.9346 5.60432C12.7173 5.60432 11.7269 4.6136 11.7269 3.39576C11.7269 2.17854 12.7173 1.1883 13.9346 1.1883ZM4.06639 11.2077C2.84886 11.2077 1.8583 10.2174 1.8583 9.00024C1.8583 7.78295 2.84886 6.7927 4.06639 6.7927C5.28344 6.7927 6.27353 7.78295 6.27353 9.00024C6.27353 10.2174 5.28336 11.2077 4.06639 11.2077ZM13.9346 16.8117C12.7173 16.8117 11.7269 15.8214 11.7269 14.6042C11.7269 13.3866 12.7173 12.396 13.9346 12.396C15.1516 12.396 16.1418 13.3866 16.1418 14.6042C16.1418 15.8214 15.1516 16.8117 13.9346 16.8117Z" fill="#0D0E10"/>
-                                                    </g>
-                                                    <defs>
-                                                    <clipPath id="clip0_664_18329">
-                                                        <rect width="18" height="18" fill="white"/>
-                                                    </clipPath>
-                                                    </defs>
-                                                </svg>
-                                            </span>
-                                        </a>
-                                    </div>
-                             </div>
+                                       class="product-icon-btn {{ wishlist_class($product->id) }}" 
+                                       onclick="toggleWishlist({{ $product->id }}, this)" data-bs-toggle="tooltip" data-bs-title="Wishlist">
+                                        <i class="fa-regular fa-heart fs-18px"></i>
+                                    </a>
+                                    <a href="javascript:;" class="product-icon-btn" id="shareButton" 
+                                       onclick="openSocialShareModal(window.location.href, '{{ addslashes($product->title) }}')" data-bs-toggle="tooltip" data-bs-title="Share">
+                                        <i class="fa-solid fa-share-nodes fs-18px"></i>
+                                    </a>
+                                </div>
+                                <button type="button" id="buyNowButtonMain" class="btn btn-buy-now">
+                                    <i class="fa-solid fa-bolt me-1"></i> {{ strtoupper(get_phrase('BUY IT NOW')) }}
+                                </button>
+                            </div>
                         </form>
                          
                         <!-- Hidden Buy Now Form -->
-                        <form class="buyNowForm d-none" id="buyNowFormMain" action="{{ route('customer.buy_now', ['product_id' => $product->id]) }}" method="post" >
+                        <form class="buyNowForm d-none" id="buyNowFormMain" action="{{ route('customer.buy_now', ['product_id' => $product->id ?? 582]) }}" method="post" >
                             @csrf
                             <!-- Hidden inputs will be dynamically filled -->
                         </form>
-
-                        <div class="mb-30px etBtn">
-                            <!-- Buy Now Button -->
-                            <button type="button" id="buyNowButtonMain" class="btn fsh-btn-warning w-100">
-                                {{ strtoupper(get_phrase('BUY IT NOW')) }}
-                            </button>
-                        </div>
                       
                     </div>
                 </div>
@@ -362,12 +1093,12 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
     <section>
         <div class="container">
             <div class="row g-30px mb-60px wow animate__fadeInUp" data-wow-delay=".2s">
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="d-flex align-items-start gap-12px">
                         <div class="circle-iconbox-48px svg-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M12.9988 14.75H11.9988C11.5888 14.75 11.2488 14.41 11.2488 14C11.2488 13.59 11.5888 13.25 11.9988 13.25H12.9988C13.6888 13.25 14.2488 12.69 14.2488 12V2.75H5.9988C4.8188 2.75 3.73877 3.38998 3.15877 4.41998C2.95877 4.77998 2.49882 4.91002 2.13882 4.71002C1.77882 4.51002 1.64878 4.05 1.84878 3.69C2.68878 2.19 4.2788 1.25 5.9988 1.25H14.9988C15.4088 1.25 15.7488 1.59 15.7488 2V12C15.7488 13.52 14.5188 14.75 12.9988 14.75Z" fill="#0D0E10"/>
-                                <path d="M19 20.75H18C17.59 20.75 17.25 20.41 17.25 20C17.25 19.31 16.69 18.75 16 18.75C15.31 18.75 14.75 19.31 14.75 20C14.75 20.41 14.41 20.75 14 20.75H10C9.59 20.75 9.25 20.41 9.25 20C9.25 19.31 8.69 18.75 8 18.75C7.31 18.75 6.75 19.31 6.75 20C6.75 20.41 6.41 20.75 6 20.75H5C2.93 20.75 1.25 19.07 1.25 17C1.25 16.59 1.59 16.25 2 16.25C2.41 16.25 2.75 16.59 2.75 17C2.75 18.24 3.76 19.25 5 19.25H5.34997C5.67997 18.1 6.74 17.25 8 17.25C9.26 17.25 10.32 18.1 10.65 19.25H13.36C13.69 18.1 14.75 17.25 16.01 17.25C17.27 17.25 18.33 18.1 18.66 19.25H19C20.24 19.25 21.25 18.24 21.25 17V14.75H19C18.04 14.75 17.25 13.96 17.25 13V10C17.25 9.04 18.03 8.25 19 8.25L17.93 6.38C17.71 5.99 17.29 5.75 16.84 5.75H15.75V12C15.75 13.52 14.52 14.75 13 14.75H12C11.59 14.75 11.25 14.41 11.25 14C11.25 13.59 11.59 13.25 12 13.25H13C13.69 13.25 14.25 12.69 14.25 12V5C14.25 4.59 14.59 4.25 15 4.25H16.84C17.83 4.25 18.74 4.78001 19.23 5.64001L20.94 8.63C21.07 8.86 21.07 9.15 20.94 9.38C20.81 9.61 20.56 9.75 20.29 9.75H19C18.86 9.75 18.75 9.86 18.75 10V13C18.75 13.14 18.86 13.25 19 13.25H22C22.41 13.25 22.75 13.59 22.75 14V17C22.75 19.07 21.07 20.75 19 20.75Z" fill="#0D0E10"/>
+                                <path d="M19 20.75H18C17.59 20.75 17.25 20.41 17.25 20C17.25 19.31 16.69 18.75 16 18.75C15.31 18.75 14.75 19.31 14.75 20C14.75 20.41 14.41 20.75 14 20.75H10C9.59 20.75 9.25 20.41 9.25 20C9.25 19.31 8.69 18.75 8 18.75C7.31 18.75 6.75 19.31 6.75 20C6.75 20.41 6.41 20.75 6 20.75H5C2.93 20.75 1.25 19.07 1.25 17C1.25 16.59 1.59 16.25 2 16.25C2.41 16.25 2.75 16.59 2.75 17C2.75 18.24 3.76 19.25 5 19.25H5.34997C5.67997 18.1 6.74 17.25 8 17.25C9.26 17.25 10.32 18.1 10.65 19.25H13.36C13.69 18.1 14.75 17.25 16.01 17.25C17.27 17.25 18.33 18.1 18.66 19.25H19C20.24 19.25 21.25 18.24 21.25 17V14.75H19C18.04 14.75 17.25 13.96 17.25 13V10C17.25 9.04 18.03 8.25 19 8.25L17.93 6.38C17.71 5.99 17.29 5.75 16.84 5.75H15.75V12C15.75 13.52 14.52 14.75 13 14.75H12C11.59 14.75 11.25 14.41 11.25 14C11.25 13.59 11.59 13.25 12 13.25H13C13.69 13.25 14.25 12.69 14.25 12V5C14.25 4.59 14.59 4.25 15 4.25H16.84C17.83 4.25 18.74 4.78001 19.23 5.64001L20.94 8.63C21.07 8.86 21.07 9.15 20.94 9.38C20.81 9.61 20.56 9.75 20.29 9.75H19C18.86 9.75 18.75 9.86 18.75 10V13C18.75 13.14 18.86 13.25 19 13.25H22C22.41 13.25 22.75 13.59 22 14.75ZM19 9.75C18.86 9.75 18.75 9.86 18.75 10V13C18.75 13.14 18.86 13.25 19 13.25H21.25V12.2L19.85 9.75H19Z" fill="#0D0E10"/>
                                 <path d="M8.00098 22.75C6.48098 22.75 5.25098 21.52 5.25098 20C5.25098 18.48 6.48098 17.25 8.00098 17.25C9.52098 17.25 10.751 18.48 10.751 20C10.751 21.52 9.52098 22.75 8.00098 22.75ZM8.00098 18.75C7.31098 18.75 6.75098 19.31 6.75098 20C6.75098 20.69 7.31098 21.25 8.00098 21.25C8.69098 21.25 9.25098 20.69 9.25098 20C9.25098 19.31 8.69098 18.75 8.00098 18.75Z" fill="#0D0E10"/>
                                 <path d="M16 22.75C14.48 22.75 13.25 21.52 13.25 20C13.25 18.48 14.48 17.25 16 17.25C17.52 17.25 18.75 18.48 18.75 20C18.75 21.52 17.52 22.75 16 22.75ZM16 18.75C15.31 18.75 14.75 19.31 14.75 20C14.75 20.69 15.31 21.25 16 21.25C16.69 21.25 17.25 20.69 17.25 20C17.25 19.31 16.69 18.75 16 18.75Z" fill="#0D0E10"/>
                                 <path d="M22 14.75H19C18.04 14.75 17.25 13.96 17.25 13V10C17.25 9.04 18.04 8.25 19 8.25H20.29C20.56 8.25 20.81 8.39 20.94 8.63L22.65 11.63C22.71 11.74 22.75 11.87 22.75 12V14C22.75 14.41 22.41 14.75 22 14.75ZM19 9.75C18.86 9.75 18.75 9.86 18.75 10V13C18.75 13.14 18.86 13.25 19 13.25H21.25V12.2L19.85 9.75H19Z" fill="#0D0E10"/>
@@ -376,14 +1107,13 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
                                 <path d="M4 14.75H2C1.59 14.75 1.25 14.41 1.25 14C1.25 13.59 1.59 13.25 2 13.25H4C4.41 13.25 4.75 13.59 4.75 14C4.75 14.41 4.41 14.75 4 14.75Z" fill="#0D0E10"/>
                             </svg>
                         </div>
-                       <div class="max-w-sm-260px">
+                        <div class="max-w-sm-260px">
                             <h2 class="al-title-18px mb-2">{{ get_phrase('Committed to better shopping experiences') }}</h2>
                             <p class="al-subtitle-16px fw-medium">{{ get_phrase('Delivering value with every purchase') }}</p>
                         </div>
-
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="d-flex align-items-start gap-12px">
                         <div class="circle-iconbox-48px svg-block">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
@@ -393,26 +1123,6 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
                         <div class="max-w-sm-260px">
                             <h2 class="al-title-18px mb-2">{{get_phrase('Support Everyday')}}</h2>
                             <p class="al-subtitle-16px fw-medium">{{get_phrase('Support from 8:30 AM to 10:00 PM everyday')}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                    <div class="d-flex align-items-start gap-12px">
-                        <div class="circle-iconbox-48px svg-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M15.0002 22.75C14.7302 22.75 14.4802 22.6 14.3502 22.37C14.2202 22.14 14.2202 21.85 14.3602 21.62L15.4102 19.87C15.6202 19.51 16.0802 19.4 16.4402 19.61C16.8002 19.82 16.9102 20.28 16.7002 20.64L16.4302 21.09C19.1902 20.44 21.2602 17.96 21.2602 15C21.2602 14.59 21.6002 14.25 22.0102 14.25C22.4202 14.25 22.7602 14.59 22.7602 15C22.7502 19.27 19.2702 22.75 15.0002 22.75Z" fill="#0D0E10"/>
-                                <path d="M2 9.75C1.59 9.75 1.25 9.41 1.25 9C1.25 4.73 4.73 1.25 9 1.25C9.27 1.25 9.51999 1.4 9.64999 1.63C9.77999 1.86 9.78 2.15 9.64 2.38L8.59 4.13C8.38 4.49001 7.92 4.60001 7.56 4.39001C7.2 4.18001 7.09 3.71999 7.3 3.35999L7.57001 2.90997C4.81001 3.55997 2.74001 6.04 2.74001 9C2.75001 9.41 2.41 9.75 2 9.75Z" fill="#0D0E10"/>
-                                <path d="M17.6804 7.49987C17.5504 7.49987 17.4204 7.4699 17.3004 7.3999L13.3304 5.09985C12.9704 4.88985 12.8504 4.42988 13.0604 4.06988C13.2704 3.70988 13.7304 3.58986 14.0804 3.79986L17.6804 5.87988L21.2504 3.80987C21.6104 3.59987 22.0704 3.72989 22.2704 4.07989C22.4804 4.43989 22.3504 4.89986 22.0004 5.10986L18.0504 7.38989C17.9404 7.45989 17.8104 7.49987 17.6804 7.49987Z" fill="#0D0E10"/>
-                                <path d="M17.6797 11.5699C17.2697 11.5699 16.9297 11.2299 16.9297 10.8199V6.73987C16.9297 6.32987 17.2697 5.98987 17.6797 5.98987C18.0897 5.98987 18.4297 6.32987 18.4297 6.73987V10.8199C18.4297 11.2399 18.0897 11.5699 17.6797 11.5699Z" fill="#0D0E10"/>
-                                <path d="M17.6794 11.7499C17.2194 11.7499 16.7494 11.6499 16.3794 11.4399L13.9794 10.1099C13.1994 9.67993 12.6094 8.66997 12.6094 7.77997V5.23993C12.6094 4.33993 13.1994 3.33997 13.9894 2.89997L16.3894 1.56995C17.1294 1.15995 18.2394 1.15995 18.9894 1.56995L21.3894 2.89997C22.1694 3.32997 22.7594 4.33992 22.7594 5.22992V7.76996C22.7594 8.66996 22.1694 9.66992 21.3894 10.0999L18.9894 11.4299C18.5994 11.6499 18.1394 11.7499 17.6794 11.7499ZM17.1094 2.86994L14.7094 4.19996C14.4094 4.36996 14.1094 4.87991 14.1094 5.21991V7.75995C14.1094 8.10995 14.4094 8.61997 14.7094 8.77997L17.1094 10.1199C17.3994 10.2799 17.9594 10.2799 18.2494 10.1199L20.6494 8.78992C20.9494 8.61992 21.2494 8.10996 21.2494 7.76996V5.22992C21.2494 4.87992 20.9494 4.36997 20.6494 4.20997L18.2494 2.87995C17.9594 2.70995 17.3894 2.70994 17.1094 2.86994Z" fill="#0D0E10"/>
-                                <path d="M6.321 18.4999C6.191 18.4999 6.06099 18.4699 5.94099 18.3999L1.97099 16.0998C1.61099 15.8898 1.49099 15.4299 1.70099 15.0699C1.91099 14.7099 2.37099 14.5899 2.72099 14.7999L6.321 16.8799L9.89099 14.8099C10.251 14.5999 10.711 14.7299 10.911 15.0799C11.121 15.4399 10.991 15.8999 10.641 16.1099L6.69099 18.3899C6.58099 18.4599 6.451 18.4999 6.321 18.4999Z" fill="#0D0E10"/>
-                                <path d="M6.32031 22.5699C5.91031 22.5699 5.57031 22.2299 5.57031 21.8199V17.7399C5.57031 17.3299 5.91031 16.9899 6.32031 16.9899C6.73031 16.9899 7.07031 17.3299 7.07031 17.7399V21.8199C7.07031 22.2399 6.74031 22.5699 6.32031 22.5699Z" fill="#0D0E10"/>
-                                <path d="M6.32001 22.7499C5.86001 22.7499 5.39 22.6499 5.02 22.4399L2.62 21.1099C1.84 20.6799 1.25 19.67 1.25 18.78V16.2399C1.25 15.3399 1.84 14.3399 2.62 13.9099L5.02 12.58C5.76 12.17 6.88 12.17 7.62 12.58L10.02 13.9099C10.8 14.3399 11.39 15.3499 11.39 16.2399V18.78C11.39 19.68 10.8 20.6799 10.01 21.1199L7.61 22.45C7.25 22.65 6.79001 22.7499 6.32001 22.7499ZM5.75 13.8699L3.35001 15.2C3.05001 15.37 2.75 15.8799 2.75 16.2199V18.76C2.75 19.11 3.05001 19.62 3.35001 19.78L5.75 21.1099C6.04 21.2699 6.6 21.2699 6.89 21.1099L9.28999 19.78C9.58999 19.61 9.89 19.1 9.89 18.76V16.2199C9.89 15.8699 9.58999 15.36 9.28999 15.2L6.89 13.8599C6.61 13.7099 6.04 13.7099 5.75 13.8699Z" fill="#0D0E10"/>
-                            </svg>
-                        </div>
-                        <div class="max-w-sm-260px">
-                            <h2 class="al-title-18px mb-2">{{get_phrase('100 Day Returns')}}</h2>
-                            <p class="al-subtitle-16px fw-medium">{{get_phrase('Not impressed? Get a refund. You have 100 days to break our hearts.')}}</p>
                         </div>
                     </div>
                 </div>
@@ -622,44 +1332,328 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
 
 @push('js')
     <script type="text/javascript">
-
-	    "use strict";
+        "use strict";
+        var isSelfTriggered = false;
 
         load_view("{{ route('view', ['path' => 'frontend.product.customer_reviews', 'product_id' => $product->id]) }}", "#customer_reviews");
         load_view("{{ route('view', ['path' => 'frontend.product.customer_review_add_update', 'product_id' => $product->id]) }}", "#writeareview");
 
+        let pmTargetQtyVal = 2;
+
+        function previewPoloLogo(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('poloLogoImg').src = e.target.result;
+                    document.getElementById('poloLogoName').textContent = input.files[0].name;
+                    const box = document.getElementById('poloLogoPreviewBox');
+                    if (box) {
+                        box.classList.remove('d-none');
+                        box.classList.add('d-flex');
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function removePoloLogo() {
+            const input = document.getElementById('poloLogoInput');
+            if (input) input.value = '';
+            const box = document.getElementById('poloLogoPreviewBox');
+            if (box) {
+                box.classList.add('d-none');
+                box.classList.remove('d-flex');
+            }
+        }
+
+        function getUnitPriceForQty(qty) {
+            if (qty >= 100) return 499;
+            if (qty >= 50) return 599;
+            if (qty >= 20) return 699;
+            if (qty >= 10) return 799;
+            if (qty >= 5) return 899;
+            return 999;
+        }
+
+        function updateTierHighlight(qty) {
+            const tiers = [2, 5, 10, 20, 50, 100];
+            tiers.forEach(t => {
+                const el = document.getElementById('tier-col-' + t);
+                if (el) {
+                    el.className = '';
+                }
+            });
+
+            let activeTier = 2;
+            if (qty >= 100) activeTier = 100;
+            else if (qty >= 50) activeTier = 50;
+            else if (qty >= 20) activeTier = 20;
+            else if (qty >= 10) activeTier = 10;
+            else if (qty >= 5) activeTier = 5;
+            else activeTier = 2;
+
+            const activeEl = document.getElementById('tier-col-' + activeTier);
+            if (activeEl) {
+                activeEl.className = 'table-warning border-warning fw-bold';
+            }
+        }
+
+        function updatePricingDisplays(qty) {
+            const unitPrice = getUnitPriceForQty(qty);
+            const totalPrice = unitPrice * qty;
+
+            const totalEl = document.getElementById('poloTotalPriceDisplay');
+            if (totalEl) totalEl.textContent = '₹ ' + totalPrice.toLocaleString('en-IN') + '.00';
+
+            const unitEl = document.getElementById('poloUnitPriceDisplay');
+            if (unitEl) unitEl.textContent = '(₹' + unitPrice + '/pc)';
+
+            updateTierHighlight(qty);
+        }
+
+        function selectQtyPack(qty, labelText, btn) {
+            document.querySelectorAll('.qty-pack-btn').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            pmTargetQtyVal = qty;
+
+            const lbl = document.getElementById('pmSelectedQtyLabel');
+            if (lbl) lbl.textContent = labelText;
+            const targetEl = document.getElementById('pmTargetQty');
+            if (targetEl) targetEl.textContent = qty;
+            const targetMaxEl = document.getElementById('pmTargetQtyMax');
+            if (targetMaxEl) targetMaxEl.textContent = qty;
+
+            updatePricingDisplays(qty);
+            recalculateQtyProgress();
+        }
+
+        function changeMainProductImage(imgSrc, colorName, element, index, attrId) {
+            const mainImg = document.getElementById('mainProductImage');
+            if (mainImg && imgSrc) {
+                mainImg.style.opacity = 0.3;
+                setTimeout(() => {
+                    const cacheBuster = imgSrc.indexOf('?') === -1 ? '?v=5' : '&v=5';
+                    mainImg.src = imgSrc + cacheBuster;
+                    mainImg.setAttribute('data-zoom', imgSrc + cacheBuster);
+                    mainImg.style.opacity = 1;
+                }, 100);
+            }
+
+            // Sync swatch dot active class
+            document.querySelectorAll('.gallery-swatch-dot').forEach(sw => sw.classList.remove('active'));
+            if (element) {
+                element.classList.add('active');
+            } else {
+                const sw = document.querySelectorAll('.gallery-swatch-dot')[index];
+                if (sw) sw.classList.add('active');
+            }
+
+            // Sync color swatches in the right panel
+            document.querySelectorAll('.color-swatch-opt').forEach(s => {
+                if (s.getAttribute('data-index') == index || (colorName && s.getAttribute('data-color-name').toLowerCase() === colorName.toLowerCase())) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+
+            // Update color label
+            const label = document.getElementById('poloSelectedColorLabel');
+            if (label && colorName) label.textContent = colorName;
+
+            // Update gallery color name label
+            const galleryColorLabel = document.getElementById('selectedGalleryColorName');
+            if (galleryColorLabel && colorName) galleryColorLabel.textContent = colorName;
+
+            // Trigger attribute radio button
+            if (attrId) {
+                const radio = document.querySelector('.attribute-selector-radio[data-attribute-id="' + attrId + '"]');
+                if (radio) {
+                    isSelfTriggered = true;
+                    radio.checked = true;
+                    $(radio).trigger('change');
+                    isSelfTriggered = false;
+                }
+            } else if (colorName) {
+                // Try selecting attribute by name
+                const radio = Array.from(document.querySelectorAll('.attribute-selector-radio')).find(r => r.getAttribute('data-color-name') && r.getAttribute('data-color-name').toLowerCase() === colorName.toLowerCase());
+                if (radio) {
+                    isSelfTriggered = true;
+                    radio.checked = true;
+                    $(radio).trigger('change');
+                    isSelfTriggered = false;
+                }
+            }
+        }
+
+        function switchGallerySlide(index, name, el, attrId) {
+            const swatch = document.querySelectorAll('.gallery-swatch-dot')[index];
+            if (swatch) {
+                const imgSrc = swatch.getAttribute('data-image-src');
+                changeMainProductImage(imgSrc, name, swatch, index, attrId);
+            }
+        }
+
+        function selectPoloColor(index, name, el, attrId) {
+            document.querySelectorAll('.color-swatch-opt').forEach(s => s.classList.remove('active'));
+            if (el) el.classList.add('active');
+
+            const swatch = document.querySelectorAll('.gallery-swatch-dot')[index];
+            if (swatch) {
+                const imgSrc = swatch.getAttribute('data-image-src');
+                changeMainProductImage(imgSrc, name, swatch, index, attrId);
+            } else {
+                changeMainProductImage(null, name, null, index, attrId);
+            }
+        }
+
+        function updateSizeCount(btn, delta) {
+            const valEl = btn.parentElement.querySelector('.size-qty-val');
+            if (valEl) {
+                let count = parseInt(valEl.textContent) || 0;
+                count = Math.max(0, count + delta);
+                valEl.textContent = count;
+                recalculateQtyProgress();
+            }
+        }
+
+        function recalculateQtyProgress() {
+            let totalSelected = 0;
+            document.querySelectorAll('.size-qty-val').forEach(el => {
+                totalSelected += parseInt(el.textContent) || 0;
+            });
+
+            const currentEl = document.getElementById('pmCurrentQty');
+            if (currentEl) currentEl.textContent = totalSelected;
+
+            if (totalSelected > 0) {
+                updatePricingDisplays(totalSelected);
+            } else {
+                updatePricingDisplays(pmTargetQtyVal);
+            }
+
+            let pct = Math.min(100, Math.round((totalSelected / pmTargetQtyVal) * 100));
+            const bar = document.getElementById('pmProgressBar');
+            if (bar) {
+                bar.style.width = pct + '%';
+                if (totalSelected === pmTargetQtyVal) {
+                    bar.style.backgroundColor = '#2E7D32';
+                } else if (totalSelected > pmTargetQtyVal) {
+                    bar.style.backgroundColor = '#D32F2F';
+                } else {
+                    bar.style.backgroundColor = '#F57C00';
+                }
+            }
+        }
 
         $(document).ready(function() {
+            // ——— Side Thumbnail Color Switcher ———
+            // Use event delegation on the grid container for reliable clicks
+            $(document).on('click', '.side-thumb-card', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                var idx = parseInt($(this).attr('data-slide-index')) || 0;
+                var name = $(this).attr('data-color-name') || '';
+                var attrId = $(this).attr('data-attr-id') || '';
+
+                // Update active state
+                $('.side-thumb-card').removeClass('active');
+                $(this).addClass('active');
+
+                // Sync color swatches
+                $('.color-swatch-opt').each(function() {
+                    if ($(this).attr('data-index') == idx) {
+                        $(this).addClass('active');
+                    } else {
+                        $(this).removeClass('active');
+                    }
+                });
+
+                // Update color label
+                var $label = $('#poloSelectedColorLabel');
+                if ($label.length && name) $label.text(name);
+
+                // Slide the main Swiper — try all possible references
+                var swiperInstance = null;
+                var mainSwiperEl = document.querySelector('.tf-product-media-main');
+                if (mainSwiperEl && mainSwiperEl.swiper) {
+                    swiperInstance = mainSwiperEl.swiper;
+                } else if (window.productMainSwiper) {
+                    swiperInstance = window.productMainSwiper;
+                }
+
+                if (swiperInstance) {
+                    swiperInstance.slideTo(idx, 300, false);
+                    console.log('[Color Switch] Sliding to index ' + idx + ' (' + name + ')');
+                } else {
+                    console.warn('[Color Switch] Swiper not found! Checking DOM...');
+                    // Last resort: swap the visible image src directly
+                    var slides = document.querySelectorAll('.tf-product-media-main .swiper-slide');
+                    if (slides.length > idx) {
+                        slides.forEach(function(sl, i) {
+                            sl.style.display = (i === idx) ? 'block' : 'none';
+                        });
+                    }
+                }
+
+                // Trigger attribute radio
+                if (attrId) {
+                    var $radio = $('.attribute-selector-radio[data-attribute-id="' + attrId + '"]');
+                    if ($radio.length) {
+                        $radio.prop('checked', true).trigger('change');
+                    }
+                }
+            });
+
+            // Explicit Related Products Swiper Initialization
+            if ($('.products-slider').length > 0 && typeof Swiper !== 'undefined') {
+                const prevButton = document.querySelector('.products-slider-prev-btn');
+                const nextButton = document.querySelector('.products-slider-next-btn');
+                const relatedSwiper = new Swiper('.products-slider', {
+                    slidesPerView: 1,
+                    spaceBetween: 25,
+                    autoplay: {
+                        delay: 5000,
+                        disableOnInteraction: false,
+                    },
+                    breakpoints: {
+                        576: { slidesPerView: 2 },
+                        768: { slidesPerView: 2 },
+                        992: { slidesPerView: 3 },
+                        1200: { slidesPerView: 4 },
+                    },
+                });
+                if (prevButton) {
+                    prevButton.addEventListener('click', () => relatedSwiper.slidePrev());
+                }
+                if (nextButton) {
+                    nextButton.addEventListener('click', () => relatedSwiper.slideNext());
+                }
+            }
+
+            // Color name display initialization
             const colorInputs = document.querySelectorAll('.color-checkbox3-input');
             const colorNameDisplay = document.getElementById('selected-color-name');
-
-            // Initialize with the first selected color
             const defaultChecked = document.querySelector('.color-checkbox3-input:checked');
-            if (defaultChecked) {
+            if (defaultChecked && colorNameDisplay) {
                 colorNameDisplay.textContent = defaultChecked.dataset.colorName;
             }
 
-            // Update color name on change
             colorInputs.forEach(input => {
                 input.addEventListener('change', function () {
-                    if (this.checked) {
+                    if (this.checked && colorNameDisplay) {
                         colorNameDisplay.textContent = this.dataset.colorName;
                     }
                 });
             });
-        });
 
-
-        $(document).ready(function() {
+            // Buy Now button action
             $('#buyNowButtonMain').on('click', function() {
-                // Get data from productForm
                 const productForm = document.getElementById('productFormMain');
                 const buyNowForm = document.getElementById('buyNowFormMain');
+                if (!productForm || !buyNowForm) return;
 
-                // Clear buyNowForm fields
                 buyNowForm.innerHTML = '';
-
-                // Copy inputs from productForm to buyNowForm
                 Array.from(productForm.elements).forEach(function (element) {
                     if (element.name && element.value) {
                         const input = document.createElement('input');
@@ -669,81 +1663,87 @@ $active_theme = \App\Models\Theme::where('status', 1)->first();
                         buyNowForm.appendChild(input);
                     }
                 });
-
-                // Submit the buyNowForm
                 buyNowForm.submit();
             });
-        });
 
-    </script>
-
-   <script type="text/javascript">
-
-	    "use strict";
+            // Progress bar init
             document.querySelectorAll('.progress-bar').forEach(bar => {
-            let val = bar.dataset.progress;
-            val = Math.min(Math.max(val, 0), 100);
-            bar.style.width = val + '%';
-        });
+                let val = bar.dataset.progress;
+                if (val) {
+                    val = Math.min(Math.max(val, 0), 100);
+                    bar.style.width = val + '%';
+                }
+            });
 
-</script>
-<script>
-    "use strict";
-        $(document).ready(function() {
+            // Share button action
             $('#shareButton').on('click', function() {
                 var currentPageUrl = window.location.href;
                 $(this).toggleClass('active');
-                navigator.clipboard.writeText(currentPageUrl).then(function() {
-                    success('Successfully copied this link!');
-                }).catch(function(error) {
-                    error('Failed to copy the link!');
-                });
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(currentPageUrl);
+                }
             });
 
-            // Dynamic Image Switcher based on Selected Attribute Option (Color variation)
+            // Dynamic Image Switcher based on Selected Attribute Option
             $(document).on('change', '.attribute-selector-radio', function() {
+                if (isSelfTriggered) return;
                 var attributeId = $(this).attr('data-attribute-id');
                 if (!attributeId) return;
 
-                var mainSwiperEl = document.querySelector('.tf-product-media-main');
-                if (!mainSwiperEl || !mainSwiperEl.swiper) return;
-
-                var mainSwiper = mainSwiperEl.swiper;
-                var thumbsSwiperEl = document.querySelector('.tf-product-media-thumbs');
-                var thumbsSwiper = thumbsSwiperEl ? thumbsSwiperEl.swiper : null;
-
-                var slides = mainSwiper.slides;
-                var targetIndex = -1;
-
-                for (var i = 0; i < slides.length; i++) {
-                    var slideAttrId = $(slides[i]).attr('data-mapped-attribute-id');
-                    if (slideAttrId) {
-                        var attrIds = slideAttrId.split(',');
-                        if (attrIds.includes(attributeId.toString())) {
-                            targetIndex = i;
-                            break;
-                        }
-                    }
-                }
-
-                if (targetIndex !== -1) {
-                    mainSwiper.slideTo(targetIndex);
-                    if (thumbsSwiper) {
-                        thumbsSwiper.slideTo(targetIndex);
+                var swatches = document.querySelectorAll('.gallery-swatch-dot');
+                for (var i = 0; i < swatches.length; i++) {
+                    var mappedIdsStr = swatches[i].getAttribute('data-mapped-ids') || '';
+                    var mappedIds = mappedIdsStr.split(',');
+                    if (mappedIds.includes(attributeId.toString())) {
+                        var imgSrc = swatches[i].getAttribute('data-image-src');
+                        var colorName = swatches[i].getAttribute('data-color-name');
+                        changeMainProductImage(imgSrc, colorName, swatches[i], i, attributeId);
+                        break;
                     }
                 }
             });
 
-            // Trigger slightly after Swiper initializes to select initial color's image
-            setTimeout(function() {
-                $('.attribute-selector-radio:checked').trigger('change');
-            }, 300);
+            // Active chip selection toggles
+            $(document).on('click', '.size-chip-item label', function() {
+                $(this).closest('.size-chips-grid').find('label').removeClass('active');
+                $(this).addClass('active');
+            });
+            $(document).on('click', '.color-chip-item label', function() {
+                $(this).closest('.color-chips-grid').find('label').removeClass('active');
+                $(this).addClass('active');
+                var radio = $(this).closest('.color-chip-item').find('input[type="radio"]');
+                var targetId = radio.attr('data-target-label');
+                var colorName = radio.attr('data-color-name');
+                if (targetId && colorName) {
+                    var el = document.getElementById(targetId);
+                    if (el) el.textContent = colorName;
+                }
+            });
+
+            // Touch Scroll Fix
+            function applyTouchScrollFix() {
+                var mainSwiperEl = document.querySelector('.tf-product-media-main');
+                if (mainSwiperEl && mainSwiperEl.swiper) {
+                    var swiper = mainSwiperEl.swiper;
+                    swiper.params.touchReleaseOnEdges = true;
+                    swiper.params.passiveListeners = true;
+                    swiper.params.threshold = 15;
+                    swiper.params.touchAngle = 45;
+                    swiper.params.touchStartPreventDefault = false;
+                    swiper.params.touchMoveStopPropagation = false;
+                    swiper.update();
+                }
+
+                $('.tf-image-zoom, .swiper-slide, .tf-product-media-wrap, .thumbs-slider, .tf-product-media-main img').css({
+                    'touch-action': 'pan-y',
+                    '-webkit-user-drag': 'none'
+                });
+            }
+
+            setTimeout(applyTouchScrollFix, 300);
+            setTimeout(applyTouchScrollFix, 800);
         });
-</script>
-
-
-
-
+    </script>
 @endpush
 
 

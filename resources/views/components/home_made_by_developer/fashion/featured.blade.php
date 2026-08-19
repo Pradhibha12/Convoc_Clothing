@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="mb-30px">
-                    <h1 class="mv-title-40px text-center wow animate__fadeInUp builder-editable" builder-identity="10" data-wow-delay=".2s">{{get_phrase('Featured products')}}</h1>
+                    <h1 class="mv-title-40px text-center wow animate__fadeInUp builder-editable" builder-identity="10" data-wow-delay=".2s">{{ get_phrase('Featured Products') }}</h1>
                 </div>
             </div>
         </div>
@@ -19,8 +19,8 @@
                 <div class="d-flex column-gap-30px row-gap-4 justify-content-center flex-wrap">
                   <button type="button" data-filter=".show-all" class="btn fsh-mixitup-btn mixitup-control-active">{{ get_phrase('All') }}</button>
 
-                    @foreach($categories->take(4) as $category)
-                        <button type="button" data-filter=".cat-{{$category->id}}" class="btn fsh-mixitup-btn"> {{ $category->title }} </button>
+                    @foreach($categories as $category)
+                        <button type="button" data-filter=".cat-{{$category->id}}" class="btn fsh-mixitup-btn"> {{ strtoupper($category->title) }} </button>
                     @endforeach
                 </div>
             </div>
@@ -30,7 +30,7 @@
                    $allproduct =App\Models\Product::where('status', 1)->latest()->take(8)->get();
                 @endphp
                @foreach($allproduct as $product)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mix show-all">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mix show-all">
                     <div class="d-block product-grid-md">
                         <div>
                             <div class="product-grid-banner-md mb-12px">
@@ -38,7 +38,9 @@
                                     $thumbnails = json_decode($product->thumbnail, true);
                                     $firstImage = $thumbnails[0] ?? null;
                                 @endphp
-                                <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                <a href="{{ route('product', $product->slug) }}" class="d-block w-100 h-100">
+                                    <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                </a>
                                @if ($product->is_discounted()->exists())
                                             @php
                                                 $discount = $product->is_discounted;
@@ -104,12 +106,14 @@
                     </div>
                 </div>
             @endforeach
-            @foreach($categories->take(4) as $category)
+            @foreach($categories as $category)
                 @php 
-                    $catProducts = App\Models\Product::where('status', 1)->where('category_id', $category->id)->latest()->take(8)->get();
+                    $subCategoryIds = App\Models\Category::where('parent_id', $category->id)->pluck('id')->toArray();
+                    $categoryIds = array_merge([$category->id], $subCategoryIds);
+                    $catProducts = App\Models\Product::where('status', 1)->whereIn('category_id', $categoryIds)->latest()->take(8)->get();
                 @endphp
                 @foreach($catProducts as $catproduct)
-                   <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mix cat-{{$catproduct->category_id}}">
+                   <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mix cat-{{$category->id}}">
                       <div class="d-block product-grid-md">
                             <div>
                                 <div class="product-grid-banner-md mb-12px">
@@ -117,7 +121,9 @@
                                         $thumbnails = json_decode($catproduct->thumbnail, true);
                                         $firstImage = $thumbnails[0] ?? null;
                                     @endphp
-                                    <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                    <a href="{{ route('product', $catproduct->slug) }}" class="d-block w-100 h-100">
+                                        <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                    </a>
                                     
                                     @if ($catproduct->is_discounted()->exists())
                                             @php

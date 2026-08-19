@@ -1,6 +1,111 @@
-{{-- To make a editable image or text need to be add a "builder editable" class and builder identity attribute with a unique value --}}
-{{-- "builder identity" and "builder editable" --}}
-{{-- builder identity value have to be unique under a single file --}}
+@php
+if (!function_exists('get_product_color_variants')) {
+    function get_product_color_variants($product) {
+        $thumbnails = json_decode($product->thumbnail, true);
+        if (!is_array($thumbnails) || empty($thumbnails)) {
+            return [];
+        }
+
+        $image_attrs = json_decode($product->image_attributes, true);
+        if (!is_array($image_attrs)) {
+            $image_attrs = [];
+        }
+
+        $color_map = [
+            11 => ['name' => 'Black', 'hex' => '#111827'],
+            12 => ['name' => 'White', 'hex' => '#FFFFFF'],
+            13 => ['name' => 'Navy', 'hex' => '#0F172A'],
+            30 => ['name' => 'Charcoal Melange', 'hex' => '#4B5563'],
+            31 => ['name' => 'Sky Blue', 'hex' => '#38BDF8'],
+            43 => ['name' => 'Red', 'hex' => '#DC2626'],
+            45 => ['name' => 'Maroon', 'hex' => '#7F1D1D'],
+            83 => ['name' => 'Royal Blue', 'hex' => '#1D4ED8'],
+            84 => ['name' => 'Yellow', 'hex' => '#EAB308'],
+            85 => ['name' => 'Orange', 'hex' => '#EA580C'],
+        ];
+
+        $polo_color_meta = [
+            'uploads/product/thumbnail/printmine_real_black.webp' => ['name' => 'Black', 'hex' => '#111827', 'attr_id' => 11],
+            'uploads/product/thumbnail/printmine_real_navy.webp' => ['name' => 'Navy', 'hex' => '#0F172A', 'attr_id' => 13],
+            'uploads/product/thumbnail/printmine_real_royal_blue.webp' => ['name' => 'Royal Blue', 'hex' => '#1D4ED8', 'attr_id' => 83],
+            'uploads/product/thumbnail/printmine_real_sky_blue.webp' => ['name' => 'Sky Blue', 'hex' => '#38BDF8', 'attr_id' => 31],
+            'uploads/product/thumbnail/printmine_real_red.webp' => ['name' => 'Red', 'hex' => '#DC2626', 'attr_id' => 43],
+            'uploads/product/thumbnail/printmine_real_maroon.webp' => ['name' => 'Maroon', 'hex' => '#7F1D1D', 'attr_id' => 45],
+            'uploads/product/thumbnail/printmine_real_yellow.webp' => ['name' => 'Yellow', 'hex' => '#EAB308', 'attr_id' => 84],
+            'uploads/product/thumbnail/printmine_real_orange.webp' => ['name' => 'Orange', 'hex' => '#EA580C', 'attr_id' => 85],
+            'uploads/product/thumbnail/printmine_real_white.webp' => ['name' => 'White', 'hex' => '#FFFFFF', 'attr_id' => 12],
+            'uploads/product/thumbnail/printmine_real_gray.webp' => ['name' => 'Charcoal Melange', 'hex' => '#4B5563', 'attr_id' => 30],
+        ];
+
+        $variants = [];
+        foreach ($thumbnails as $thumb) {
+            $normalized_thumb = str_replace('\\', '/', $thumb);
+
+            // Polo check
+            if (isset($polo_color_meta[$normalized_thumb])) {
+                $meta = $polo_color_meta[$normalized_thumb];
+                $variants[] = [
+                    'image' => $normalized_thumb,
+                    'name' => $meta['name'],
+                    'hex' => $meta['hex'],
+                    'attr_id' => $meta['attr_id']
+                ];
+                continue;
+            }
+
+            // Database mapping
+            $attr_val = $image_attrs[$thumb] ?? $image_attrs[$normalized_thumb] ?? null;
+            if ($attr_val) {
+                $attr_id = null;
+                if (is_array($attr_val)) {
+                    $attr_id = $attr_val['3'] ?? reset($attr_val);
+                } else {
+                    $attr_id = $attr_val;
+                }
+
+                if ($attr_id && isset($color_map[$attr_id])) {
+                    $variants[] = [
+                        'image' => $normalized_thumb,
+                        'name' => $color_map[$attr_id]['name'],
+                        'hex' => $color_map[$attr_id]['hex'],
+                        'attr_id' => $attr_id
+                    ];
+                    continue;
+                }
+            }
+
+            // Guess from path / filename
+            $filename = strtolower(basename($normalized_thumb));
+            $matched = false;
+            foreach ($color_map as $id => $color_info) {
+                $color_name_lower = strtolower($color_info['name']);
+                $color_name_clean = str_replace(' ', '_', $color_name_lower);
+                if (str_contains($filename, $color_name_clean) || str_contains($filename, $color_name_lower)) {
+                    $variants[] = [
+                        'image' => $normalized_thumb,
+                        'name' => $color_info['name'],
+                        'hex' => $color_info['hex'],
+                        'attr_id' => $id
+                    ];
+                    $matched = true;
+                    break;
+                }
+            }
+
+            if (!$matched) {
+                $variants[] = [
+                    'image' => $normalized_thumb,
+                    'name' => 'Default',
+                    'hex' => '#9CA3AF',
+                    'attr_id' => null
+                ];
+            }
+        }
+
+        return $variants;
+    }
+}
+@endphp
 <!-- Featured Product Area Start -->
 <section>
     <div class="container">
@@ -17,10 +122,10 @@
                     $categories = App\Models\Category::where('parent_id', '=', 0)->orderBy('sort', 'asc')->orderBy('title', 'asc')->get();
                 @endphp
                 <div class="d-flex column-gap-30px row-gap-4 justify-content-center flex-wrap">
-                  <button type="button" data-filter=".show-all" class="btn fsh-mixitup-btn mixitup-control-active">{{ get_phrase('All') }}</button>
+                  <button type="button" data-filter=".show-all" data-url="{{ route('all_products') }}" class="btn fsh-mixitup-btn mixitup-control-active">{{ get_phrase('All') }}</button>
 
-                    @foreach($categories->take(4) as $category)
-                        <button type="button" data-filter=".cat-{{$category->id}}" class="btn fsh-mixitup-btn"> {{ $category->title }} </button>
+                    @foreach($categories as $category)
+                        <button type="button" data-filter=".cat-{{$category->id}}" data-url="{{ route('products', $category->slug) }}" class="btn fsh-mixitup-btn"> {{ strtoupper($category->title) }} </button>
                     @endforeach
                 </div>
             </div>
@@ -30,15 +135,34 @@
                    $allproduct =App\Models\Product::where('status', 1)->latest()->take(8)->get();
                 @endphp
                @foreach($allproduct as $product)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mix show-all">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mix show-all">
                     <div class="d-block product-grid-md">
                         <div>
                             <div class="product-grid-banner-md mb-12px">
                                 @php
                                     $thumbnails = json_decode($product->thumbnail, true);
-                                    $firstImage = $thumbnails[0] ?? null;
+                                    $variants = get_product_color_variants($product);
+                                    $unique_variants = [];
+                                    $seen_colors = [];
+                                    foreach ($variants as $v) {
+                                        $color_key = strtolower($v['name']);
+                                        if (!in_array($color_key, $seen_colors)) {
+                                            $seen_colors[] = $color_key;
+                                            $unique_variants[] = $v;
+                                        }
+                                    }
+                                    
+                                    $defaultImage = $thumbnails[0] ?? null;
+                                    $active_swatch_idx = 0;
+                                    if (count($unique_variants) > 1) {
+                                        $variant_idx = $loop->index % count($unique_variants);
+                                        $defaultImage = $unique_variants[$variant_idx]['image'];
+                                        $active_swatch_idx = $variant_idx;
+                                    }
                                 @endphp
-                                <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                <a href="{{ route('product', $product->slug) }}" class="d-block w-100 h-100">
+                                    <img class="banner product-card-image-{{ $product->id }}" src="{{ get_image($defaultImage) }}" alt="banner">
+                                </a>
                                @if ($product->is_discounted()->exists())
                                             @php
                                                 $discount = $product->is_discounted;
@@ -70,6 +194,16 @@
                                 </a>
                             </div>
                             <div>
+                                @if(count($unique_variants) > 1)
+                                    <div class="product-card-swatches d-flex align-items-center gap-1 mt-1 mb-2 justify-content-start flex-wrap">
+                                        @foreach($unique_variants as $v_idx => $v)
+                                            <span class="color-swatch-dot {{ $v_idx == $active_swatch_idx ? 'active' : '' }}" 
+                                                  style="background-color: {{ $v['hex'] }}; cursor: pointer; display: inline-block; width: 15px; height: 15px; border-radius: 50%; border: {{ strtolower($v['name']) == 'white' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.1)' }}; transition: all 0.2s;" 
+                                                  title="{{ $v['name'] }}"
+                                                  onclick="event.preventDefault(); changeProductCardImage('{{ $product->id }}', '{{ get_image($v['image']) }}', this)"></span>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <a href="{{ route('product', $product->slug) }}" class="al-title-16px mb-12px product-title-link">{{ \Illuminate\Support\Str::limit($product->title, 70, '...') }}</a>
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-start gap-1 mb-12px">
@@ -103,20 +237,41 @@
                     </div>
                 </div>
             @endforeach
-            @foreach($categories->take(4) as $category)
+            @foreach($categories as $category)
                 @php 
-                    $catProducts = App\Models\Product::where('status', 1)->where('category_id', $category->id)->latest()->take(8)->get();
+                    $subCategoryIds = App\Models\Category::where('parent_id', $category->id)->pluck('id')->toArray();
+                    $categoryIds = array_merge([$category->id], $subCategoryIds);
+                    $catProducts = App\Models\Product::where('status', 1)->whereIn('category_id', $categoryIds)->latest()->take(8)->get();
                 @endphp
                 @foreach($catProducts as $catproduct)
-                   <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mix cat-{{$catproduct->category_id}}">
+                   <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-6 mix cat-{{$category->id}}">
                       <div class="d-block product-grid-md">
                             <div>
                                 <div class="product-grid-banner-md mb-12px">
                                     @php
                                         $thumbnails = json_decode($catproduct->thumbnail, true);
-                                        $firstImage = $thumbnails[0] ?? null;
+                                        $variants = get_product_color_variants($catproduct);
+                                        $unique_variants = [];
+                                        $seen_colors = [];
+                                        foreach ($variants as $v) {
+                                            $color_key = strtolower($v['name']);
+                                            if (!in_array($color_key, $seen_colors)) {
+                                                $seen_colors[] = $color_key;
+                                                $unique_variants[] = $v;
+                                            }
+                                        }
+                                        
+                                        $defaultImage = $thumbnails[0] ?? null;
+                                        $active_swatch_idx = 0;
+                                        if (count($unique_variants) > 1) {
+                                            $variant_idx = $loop->index % count($unique_variants);
+                                            $defaultImage = $unique_variants[$variant_idx]['image'];
+                                            $active_swatch_idx = $variant_idx;
+                                        }
                                     @endphp
-                                    <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
+                                    <a href="{{ route('product', $catproduct->slug) }}" class="d-block w-100 h-100">
+                                        <img class="banner product-card-image-{{ $catproduct->id }}" src="{{ get_image($defaultImage) }}" alt="banner">
+                                    </a>
                                     
                                     @if ($catproduct->is_discounted()->exists())
                                             @php
@@ -149,6 +304,16 @@
                                     </a>
                                 </div>
                                 <div>
+                                    @if(count($unique_variants) > 1)
+                                        <div class="product-card-swatches d-flex align-items-center gap-1 mt-1 mb-2 justify-content-start flex-wrap">
+                                            @foreach($unique_variants as $v_idx => $v)
+                                                <span class="color-swatch-dot {{ $v_idx == $active_swatch_idx ? 'active' : '' }}" 
+                                                      style="background-color: {{ $v['hex'] }}; cursor: pointer; display: inline-block; width: 15px; height: 15px; border-radius: 50%; border: {{ strtolower($v['name']) == 'white' ? '1px solid #cbd5e1' : '1px solid rgba(0,0,0,0.1)' }}; transition: all 0.2s;" 
+                                                      title="{{ $v['name'] }}"
+                                                      onclick="event.preventDefault(); changeProductCardImage('{{ $catproduct->id }}', '{{ get_image($v['image']) }}', this)"></span>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                     <a href="{{ route('product', $catproduct->slug) }}" class="al-title-16px mb-12px product-title-link">{{ \Illuminate\Support\Str::limit($catproduct->title, 70, '...') }}</a>
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-start gap-1 mb-12px">
@@ -187,6 +352,69 @@
 
         </div>
        
+        <!-- See More Button Section -->
+        <div class="row mt-4 mb-30px wow animate__fadeInUp" data-wow-delay=".5s">
+            <div class="col-12 text-center">
+                <a id="seeMoreBtn" href="{{ route('all_products') }}" class="btn fsh-btn-dark px-5 py-3 rounded-pill shadow-sm hover-lift fw-bold border-0" style="font-size: 15px; letter-spacing: 0.5px; transition: all 0.3s ease;">
+                    <span>{{ get_phrase('See More Products') }}</span>
+                    <svg class="ms-2" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const filterBtns = document.querySelectorAll('.fsh-mixitup-btn');
+                const seeMoreBtn = document.getElementById('seeMoreBtn');
+                
+                filterBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const targetUrl = this.getAttribute('data-url');
+                        if (targetUrl && seeMoreBtn) {
+                            seeMoreBtn.setAttribute('href', targetUrl);
+                        }
+                    });
+                });
+            });
+        </script>
     </div>
 
 <!-- Featured Product Area End --></div></div></section>
+@push('css')
+<style>
+    .color-swatch-dot {
+        border-radius: 50%;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .color-swatch-dot:hover {
+        transform: scale(1.35);
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #FF9900 !important;
+        z-index: 2;
+    }
+    .color-swatch-dot.active {
+        transform: scale(1.35);
+        box-shadow: 0 0 0 2px #fff, 0 0 0 4px #FF9900 !important;
+        z-index: 2;
+    }
+</style>
+@endpush
+
+@push('js')
+<script>
+    if (typeof changeProductCardImage !== 'function') {
+        function changeProductCardImage(productId, imageUrl, element) {
+            const img = document.querySelector('.product-card-image-' + productId);
+            if (img) {
+                img.src = imageUrl;
+            }
+            const swatches = element.parentElement.querySelectorAll('.color-swatch-dot');
+            swatches.forEach(s => {
+                s.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+    }
+</script>
+@endpush

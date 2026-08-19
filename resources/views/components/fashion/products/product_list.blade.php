@@ -3,8 +3,12 @@
         <div class="d-flex align-items-center gap-20px flex-column flex-md-row">
             <div class="product-list-banner">
                 @php
-                    $thumbnails = json_decode($product->thumbnail, true);
-                    $firstImage = $thumbnails[0] ?? null;
+                    $thumbnails = json_decode($product->thumbnail, true) ?: [];
+                    $firstImage = null;
+                    if (count($thumbnails) > 0) {
+                        $imgIndex = ($loop->index ?? $product->id) % count($thumbnails);
+                        $firstImage = $thumbnails[$imgIndex] ?? ($thumbnails[0] ?? null);
+                    }
                 @endphp
                 <img class="banner" src="{{ get_image($firstImage) }}" alt="banner">
                 @if ($product->is_discounted()->exists())

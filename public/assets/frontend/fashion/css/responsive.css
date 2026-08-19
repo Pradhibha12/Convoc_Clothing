@@ -408,9 +408,15 @@
     .collection-banner-row::after {
         height: 285px;
     }
-    /* Hero Banner */
     .home-hero-buttons {
-        bottom: 50px;
+        position: relative !important;
+        bottom: auto !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin-top: 25px !important;
+        margin-bottom: 20px !important;
+        justify-content: center !important;
     }
     .text-circle-btn {
         height: 100px;

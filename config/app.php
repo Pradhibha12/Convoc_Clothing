@@ -1,15 +1,37 @@
 <?php
 
-// Cache server variables to avoid multiple calls
-$is_https = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on';
-$http_host = $_SERVER['HTTP_HOST'] ?? '127.0.0.1';
+/*
+ * PERMANENT FIX: Dynamic URL detection for Cloudflare Tunnel / reverse proxies.
+ *
+ * The problem: artisan serve never sets $_SERVER['HTTPS'], and SERVER_NAME is always
+ * 127.0.0.1. When behind Cloudflare Tunnel, the real domain is in HTTP_HOST and
+ * the real scheme is in HTTP_X_FORWARDED_PROTO.
+ *
+ * This config file runs before ANY middleware or service provider, so it's the
+ * correct place to detect the true public URL and set asset_url correctly.
+ * The asset() helper reads config('app.asset_url') directly — URL::forceRootUrl()
+ * does NOT affect asset_url, which is why previous fixes in AppServiceProvider
+ * did not work.
+ */
+
+$http_host   = $_SERVER['HTTP_HOST'] ?? '127.0.0.1';
+$is_https = (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+         || (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on')
+         || ($http_host !== '127.0.0.1' && $http_host !== 'localhost' && !str_starts_with($http_host, '127.') && !str_starts_with($http_host, 'localhost:'));
 $script_name = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
-// Construct base app URL with minimal concatenation
-$app_url = ($is_https ? 'https://' : 'http://') . $http_host . $script_name;
-// Replace '/index.php' and split to remove '/view/'
-$app_url = explode('/view/', str_replace('/index.php', '', $app_url))[0];
-// Determine asset URL
+
+// Construct base app URL with correct scheme
+$app_url   = ($is_https ? 'https://' : 'http://') . $http_host . $script_name;
+$app_url   = explode('/view/', str_replace('/index.php', '', $app_url))[0];
+
+// asset_url: same as app_url (public/ assets served from same domain)
 $asset_url = is_dir('public') ? $app_url . '/public' : $app_url;
+
+// If running from CLI (artisan commands), fall back to APP_URL env var
+if (PHP_SAPI === 'cli' || PHP_SAPI === 'phpdbg') {
+    $app_url   = getenv('APP_URL') ?: 'http://localhost:8000';
+    $asset_url = $app_url;
+}
 
 
 return [
@@ -66,7 +88,10 @@ return [
 
     'url' => env('APP_URL', $app_url),
 
-    'asset_url' => env('APP_URL') ? env('APP_URL') : $asset_url,
+    // Always use the dynamically-computed $asset_url (based on HTTP_HOST + X-Forwarded-Proto).
+    // Never use env('APP_URL') for assets — it would be hardcoded to http://localhost:8000.
+    'asset_url' => $asset_url,
+
 
     /*
     |--------------------------------------------------------------------------

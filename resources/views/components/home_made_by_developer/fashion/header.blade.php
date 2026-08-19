@@ -17,17 +17,17 @@
          text-decoration: none;
          background-color: var(--lightColor);
      }
- </style>
+  </style>
 
  <!-- Logo Header Area Start -->
  <header class="logo-header">
      <div class="container">
          <div class="row justify-content-between align-items-center">
-             <div class="col-auto col-lg order-2 order-lg-1">
-                 <a href="{{ route('home') }}" class="header-logo">
-                     <img src="{{ get_image(get_frontend_settings('dark_logo')) }}" alt="logo">
-                 </a>
-             </div>
+              <div class="col-auto col-lg order-2 order-lg-1 d-flex align-items-center">
+                  <a href="{{ route('home') }}" class="header-logo d-flex align-items-center" style="padding: 0; height: 68px;">
+                      <img src="{{ get_image(get_frontend_settings('dark_logo')) }}" alt="logo" style="max-height: 42px; object-fit: contain;">
+                  </a>
+              </div>
              <div class="col-auto col-lg-6 order-1 order-lg-2">
                  <div class="d-lg-flex justify-content-center d-none">
                      <nav>
@@ -37,6 +37,7 @@
                                      <span>{{ get_phrase('Home') }}</span>
                                  </a>
                              </li>
+                             <li><a href="{{ route('product', 'customized-corporate-your-company-logo-order-logo-print-582') }}" class="header-menuitem-a @if (request()->is('product/customized-corporate*')) active @endif">{{ get_phrase("Custom / Corporate Polo's") }}</a></li>
                              <li class="mega-menu-btn-wrap">
                                  <a href="javascript:void(0)" class="header-menuitem-a mega-menu-btn">
                                      <span>{{ get_phrase('Categories') }}</span>
@@ -46,8 +47,8 @@
                                  </a>
                                  @php
                                      $categories = App\Models\Category::where('parent_id', '=', 0)
+                                         ->whereIn('slug', ['t-shirts', 'hoodies', 'family', 'polo-t-shirt', 'combo'])
                                          ->orderBy('sort', 'asc')
-                                         ->orderBy('title', 'asc')
                                          ->get();
                                  @endphp
                                  <!-- Mega Menu -->
@@ -143,7 +144,7 @@
              </div>
              <div class="col-auto col-lg order-3">
                  <div class="d-flex align-items-center gap-4 justify-content-end">
-                     <button type="button" class="search-modal-btn d-none d-lg-block svg-link header-svg-link d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#searchModal">
+                     <button type="button" class="search-modal-btn svg-link header-svg-link d-flex align-items-center me-2 me-lg-0" data-bs-toggle="modal" data-bs-target="#searchModal">
                          <span class="header-svg-link-inner" data-bs-toggle="tooltip" data-bs-title="Search" data-bs-placement="bottom">
                              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 18 18" fill="none">
                                  <path d="M8.625 16.3125C4.3875 16.3125 0.9375 12.8625 0.9375 8.625C0.9375 4.3875 4.3875 0.9375 8.625 0.9375C12.8625 0.9375 16.3125 4.3875 16.3125 8.625C16.3125 12.8625 12.8625 16.3125 8.625 16.3125ZM8.625 2.0625C5.0025 2.0625 2.0625 5.01 2.0625 8.625C2.0625 12.24 5.0025 15.1875 8.625 15.1875C12.2475 15.1875 15.1875 12.24 15.1875 8.625C15.1875 5.01 12.2475 2.0625 8.625 2.0625Z" fill="#0D0E10"></path>
