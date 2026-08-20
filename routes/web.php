@@ -82,20 +82,40 @@ Route::get('/sync-sqlite-to-pgsql', function () {
     }
 
     try {
-        // Disable foreign keys and triggers in PostgreSQL for this session
-        $pgsql->statement("SET session_replication_role = 'replica'");
+        echo "Wiping and migrating PostgreSQL database...\n";
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--database' => 'pgsql', '--force' => true]);
 
-        $tablesObj = $sqlite->select("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE 'migrations'");
-        $tables = array_map(function ($t) { return $t->name; }, $tablesObj);
+        // Dependency ordered tables list
+        $orderedTables = [
+            // Tier 1 (no dependencies)
+            'users', 'brands', 'categories', 'attribute_types', 'stores', 'languages', 'pages', 
+            'blog_categories', 'coupons', 'shipping_carriers', 'shipping_zones', 'cities', 
+            'countries', 'states', 'contacts', 'applications', 'currencies', 'frontend_settings', 
+            'settings', 'themes',
+            
+            // Tier 2 (depends on Tier 1)
+            'attributes', 'attribute_type_category', 'language_phrases', 'theme_settings', 
+            'store_settings', 'products', 'shipping_zone_regions', 'blogs', 'message_threads',
+            
+            // Tier 3 (depends on Tier 2)
+            'product_attributes', 'reviews', 'wishlist_items', 'cart_items', 'blog_comments', 
+            'messages', 'shipping_rules', 'orders',
+            
+            // Tier 4 (depends on Tier 3)
+            'order_items', 'order_updates', 'order_returns', 'payments',
+            
+            // Tier 5 (depends on Tier 4)
+            'payouts'
+        ];
 
-        // Truncate public tables on pgsql
-        foreach ($tables as $table) {
-            $pgsql->statement("TRUNCATE TABLE \"{$table}\" CASCADE");
-        }
-
-        // Import rows
         $logOutput = "Sync log:\n";
-        foreach ($tables as $table) {
+        foreach ($orderedTables as $table) {
+            // Check if table exists in SQLite
+            $tableExists = $sqlite->select("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", [$table]);
+            if (empty($tableExists)) {
+                continue;
+            }
+
             $rows = $sqlite->table($table)->get();
             if ($rows->isEmpty()) {
                 continue;
@@ -113,15 +133,8 @@ Route::get('/sync-sqlite-to-pgsql', function () {
             $logOutput .= "- Synced table '{$table}' (" . count($insertData) . " rows)\n";
         }
 
-        // Restore normal session role
-        $pgsql->statement("SET session_replication_role = 'origin'");
-
         return nl2br($logOutput . "\nDatabase synchronization completed successfully! All products copied to PostgreSQL.");
     } catch (\Exception $e) {
-        // Make sure to restore origin mode on error
-        try {
-            $pgsql->statement("SET session_replication_role = 'origin'");
-        } catch (\Exception $ex) {}
         return 'Error during sync: ' . $e->getMessage() . ' at line ' . $e->getLine();
     }
 });
