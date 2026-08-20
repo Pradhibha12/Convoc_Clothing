@@ -72,6 +72,60 @@ Route::get('/recover-db', function () {
     }
 });
 
+Route::get('/sync-sqlite-to-pgsql', function () {
+    try {
+        $sqlite = \Illuminate\Support\Facades\DB::connection('sqlite');
+        $pgsql = \Illuminate\Support\Facades\DB::connection('pgsql');
+        $pgsql->getPdo();
+    } catch (\Exception $e) {
+        return 'PostgreSQL connection check failed: ' . $e->getMessage();
+    }
+
+    try {
+        // Disable foreign keys and triggers in PostgreSQL for this session
+        $pgsql->statement("SET session_replication_role = 'replica'");
+
+        $tablesObj = $sqlite->select("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' AND name NOT LIKE 'migrations'");
+        $tables = array_map(function ($t) { return $t->name; }, $tablesObj);
+
+        // Truncate public tables on pgsql
+        foreach ($tables as $table) {
+            $pgsql->statement("TRUNCATE TABLE \"{$table}\" CASCADE");
+        }
+
+        // Import rows
+        $logOutput = "Sync log:\n";
+        foreach ($tables as $table) {
+            $rows = $sqlite->table($table)->get();
+            if ($rows->isEmpty()) {
+                continue;
+            }
+
+            $insertData = [];
+            foreach ($rows as $row) {
+                $insertData[] = (array)$row;
+            }
+
+            $chunks = array_chunk($insertData, 50);
+            foreach ($chunks as $chunk) {
+                $pgsql->table($table)->insert($chunk);
+            }
+            $logOutput .= "- Synced table '{$table}' (" . count($insertData) . " rows)\n";
+        }
+
+        // Restore normal session role
+        $pgsql->statement("SET session_replication_role = 'origin'");
+
+        return nl2br($logOutput . "\nDatabase synchronization completed successfully! All products copied to PostgreSQL.");
+    } catch (\Exception $e) {
+        // Make sure to restore origin mode on error
+        try {
+            $pgsql->statement("SET session_replication_role = 'origin'");
+        } catch (\Exception $ex) {}
+        return 'Error during sync: ' . $e->getMessage() . ' at line ' . $e->getLine();
+    }
+});
+
 Route::get('/logout', function (Request $request) {
     Auth::guard('web')->logout();
     $request->session()->invalidate();
