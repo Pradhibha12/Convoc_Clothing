@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    public bool $withinTransaction = false;
     /**
      * Run the migrations.
      */
@@ -39,3 +40,4 @@ return new class extends Migration
         Schema::dropIfExists('coupons');
     }
 };
+
