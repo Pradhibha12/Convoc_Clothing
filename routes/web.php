@@ -73,88 +73,78 @@ Route::get('/recover-db', function () {
 });
 
 Route::get('/sync-sqlite-to-pgsql', function () {
+    set_time_limit(300);
+
+    // 1. Get raw PDO connections
     try {
-        $sqlite = \Illuminate\Support\Facades\DB::connection('sqlite');
-        $pgsql = \Illuminate\Support\Facades\DB::connection('pgsql');
-        $pgsql->getPdo();
+        $sqlitePdo = \Illuminate\Support\Facades\DB::connection('sqlite')->getPdo();
+        $pgsqlPdo  = \Illuminate\Support\Facades\DB::connection('pgsql')->getPdo();
     } catch (\Exception $e) {
-        return 'PostgreSQL connection check failed: ' . $e->getMessage();
+        return 'Connection failed: ' . $e->getMessage();
     }
 
+    // 2. Rollback any open transaction on pgsql
+    try { $pgsqlPdo->exec('ROLLBACK'); } catch (\Exception $e) {}
+
+    // 3. Drop all existing tables using CASCADE (raw PDO, no transactions)
+    $tablesResult = $pgsqlPdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
+    $tables = $tablesResult->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($tables as $table) {
+        $pgsqlPdo->exec("DROP TABLE IF EXISTS \"{$table}\" CASCADE");
+    }
+
+    // 4. Run migrations using Artisan (creates fresh schema)
     try {
-        echo "Wiping PostgreSQL database table-by-table...\n";
-        
-        $pgsqlTables = $pgsql->select("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
-        $tablesToDrop = array_map(function ($t) { return $t->table_name; }, $pgsqlTables);
-        
-        foreach ($tablesToDrop as $table) {
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'pgsql', '--force' => true]);
+    } catch (\Exception $ex) {
+        return 'Migration failed: ' . $ex->getMessage() . "\n\nOutput:\n" . \Illuminate\Support\Facades\Artisan::output();
+    }
+
+    // 5. Sync data from SQLite to PostgreSQL in dependency order
+    $orderedTables = [
+        'users', 'brands', 'categories', 'attribute_types', 'stores', 'languages', 'pages',
+        'blog_categories', 'coupons', 'shipping_carriers', 'shipping_zones', 'cities',
+        'countries', 'states', 'contacts', 'applications', 'currencies', 'frontend_settings',
+        'settings', 'themes',
+        'attributes', 'attribute_type_category', 'language_phrases', 'theme_settings',
+        'store_settings', 'products', 'shipping_zone_regions', 'blogs', 'message_threads',
+        'product_attributes', 'reviews', 'wishlist_items', 'cart_items', 'blog_comments',
+        'messages', 'shipping_rules', 'orders',
+        'order_items', 'order_updates', 'order_returns', 'payments',
+        'payouts'
+    ];
+
+    $logOutput = "Sync log:\n";
+    foreach ($orderedTables as $table) {
+        // Check table exists in SQLite
+        $check = $sqlitePdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name='{$table}'")->fetch();
+        if (!$check) continue;
+
+        $rows = $sqlitePdo->query("SELECT * FROM \"{$table}\"")->fetchAll(PDO::FETCH_ASSOC);
+        if (empty($rows)) continue;
+
+        // Build insert SQL for PostgreSQL
+        $cols = array_keys($rows[0]);
+        $colList = implode(', ', array_map(fn($c) => "\"{$c}\"", $cols));
+        $placeholders = implode(', ', array_fill(0, count($cols), '?'));
+        $sql = "INSERT INTO \"{$table}\" ({$colList}) VALUES ({$placeholders}) ON CONFLICT DO NOTHING";
+        $stmt = $pgsqlPdo->prepare($sql);
+
+        $count = 0;
+        foreach ($rows as $row) {
             try {
-                $pgsql->statement("DROP TABLE IF EXISTS \"{$table}\" CASCADE");
+                $stmt->execute(array_values($row));
+                $count++;
             } catch (\Exception $ex) {
-                return "Failed to drop table '{$table}': " . $ex->getMessage();
+                $logOutput .= "  [WARN] Row insert failed in '{$table}': " . $ex->getMessage() . "\n";
             }
         }
-        
-        echo "Running migrations on empty schema...\n";
-        try {
-            \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'pgsql', '--force' => true]);
-        } catch (\Exception $ex) {
-            return 'Migration failed: ' . $ex->getMessage() . "\n\nArtisan Output:\n" . \Illuminate\Support\Facades\Artisan::output();
-        }
-
-        // Dependency ordered tables list
-        $orderedTables = [
-            // Tier 1 (no dependencies)
-            'users', 'brands', 'categories', 'attribute_types', 'stores', 'languages', 'pages', 
-            'blog_categories', 'coupons', 'shipping_carriers', 'shipping_zones', 'cities', 
-            'countries', 'states', 'contacts', 'applications', 'currencies', 'frontend_settings', 
-            'settings', 'themes',
-            
-            // Tier 2 (depends on Tier 1)
-            'attributes', 'attribute_type_category', 'language_phrases', 'theme_settings', 
-            'store_settings', 'products', 'shipping_zone_regions', 'blogs', 'message_threads',
-            
-            // Tier 3 (depends on Tier 2)
-            'product_attributes', 'reviews', 'wishlist_items', 'cart_items', 'blog_comments', 
-            'messages', 'shipping_rules', 'orders',
-            
-            // Tier 4 (depends on Tier 3)
-            'order_items', 'order_updates', 'order_returns', 'payments',
-            
-            // Tier 5 (depends on Tier 4)
-            'payouts'
-        ];
-
-        $logOutput = "Sync log:\n";
-        foreach ($orderedTables as $table) {
-            // Check if table exists in SQLite
-            $tableExists = $sqlite->select("SELECT name FROM sqlite_master WHERE type='table' AND name = ?", [$table]);
-            if (empty($tableExists)) {
-                continue;
-            }
-
-            $rows = $sqlite->table($table)->get();
-            if ($rows->isEmpty()) {
-                continue;
-            }
-
-            $insertData = [];
-            foreach ($rows as $row) {
-                $insertData[] = (array)$row;
-            }
-
-            $chunks = array_chunk($insertData, 50);
-            foreach ($chunks as $chunk) {
-                $pgsql->table($table)->insert($chunk);
-            }
-            $logOutput .= "- Synced table '{$table}' (" . count($insertData) . " rows)\n";
-        }
-
-        return nl2br($logOutput . "\nDatabase synchronization completed successfully! All products copied to PostgreSQL.");
-    } catch (\Exception $e) {
-        return 'Error during sync: ' . $e->getMessage() . ' at line ' . $e->getLine();
+        $logOutput .= "- Synced table '{$table}' ({$count} rows)\n";
     }
+
+    return nl2br($logOutput . "\nDatabase synchronization completed successfully!");
 });
+
 
 Route::get('/logout', function (Request $request) {
     Auth::guard('web')->logout();
