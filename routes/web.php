@@ -73,76 +73,94 @@ Route::get('/recover-db', function () {
 });
 
 Route::get('/sync-sqlite-to-pgsql', function () {
-    set_time_limit(300);
-
-    // 1. Get raw PDO connections
     try {
+        set_time_limit(300);
+
+        // 1. Get raw PDO connections
         $sqlitePdo = \Illuminate\Support\Facades\DB::connection('sqlite')->getPdo();
         $pgsqlPdo  = \Illuminate\Support\Facades\DB::connection('pgsql')->getPdo();
-    } catch (\Exception $e) {
-        return 'Connection failed: ' . $e->getMessage();
+
+        // 2. Rollback any open transaction on pgsql
+        try { $pgsqlPdo->exec('ROLLBACK'); } catch (\Throwable $e) {}
+
+        // 3. Drop all existing tables using CASCADE (raw PDO, no transactions)
+        $tablesResult = $pgsqlPdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
+        $tables = $tablesResult->fetchAll(PDO::FETCH_COLUMN);
+        foreach ($tables as $table) {
+            try { $pgsqlPdo->exec("DROP TABLE IF EXISTS \"{$table}\" CASCADE"); } catch (\Throwable $e) {}
+        }
+
+        // 4. Run migrations using Artisan (creates fresh schema)
+        $artisanOutput = '';
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'pgsql', '--force' => true]);
+            $artisanOutput = \Illuminate\Support\Facades\Artisan::output();
+        } catch (\Throwable $ex) {
+            $artisanOutput = \Illuminate\Support\Facades\Artisan::output();
+            return "Migration failed: " . $ex->getMessage() . "\n\nOutput:\n" . $artisanOutput;
+        }
+
+        // Check if migration actually succeeded by checking for a known table
+        $check = $pgsqlPdo->query("SELECT to_regclass('public.users')")->fetchColumn();
+        if (!$check) {
+            return "Migration ran but 'users' table not found. Artisan output:\n" . $artisanOutput;
+        }
+
+        // 5. Sync data from SQLite to PostgreSQL in dependency order
+        $orderedTables = [
+            'users', 'brands', 'categories', 'attribute_types', 'stores', 'languages', 'pages',
+            'blog_categories', 'coupons', 'shipping_carriers', 'shipping_zones', 'cities',
+            'countries', 'states', 'contacts', 'applications', 'currencies', 'frontend_settings',
+            'settings', 'themes',
+            'attributes', 'attribute_type_category', 'language_phrases', 'theme_settings',
+            'store_settings', 'products', 'shipping_zone_regions', 'blogs', 'message_threads',
+            'product_attributes', 'reviews', 'wishlist_items', 'cart_items', 'blog_comments',
+            'messages', 'shipping_rules', 'orders',
+            'order_items', 'order_updates', 'order_returns', 'payments',
+            'payouts'
+        ];
+
+        $logOutput = "Artisan output:\n" . $artisanOutput . "\nSync log:\n";
+        foreach ($orderedTables as $table) {
+            // Check table exists in SQLite
+            $check = $sqlitePdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name='{$table}'")->fetch();
+            if (!$check) continue;
+
+            $rows = $sqlitePdo->query("SELECT * FROM \"{$table}\"")->fetchAll(PDO::FETCH_ASSOC);
+            if (empty($rows)) continue;
+
+            // Build insert SQL for PostgreSQL
+            $cols = array_keys($rows[0]);
+            $colList = implode(', ', array_map(fn($c) => "\"{$c}\"", $cols));
+            $placeholders = implode(', ', array_fill(0, count($cols), '?'));
+            $sql = "INSERT INTO \"{$table}\" ({$colList}) VALUES ({$placeholders}) ON CONFLICT DO NOTHING";
+            $stmt = $pgsqlPdo->prepare($sql);
+
+            $count = 0;
+            foreach ($rows as $row) {
+                try {
+                    $stmt->execute(array_values($row));
+                    $count++;
+                } catch (\Throwable $ex) {
+                    $logOutput .= "  [WARN] Row insert failed in '{$table}': " . $ex->getMessage() . "\n";
+                }
+            }
+            $logOutput .= "- Synced table '{$table}' ({$count} rows)\n";
+        }
+
+        return nl2br($logOutput . "\nDatabase synchronization completed successfully!");
+    } catch (\Throwable $e) {
+        return "FATAL ERROR: " . $e->getMessage() . "\nFile: " . $e->getFile() . "\nLine: " . $e->getLine() . "\nTrace:\n" . $e->getTraceAsString();
     }
+});
 
-    // 2. Rollback any open transaction on pgsql
-    try { $pgsqlPdo->exec('ROLLBACK'); } catch (\Exception $e) {}
-
-    // 3. Drop all existing tables using CASCADE (raw PDO, no transactions)
-    $tablesResult = $pgsqlPdo->query("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
-    $tables = $tablesResult->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($tables as $table) {
-        $pgsqlPdo->exec("DROP TABLE IF EXISTS \"{$table}\" CASCADE");
-    }
-
-    // 4. Run migrations using Artisan (creates fresh schema)
+Route::get('/run-migrate', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'pgsql', '--force' => true]);
-    } catch (\Exception $ex) {
-        return 'Migration failed: ' . $ex->getMessage() . "\n\nOutput:\n" . \Illuminate\Support\Facades\Artisan::output();
+        return "Output:\n" . \Illuminate\Support\Facades\Artisan::output();
+    } catch (\Throwable $e) {
+        return "FATAL: " . $e->getMessage() . "\nOutput:\n" . \Illuminate\Support\Facades\Artisan::output();
     }
-
-    // 5. Sync data from SQLite to PostgreSQL in dependency order
-    $orderedTables = [
-        'users', 'brands', 'categories', 'attribute_types', 'stores', 'languages', 'pages',
-        'blog_categories', 'coupons', 'shipping_carriers', 'shipping_zones', 'cities',
-        'countries', 'states', 'contacts', 'applications', 'currencies', 'frontend_settings',
-        'settings', 'themes',
-        'attributes', 'attribute_type_category', 'language_phrases', 'theme_settings',
-        'store_settings', 'products', 'shipping_zone_regions', 'blogs', 'message_threads',
-        'product_attributes', 'reviews', 'wishlist_items', 'cart_items', 'blog_comments',
-        'messages', 'shipping_rules', 'orders',
-        'order_items', 'order_updates', 'order_returns', 'payments',
-        'payouts'
-    ];
-
-    $logOutput = "Sync log:\n";
-    foreach ($orderedTables as $table) {
-        // Check table exists in SQLite
-        $check = $sqlitePdo->query("SELECT name FROM sqlite_master WHERE type='table' AND name='{$table}'")->fetch();
-        if (!$check) continue;
-
-        $rows = $sqlitePdo->query("SELECT * FROM \"{$table}\"")->fetchAll(PDO::FETCH_ASSOC);
-        if (empty($rows)) continue;
-
-        // Build insert SQL for PostgreSQL
-        $cols = array_keys($rows[0]);
-        $colList = implode(', ', array_map(fn($c) => "\"{$c}\"", $cols));
-        $placeholders = implode(', ', array_fill(0, count($cols), '?'));
-        $sql = "INSERT INTO \"{$table}\" ({$colList}) VALUES ({$placeholders}) ON CONFLICT DO NOTHING";
-        $stmt = $pgsqlPdo->prepare($sql);
-
-        $count = 0;
-        foreach ($rows as $row) {
-            try {
-                $stmt->execute(array_values($row));
-                $count++;
-            } catch (\Exception $ex) {
-                $logOutput .= "  [WARN] Row insert failed in '{$table}': " . $ex->getMessage() . "\n";
-            }
-        }
-        $logOutput .= "- Synced table '{$table}' ({$count} rows)\n";
-    }
-
-    return nl2br($logOutput . "\nDatabase synchronization completed successfully!");
 });
 
 
