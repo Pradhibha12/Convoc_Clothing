@@ -83,7 +83,11 @@ Route::get('/sync-sqlite-to-pgsql', function () {
 
     try {
         echo "Wiping and migrating PostgreSQL database...\n";
-        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--database' => 'pgsql', '--force' => true]);
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--database' => 'pgsql', '--force' => true]);
+        } catch (\Exception $ex) {
+            return 'Migration failed: ' . $ex->getMessage() . "\n\nArtisan Output:\n" . \Illuminate\Support\Facades\Artisan::output();
+        }
 
         // Dependency ordered tables list
         $orderedTables = [
