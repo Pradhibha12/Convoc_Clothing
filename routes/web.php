@@ -82,10 +82,24 @@ Route::get('/sync-sqlite-to-pgsql', function () {
     }
 
     try {
-        echo "Wiping and migrating PostgreSQL database...\n";
-        $exitCode = \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--database' => 'pgsql', '--force' => true]);
-        if ($exitCode !== 0) {
-            return "Migration failed with exit code {$exitCode}.\n\nArtisan Output:\n" . \Illuminate\Support\Facades\Artisan::output();
+        echo "Wiping PostgreSQL database table-by-table...\n";
+        
+        $pgsqlTables = $pgsql->select("SELECT table_name FROM information_schema.tables WHERE table_schema='public'");
+        $tablesToDrop = array_map(function ($t) { return $t->table_name; }, $pgsqlTables);
+        
+        foreach ($tablesToDrop as $table) {
+            try {
+                $pgsql->statement("DROP TABLE IF EXISTS \"{$table}\" CASCADE");
+            } catch (\Exception $ex) {
+                return "Failed to drop table '{$table}': " . $ex->getMessage();
+            }
+        }
+        
+        echo "Running migrations on empty schema...\n";
+        try {
+            \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'pgsql', '--force' => true]);
+        } catch (\Exception $ex) {
+            return 'Migration failed: ' . $ex->getMessage() . "\n\nArtisan Output:\n" . \Illuminate\Support\Facades\Artisan::output();
         }
 
         // Dependency ordered tables list
