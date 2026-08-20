@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('size')->nullable();
             $table->timestamps();
 
-            $table->index('product_id')->nullable();
-            $table->index('review_id')->nullable();
+            $table->index('product_id');
+            $table->index('review_id');
         });
     }
 

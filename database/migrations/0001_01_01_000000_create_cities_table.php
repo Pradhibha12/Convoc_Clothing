@@ -18,8 +18,8 @@ return new class extends Migration
             $table->integer('state_id')->nullable();
             $table->timestamps();
 
-            $table->index('country_id')->nullable();
-            $table->index('state_id')->nullable();
+            $table->index('country_id');
+            $table->index('state_id');
         });
     }
 

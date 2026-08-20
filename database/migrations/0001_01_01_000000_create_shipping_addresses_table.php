@@ -23,11 +23,11 @@ return new class extends Migration
             $table->integer('is_primary')->nullable();
             $table->timestamps();
 
-            $table->index('country_id')->nullable();
-            $table->index('state_id')->nullable();
-            $table->index('city_id')->nullable();
-            $table->index('user_id')->nullable();
-            $table->index('is_primary')->nullable();
+            $table->index('country_id');
+            $table->index('state_id');
+            $table->index('city_id');
+            $table->index('user_id');
+            $table->index('is_primary');
         });
     }
 
