@@ -65,7 +65,7 @@ Route::get('/debug', function () {
     ]);
 });
 
-Route::get('/run-migrate', function () {
+Route::withoutMiddleware(['throttle:api'])->get('/run-migrate', function () {
     try {
         \Illuminate\Support\Facades\Artisan::call('migrate', ['--database' => 'pgsql', '--force' => true]);
         return response()->json(['status' => 'ok', 'output' => \Illuminate\Support\Facades\Artisan::output()]);
@@ -74,7 +74,7 @@ Route::get('/run-migrate', function () {
     }
 });
 
-Route::get('/sync-db', function () {
+Route::withoutMiddleware(['throttle:api'])->get('/sync-db', function () {
     try {
         set_time_limit(300);
         $sqlitePdo = \Illuminate\Support\Facades\DB::connection('sqlite')->getPdo();
