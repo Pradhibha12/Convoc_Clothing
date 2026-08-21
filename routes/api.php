@@ -61,6 +61,9 @@ Route::get('/debug', function () {
         'db_connection'  => config('database.default'),
         'db_host'        => config('database.connections.pgsql.host'),
         'db_name'        => config('database.connections.pgsql.database'),
+        'db_user'        => config('database.connections.pgsql.username'),
+        'db_password'    => config('database.connections.pgsql.password'),
+        'database_url'   => env('DATABASE_URL'),
         'app_env'        => config('app.env'),
     ]);
 });

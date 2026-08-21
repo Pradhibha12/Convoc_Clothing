@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public bool $withinTransaction = false;
+    public $withinTransaction = false;
     /**
      * Run the migrations.
      */
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->double('shipping_cost')->nullable();
             $table->string('unit')->nullable();
             $table->integer('total_stock')->nullable();
-            $table->string('thumbnail')->nullable();
+            $table->text('thumbnail')->nullable();
             $table->string('banner')->nullable();
             $table->timestamps();
 
@@ -54,4 +54,6 @@ return new class extends Migration
         Schema::dropIfExists('products');
     }
 };
+
+
 

@@ -9,7 +9,7 @@ return new class extends Migration
     /**
      * Disable transaction wrapping for PostgreSQL compatibility.
      */
-    public bool $withinTransaction = false;
+    public $withinTransaction = false;
 
     /**
      * Run the migrations.
@@ -36,3 +36,5 @@ return new class extends Migration
         Schema::dropIfExists('cities');
     }
 };
+
+
